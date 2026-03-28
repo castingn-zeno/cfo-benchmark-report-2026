@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 간접구매 벤치마크 리포트 | 업무마켓9 Research</title>
+<meta name="description" content="16개 기업, 57만 건 AP 데이터가 말하는 간접구매의 구조적 비효율.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1426;--blue:#0D8AE7;--teal:#2FAC8E;
+  --danger:#D94F4F;--caution:#E8983E;
+  --g900:#111827;--g800:#1F2937;--g700:#374151;--g600:#4B5563;
+  --g500:#6B7280;--g400:#9CA3AF;--g300:#D1D5DB;--g200:#E5E7EB;
+  --g100:#F3F4F6;--g50:#F9FAFB;--white:#FFF;
+  --ct:1080px;--gap:140px;
+  --r:16px;--r-sm:10px;--r-xs:6px;
+  --sh:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 12px 40px rgba(0,0,0,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'Pretendard',-apple-system,system-ui,sans-serif;color:var(--g800);background:var(--white);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px}
+a{color:inherit;text-decoration:none}
+.ct{max-width:var(--ct);margin:0 auto;padding:0 40px}
+
+/* Progress */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--blue);z-index:10000;width:0;transition:width .06s linear}
+
+/* Topbar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.topbar.scrolled{border-color:var(--g200)}
+.topbar-brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink)}
+.topbar-brand .mark{width:24px;height:24px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:11px;font-weight:800}
+.topbar-cta{font-size:12px;font-weight:600;color:var(--white);background:var(--ink);padding:8px 20px;border-radius:20px;cursor:pointer;border:none;font-family:inherit;transition:background .2s}
+.topbar-cta:hover{background:var(--blue)}
+
+/* Sections */
+.sec{padding:var(--gap) 0;opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.sec.vis{opacity:1;transform:none}
+.sec-num{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.sec h2{font-size:clamp(30px,4vw,44px);font-weight:800;line-height:1.15;letter-spacing:-.8px;color:var(--ink);margin-bottom:16px}
+.sec .lead{font-size:17px;color:var(--g500);line-height:1.7;max-width:680px;margin-bottom:64px}
+
+/* ================================================================
+   COVER
+   ================================================================ */
+.cover{min-height:100vh;background:var(--ink);color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 80px;position:relative;overflow:hidden;opacity:1;transform:none}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 15% 85%,rgba(13,138,231,.12),transparent),radial-gradient(ellipse 60% 50% at 85% 20%,rgba(47,172,142,.08),transparent)}
+.cover-top{padding:24px 40px;display:flex;justify-content:space-between;align-items:center;position:absolute;top:0;left:0;right:0}
+.cover-brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+.cover-brand .mark{width:24px;height:24px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.cover-year{font-size:12px;color:var(--g400);padding:6px 16px;border:1px solid rgba(255,255,255,.12);border-radius:20px}
+.cover-body{max-width:900px;padding:0 64px;position:relative;z-index:1}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(13,138,231,.12);border:1px solid rgba(13,138,231,.2);border-radius:24px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:40px}
+.cover-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.cover h1{font-size:clamp(40px,6.5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:28px}
+.cover h1 em{font-style:normal;color:var(--blue)}
+.cover-sub{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.55);line-height:1.6;max-width:600px;margin-bottom:48px}
+.cover-meta{display:flex;gap:36px;font-size:13px;color:rgba(255,255,255,.35)}
+.cover-meta strong{color:rgba(255,255,255,.7);font-weight:600}
+.cover-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.25);font-size:11px;letter-spacing:2px}
+
+/* ================================================================
+   COMPANY INTRO
+   ================================================================ */
+.company{background:var(--g50);border-top:1px solid var(--g200);border-bottom:1px solid var(--g200)}
+.company-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.company-card{padding:36px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r);position:relative;overflow:hidden}
+.company-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.company-card.castingen::before{background:var(--ink)}
+.company-card.wm9::before{background:var(--blue)}
+.company-card-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.company-card h3{font-size:22px;font-weight:800;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.company-card p{font-size:14px;color:var(--g500);line-height:1.7;margin-bottom:16px}
+.company-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-top:16px;border-top:1px solid var(--g100)}
+.company-num{text-align:center}
+.company-num-v{font-size:22px;font-weight:800;color:var(--ink)}
+.company-num-l{font-size:11px;color:var(--g400);margin-top:2px}
+.company-why{grid-column:1/-1;padding:28px 32px;background:var(--white);border:1px solid var(--g200);border-left:3px solid var(--blue);border-radius:0 var(--r-xs) var(--r-xs) 0}
+.company-why h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.company-why p{font-size:14px;color:var(--g500);line-height:1.7}
+
+/* ================================================================
+   METHODOLOGY
+   ================================================================ */
+.meth-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px}
+.meth-stat{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r-sm);padding:28px 20px;text-align:center}
+.meth-stat-n{font-size:32px;font-weight:800;color:var(--ink);line-height:1}
+.meth-stat-n .u{font-size:14px;color:var(--g400)}
+.meth-stat-l{font-size:11px;color:var(--g400);margin-top:6px}
+.meth-detail{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.meth-detail h3{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.meth-detail p{font-size:14px;color:var(--g500);line-height:1.8}
+.meth-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.meth-list li{font-size:13px;color:var(--g600);padding-left:18px;position:relative}
+.meth-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.trust-box{margin-top:40px;padding:24px 28px;background:rgba(13,138,231,.03);border:1px solid rgba(13,138,231,.1);border-radius:var(--r-sm);font-size:13px;color:var(--g500);line-height:1.7}
+.trust-box b{color:var(--ink)}
+
+/* ================================================================
+   EXEC SUMMARY
+   ================================================================ */
+.exec{background:var(--ink);color:var(--white);position:relative;overflow:hidden}
+.exec::before{content:'';position:absolute;top:0;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(13,138,231,.08),transparent);border-radius:50%}
+.exec .sec-num{color:rgba(255,255,255,.3)}
+.exec h2{color:var(--white)}
+.exec .lead{color:rgba(255,255,255,.45)}
+.exec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.exec-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-sm);padding:32px 24px;transition:background .2s}
+.exec-card:hover{background:rgba(255,255,255,.07)}
+.exec-card-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:2px;margin-bottom:16px}
+.exec-card-val{font-size:40px;font-weight:800;line-height:1;margin-bottom:8px}
+.exec-card-val .unit{font-size:18px;opacity:.6}
+.exec-card-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5}
+.exec-callout{margin-top:40px;padding:24px 32px;border-left:3px solid var(--danger);background:rgba(217,79,79,.06);border-radius:0 var(--r-xs) var(--r-xs) 0;display:flex;align-items:center;gap:16px}
+.exec-callout-n{font-size:48px;font-weight:800;color:var(--danger)}
+.exec-callout-t{font-size:15px;color:rgba(255,255,255,.7);line-height:1.5}
+.exec-callout-t strong{color:var(--white)}
+
+/* ================================================================
+   FINDING PATTERN
+   ================================================================ */
+.takeaway{margin-top:48px;padding:28px 32px;background:rgba(13,138,231,.03);border:1px solid rgba(13,138,231,.1);border-radius:var(--r-sm);display:flex;gap:20px;align-items:flex-start}
+.takeaway-icon{width:36px;height:36px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--white);font-size:16px;font-weight:800}
+.takeaway h4{font-size:13px;font-weight:700;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.takeaway p{font-size:14px;color:var(--g600);line-height:1.7}
+.cfo-q{margin-top:28px;padding:20px 24px;border-left:3px solid var(--caution);background:rgba(232,152,62,.03);border-radius:0 var(--r-xs) var(--r-xs) 0}
+.cfo-q-label{font-size:11px;font-weight:700;color:var(--caution);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.cfo-q p{font-size:15px;color:var(--ink);font-weight:500;line-height:1.6}
+.src{font-size:11px;color:var(--g400);margin-top:24px;padding-top:16px;border-top:1px solid var(--g100);line-height:1.6}
+.src b{color:var(--g500)}
+
+/* ================================================================
+   F1: TAIL SPEND — DONUT CHART (SVG) + VISUAL STORY
+   ================================================================ */
+.donut-section{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:56px}
+.donut-wrap{position:relative;width:100%;max-width:380px;margin:0 auto}
+.donut-wrap svg{width:100%;height:auto;transform:rotate(-90deg)}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-center-n{font-size:56px;font-weight:800;color:var(--ink);line-height:1}
+.donut-center-l{font-size:14px;color:var(--g400);margin-top:4px}
+.donut-legend{display:flex;gap:28px;justify-content:center;margin-top:24px}
+.donut-legend-i{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
+.donut-legend-d{width:14px;height:14px;border-radius:4px}
+.donut-story h3{font-size:24px;font-weight:800;color:var(--ink);margin-bottom:16px;line-height:1.3}
+.donut-story p{font-size:15px;color:var(--g500);line-height:1.8;margin-bottom:16px}
+.donut-story .highlight{background:rgba(217,79,79,.06);border-radius:var(--r-xs);padding:16px 20px;border-left:3px solid var(--danger)}
+.donut-story .highlight p{margin:0;font-size:14px;color:var(--g700);font-weight:500}
+
+/* Tail detail bars */
+.tail-bars{display:flex;flex-direction:column;gap:8px;margin-bottom:40px}
+.tail-bar{display:grid;grid-template-columns:130px 1fr 60px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--g100)}
+.tail-bar:last-child{border-bottom:none}
+.tail-bar-nm{font-size:13px;color:var(--g600);font-weight:500}
+.tail-bar-track{height:28px;background:var(--g50);border-radius:var(--r-xs);overflow:hidden;position:relative}
+.tail-bar-fill{height:100%;border-radius:var(--r-xs);transition:width 1.2s cubic-bezier(.22,1,.36,1);position:relative;display:flex;align-items:center;justify-content:flex-end;padding-right:10px}
+.tail-bar-fill span{font-size:11px;font-weight:700;color:var(--white)}
+.tail-bar-val{font-size:16px;font-weight:800;text-align:right}
+.tail-bar.is-avg{background:rgba(13,138,231,.04);border-radius:var(--r-xs);padding:14px 12px;border:1.5px dashed var(--blue);border-bottom:1.5px dashed var(--blue)}
+.tail-bar.is-avg .tail-bar-nm{color:var(--blue);font-weight:700}
+.tail-bar.is-avg .tail-bar-val{color:var(--blue)}
+
+/* Annotation callout on chart */
+.chart-annotation{position:relative;margin-top:16px;padding:16px 20px;background:var(--g50);border-radius:var(--r-xs);font-size:13px;color:var(--g600);line-height:1.6;border-left:3px solid var(--ink)}
+.chart-annotation strong{color:var(--ink);font-weight:700}
+
+/* ================================================================
+   F2: 1회성 — ICON ARRAY + BARS
+   ================================================================ */
+.icon-array{display:flex;gap:12px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
+.icon-person{width:48px;height:64px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.icon-person svg{width:36px;height:36px}
+.icon-person span{font-size:10px;font-weight:600;text-align:center}
+
+.onetime-bars{display:flex;flex-direction:column;gap:6px}
+.onetime-row{display:grid;grid-template-columns:160px 1fr 72px;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--g100)}
+.onetime-row:last-child{border-bottom:none}
+.onetime-nm{font-size:13px;color:var(--g600);font-weight:500}
+.onetime-track{height:36px;background:var(--g50);border-radius:var(--r-xs);overflow:hidden;position:relative}
+.onetime-fill{height:100%;border-radius:var(--r-xs);transition:width 1s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;padding-left:14px}
+.onetime-fill span{font-size:12px;font-weight:700;color:var(--white)}
+.onetime-val{font-size:20px;font-weight:800;text-align:right}
+.onetime-row.is-avg{background:rgba(232,152,62,.04);border-radius:var(--r-xs);padding:16px 14px;border:1.5px dashed var(--caution);margin-top:8px}
+.onetime-row.is-avg .onetime-nm{color:var(--caution);font-weight:700}
+.onetime-row.is-avg .onetime-val{color:var(--caution)}
+
+/* ================================================================
+   F3: PLATFORM — TREEMAP + RISK
+   ================================================================ */
+.plat-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+.treemap{display:grid;grid-template-columns:3fr 1fr;grid-template-rows:200px 80px;gap:4px;border-radius:var(--r-sm);overflow:hidden;margin-bottom:24px}
+.treemap-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--white);padding:12px;transition:transform .2s}
+.treemap-cell:hover{transform:scale(1.02)}
+.treemap-cell-n{font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1}
+.treemap-cell-l{font-size:12px;opacity:.7;margin-top:4px;font-weight:500}
+.treemap-cell-sub{font-size:11px;opacity:.5;margin-top:2px}
+.ext-box{background:linear-gradient(135deg,rgba(217,79,79,.04),rgba(217,79,79,.02));border:1px solid rgba(217,79,79,.12);border-radius:var(--r-sm);padding:28px;margin-bottom:24px}
+.ext-box-label{font-size:11px;font-weight:700;color:var(--danger);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.ext-box-n{font-size:52px;font-weight:800;color:var(--danger);line-height:.9}
+.ext-box-d{font-size:13px;color:var(--g500);margin-top:10px;line-height:1.6}
+.risk-list{display:flex;flex-direction:column;gap:10px}
+.risk-card{background:var(--white);border:1px solid var(--g200);border-left:3px solid var(--danger);border-radius:0 var(--r-xs) var(--r-xs) 0;padding:18px 20px;transition:all .2s}
+.risk-card:hover{box-shadow:var(--sh);transform:translateX(3px)}
+.risk-card h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.risk-card p{font-size:13px;color:var(--g500);line-height:1.5}
+
+/* ================================================================
+   F4: HHI — ZONED BAR CHART
+   ================================================================ */
+.hhi-container{position:relative;margin-bottom:24px}
+.hhi-zones-bg{display:flex;flex-direction:column;border-radius:var(--r-sm);overflow:hidden;position:relative}
+.hhi-zone-bg{padding:8px 16px;display:flex;align-items:flex-start;min-height:60px;position:relative}
+.hhi-zone-bg.z-danger{background:rgba(217,79,79,.04)}
+.hhi-zone-bg.z-caution{background:rgba(232,152,62,.04)}
+.hhi-zone-bg.z-safe{background:rgba(47,172,142,.04)}
+.hhi-zone-label{position:absolute;right:16px;top:8px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.hhi-zone-label.z-danger{color:var(--danger)}
+.hhi-zone-label.z-caution{color:var(--caution)}
+.hhi-zone-label.z-safe{color:var(--teal)}
+.hhi-zone-line{font-size:11px;font-weight:600;color:var(--g400);position:absolute;left:16px;top:8px}
+
+/* HHI horizontal bars inside zones */
+.hhi-hbars{display:flex;flex-direction:column;gap:8px;padding:16px 0}
+.hhi-hrow{display:grid;grid-template-columns:80px 1fr 80px;gap:12px;align-items:center}
+.hhi-hrow-nm{font-size:12px;color:var(--g600);text-align:right;font-weight:500}
+.hhi-hrow-track{height:36px;background:rgba(255,255,255,.6);border-radius:var(--r-xs);overflow:hidden}
+.hhi-hrow-fill{height:100%;border-radius:var(--r-xs);transition:width 1.2s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;padding-left:12px}
+.hhi-hrow-fill span{font-size:11px;font-weight:700;color:var(--white)}
+.hhi-hrow-val{font-size:18px;font-weight:800}
+.hhi-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.hhi-legend-item{padding:14px;border-radius:var(--r-xs);text-align:center;font-size:13px;font-weight:700}
+.hhi-legend-item small{display:block;font-weight:500;font-size:11px;opacity:.6;margin-top:2px}
+.hhi-legend-item.z-danger{background:rgba(217,79,79,.06);color:var(--danger)}
+.hhi-legend-item.z-caution{background:rgba(232,152,62,.06);color:var(--caution)}
+.hhi-legend-item.z-safe{background:rgba(47,172,142,.06);color:var(--teal)}
+
+/* ================================================================
+   SEGMENT
+   ================================================================ */
+.seg-tabs{display:flex;gap:6px;margin-bottom:40px;flex-wrap:wrap}
+.seg-tab{padding:9px 20px;border-radius:24px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--g200);background:var(--white);color:var(--g500);transition:all .2s}
+.seg-tab.on{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.seg-tab:hover:not(.on){border-color:var(--g400);color:var(--g700)}
+.seg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.seg-card{background:var(--white);border:1px solid var(--g200);border-radius:var(--r-sm);padding:24px;transition:all .25s;position:relative;overflow:hidden}
+.seg-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.seg-card[data-g="B"]::after{background:var(--blue)}
+.seg-card[data-g="C"]::after{background:var(--caution)}
+.seg-card[data-g="D"]::after{background:var(--danger)}
+.seg-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px)}
+.seg-card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.seg-card-nm{font-size:15px;font-weight:700;color:var(--ink)}
+.seg-card-grade{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700}
+.seg-card-grade.B{background:rgba(13,138,231,.08);color:var(--blue)}
+.seg-card-grade.C{background:rgba(232,152,62,.08);color:var(--caution)}
+.seg-card-grade.D{background:rgba(217,79,79,.08);color:var(--danger)}
+.seg-card-rows{display:flex;flex-direction:column;gap:10px}
+.seg-card-row{display:flex;align-items:center;font-size:12px}
+.seg-card-row-n{color:var(--g500);width:48px;flex-shrink:0}
+.seg-card-row-bar{flex:1;height:5px;background:var(--g100);border-radius:3px;margin:0 10px;overflow:hidden}
+.seg-card-row-fill{height:100%;border-radius:3px}
+.seg-card-row-v{font-weight:700;width:44px;text-align:right;font-size:11px}
+
+/* ================================================================
+   IMPLICATIONS
+   ================================================================ */
+.impl-grid{display:grid;grid-template-columns:1fr 80px 1fr;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-lg)}
+.impl-side{padding:48px 40px;display:flex;flex-direction:column;gap:36px}
+.impl-before{background:var(--ink);color:var(--white)}
+.impl-after{background:linear-gradient(135deg,var(--blue),var(--teal));color:var(--white)}
+.impl-arrow{background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--teal);font-weight:700}
+.impl-item-label{font-size:11px;opacity:.5;letter-spacing:1px;text-transform:uppercase}
+.impl-item-val{font-size:clamp(28px,4vw,36px);font-weight:800;line-height:1.1}
+.impl-item-note{font-size:12px;opacity:.5;margin-top:2px}
+
+/* ================================================================
+   SELF-ASSESSMENT
+   ================================================================ */
+.assess-intro{text-align:center;margin-bottom:48px}
+.assess-intro h3{font-size:clamp(24px,3.5vw,32px);font-weight:800;color:var(--ink);margin-bottom:10px}
+.assess-intro p{font-size:16px;color:var(--g500)}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
+.check-item{display:flex;align-items:center;gap:14px;background:var(--white);border:1.5px solid var(--g200);border-radius:var(--r-sm);padding:16px 20px;cursor:pointer;transition:all .2s;user-select:none}
+.check-item:hover{border-color:var(--blue)}
+.check-item.on{border-color:var(--blue);background:rgba(13,138,231,.03)}
+.check-box{width:22px;height:22px;border:2px solid var(--g300);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;color:transparent}
+.check-item.on .check-box{background:var(--blue);border-color:var(--blue);color:var(--white)}
+.check-text{font-size:14px;color:var(--g700)}
+.assess-result{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);padding:48px;text-align:center}
+.assess-ring{width:140px;height:140px;border-radius:50%;border:8px solid var(--g200);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;transition:border-color .5s}
+.assess-ring-n{font-size:40px;font-weight:800;line-height:1;transition:color .5s}
+.assess-ring-of{font-size:12px;color:var(--g400)}
+.assess-grade{font-size:18px;font-weight:700;transition:color .5s}
+.assess-desc{font-size:14px;color:var(--g400);margin-top:6px}
+
+/* ================================================================
+   CONCLUSION
+   ================================================================ */
+.conclusion{background:var(--ink);color:var(--white);border-radius:var(--r);padding:80px 64px;text-align:center;position:relative;overflow:hidden}
+.conclusion::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 80%,rgba(13,138,231,.1),transparent)}
+.conclusion-body{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.conclusion h3{font-size:clamp(24px,3.5vw,32px);font-weight:800;margin-bottom:16px}
+.conclusion p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:40px}
+.conclusion-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{padding:14px 36px;border-radius:var(--r-xs);font-size:15px;font-weight:700;cursor:pointer;border:none;font-family:inherit;background:var(--white);color:var(--ink);transition:all .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-secondary{padding:14px 36px;border-radius:var(--r-xs);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.15);transition:all .2s}
+.btn-secondary:hover{background:rgba(255,255,255,.05);color:var(--white)}
+.conclusion-brand{margin-top:48px;font-size:12px;color:rgba(255,255,255,.25)}
+
+footer{padding:48px 40px;text-align:center;font-size:12px;color:var(--g400);border-top:1px solid var(--g100)}
+footer a{color:var(--blue);font-weight:600}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media(max-width:1024px){
+  :root{--gap:100px}
+  .donut-section{grid-template-columns:1fr}
+  .company-grid{grid-template-columns:1fr}
+  .meth-stats{grid-template-columns:repeat(2,1fr)}
+  .meth-detail{grid-template-columns:1fr}
+  .exec-grid{grid-template-columns:repeat(2,1fr)}
+  .plat-layout{grid-template-columns:1fr}
+  .impl-grid{grid-template-columns:1fr}.impl-arrow{height:48px}
+  .seg-grid{grid-template-columns:repeat(2,1fr)}
+  .treemap{grid-template-rows:160px 60px}
+}
+@media(max-width:768px){
+  :root{--gap:64px}
+  .ct{padding:0 24px}
+  .cover-body{padding:0 24px}
+  .cover h1{font-size:32px}
+  .exec-grid{grid-template-columns:1fr}
+  .meth-stats{grid-template-columns:1fr 1fr}
+  .check-grid{grid-template-columns:1fr}
+  .seg-grid{grid-template-columns:1fr}
+  .treemap{grid-template-columns:1fr;grid-template-rows:140px 80px 60px 60px}
+  .conclusion{padding:48px 24px}
+  .onetime-row{grid-template-columns:100px 1fr 56px}
+  .tail-bar{grid-template-columns:100px 1fr 52px}
+  .hhi-hrow{grid-template-columns:60px 1fr 64px}
+}
+@media(prefers-reduced-motion:reduce){.sec{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav class="topbar" id="topbar">
+  <div class="topbar-brand"><div class="mark">9</div>업무마켓9 Research</div>
+  <button class="topbar-cta" onclick="document.getElementById('conclusion').scrollIntoView({behavior:'smooth'})">리포트 받기</button>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-top">
+    <div class="cover-brand"><div class="mark">9</div>업무마켓9 Research</div>
+    <div class="cover-year">March 2026</div>
+  </div>
+  <div class="cover-body">
+    <div class="cover-badge">한국 최초 간접구매 벤치마크 연구</div>
+    <h1>당신의 간접구매는<br><em>통제</em>되고 있습니까</h1>
+    <div class="cover-sub">16개 기업, 57만 건 이상의 AP 데이터를 분석했습니다.<br>어떤 기업도 A등급을 받지 못했습니다.</div>
+    <div class="cover-meta">
+      <span><strong>16</strong> 기업</span>
+      <span><strong>570,000+</strong> 거래</span>
+      <span><strong>1,744</strong> 억원</span>
+      <span><strong>3</strong> 개년</span>
+    </div>
+  </div>
+  <div class="cover-scroll">&#8595; SCROLL</div>
+</section>
+
+<!-- ================================================================
+   COMPANY INTRO — 브랜드팀/전략팀
+   ================================================================ -->
+<section class="sec company" id="company">
+  <div class="ct">
+    <div class="sec-num">WHO WE ARE</div>
+    <h2>왜 우리가 이 데이터를<br>갖고 있는가</h2>
+    <p class="lead">이 리포트는 마케팅 자료가 아닙니다. 실제 기업의 구매 데이터를 다루는 플랫폼이기 때문에 가능한 연구입니다.</p>
+    <div class="company-grid">
+      <div class="company-card castingen">
+        <div class="company-card-tag" style="color:var(--ink)">CASTINGEN</div>
+        <h3>캐스팅엔</h3>
+        <p>기업의 구매 업무를 디지털로 전환하는 <strong>기업 구매 OS</strong>를 만듭니다. 공급사 소싱부터 계약, 발주, 검수, 정산까지 — 흩어져 있던 간접구매 프로세스를 하나의 플랫폼으로 통합합니다.</p>
+        <p>2019년 설립 이후 금융, 제조, IT, 물류 등 다양한 산업의 기업들이 캐스팅엔을 통해 간접구매를 관리하고 있습니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">2019</div><div class="company-num-l">설립</div></div>
+          <div class="company-num"><div class="company-num-v">IPO</div><div class="company-num-l">추진 중</div></div>
+          <div class="company-num"><div class="company-num-v">BSM</div><div class="company-num-l">핵심 사업</div></div>
+        </div>
+      </div>
+      <div class="company-card wm9">
+        <div class="company-card-tag" style="color:var(--blue)">WORKMARKET 9</div>
+        <h3>업무마켓9</h3>
+        <p>캐스팅엔의 <strong>BSM(Business Spend Management) 플랫폼</strong>입니다. 기업이 "무엇을, 어디서, 얼마에 사는지"를 실시간으로 파악하고 통제할 수 있게 합니다.</p>
+        <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
+          <div class="company-num"><div class="company-num-v">25,000+</div><div class="company-num-l">등록 공급사</div></div>
+          <div class="company-num"><div class="company-num-v">1,744억</div><div class="company-num-l">관리 지출</div></div>
+        </div>
+      </div>
+      <div class="company-why">
+        <h4>이 연구의 의미</h4>
+        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 업무마켓9는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="sec" id="methodology">
+  <div class="ct">
+    <div class="sec-num">METHODOLOGY</div>
+    <h2>연구 방법론</h2>
+    <p class="lead">이 리포트의 모든 수치는 실제 기업 AP 전표에서 추출한 원본 데이터입니다.</p>
+    <div class="meth-stats">
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="16">0</span> <span class="u">개사</span></div><div class="meth-stat-l">분석 대상 기업</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="570000" data-f="c">0</span><span class="u">+</span></div><div class="meth-stat-l">AP 데이터 (원본)</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="25192" data-f="c">0</span></div><div class="meth-stat-l">고유 공급사 수</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="1744">0</span> <span class="u">억</span></div><div class="meth-stat-l">간접구매 총 지출</div></div>
+    </div>
+    <div class="meth-detail">
+      <div>
+        <h3>데이터 범위</h3>
+        <ul class="meth-list">
+          <li>기간: 2023.01 ~ 2025.12 (3개년)</li>
+          <li>대상: 16개 기업 (금융 4, 제조 3, IT 3, 물류 2, 서비스 2, 기타 2)</li>
+          <li>소스: ERP에서 추출한 AP 전표 원본 (570,000+ 건)</li>
+          <li>정제: 수수료/B2C 자체수수료 제외, 중복 제거 후 분석 대상 301,373건</li>
+          <li>분류: 대-중-소 3단계 카테고리 정규화</li>
+        </ul>
+      </div>
+      <div>
+        <h3>기업 규모 구분</h3>
+        <ul class="meth-list">
+          <li><strong>대규모:</strong> 간접구매 지출 200억원 이상 (3개사)</li>
+          <li><strong>중규모:</strong> 90~200억원 (5개사)</li>
+          <li><strong>소규모:</strong> 30~90억원 (4개사)</li>
+          <li><strong>영세:</strong> 30억원 미만 (4개사)</li>
+        </ul>
+        <p style="margin-top:16px;font-size:13px;color:var(--g400)">기업명은 A사~P사로 익명 처리했습니다.</p>
+      </div>
+    </div>
+    <div class="trust-box"><b>데이터 신뢰성:</b> 이 연구는 57만 건 이상의 AP 전표 원본 데이터에서 출발합니다. 각 데이터는 복수 상품 주문이 종합된 구매 오더(PO) 단위입니다. 수수료 등 불필요 데이터를 제거한 후 301,373건을 최종 분석 대상으로 정제했습니다. 설문 조사나 추정치가 아닌, 실제 발생한 거래 데이터입니다.</div>
+  </div>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="sec exec" id="summary">
+  <div class="ct">
+    <div class="sec-num">EXECUTIVE SUMMARY</div>
+    <h2>4가지 발견</h2>
+    <p class="lead">16개 기업 간접구매 데이터에서 공통적으로 나타난 구조적 패턴입니다.</p>
+    <div class="exec-grid">
+      <div class="exec-card"><div class="exec-card-num">FINDING 01</div><div class="exec-card-val"><span class="cu" data-t="93.2" data-dc="1">0</span><span class="unit">%</span></div><div class="exec-card-desc">전체 공급사 중 관리 비용 > 절감 효과인 Tail 공급사</div></div>
+      <div class="exec-card"><div class="exec-card-num">FINDING 02</div><div class="exec-card-val"><span class="cu" data-t="41.4" data-dc="1">0</span><span class="unit">%</span></div><div class="exec-card-desc">한 번 쓰고 사라지는 1회성 공급사</div></div>
+      <div class="exec-card"><div class="exec-card-num">FINDING 03</div><div class="exec-card-val"><span class="cu" data-t="32.6" data-dc="1">0</span><span class="unit">%</span></div><div class="exec-card-desc">비품/소모품 중 B2C 플랫폼 구매 비중</div></div>
+      <div class="exec-card"><div class="exec-card-num">FINDING 04</div><div class="exec-card-val"><span class="cu" data-t="2918">0</span></div><div class="exec-card-desc">최고 HHI — 미국 법무부 '고도 집중' 초과</div></div>
+    </div>
+    <div class="exec-callout">
+      <div class="exec-callout-n">0</div>
+      <div class="exec-callout-t"><strong>16개 기업 중 A등급은 0개사.</strong><br>간접구매 비효율은 예외가 아니라 구조입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+   F1: TAIL SPEND — DONUT + VISUAL STORY
+   ================================================================ -->
+<section class="sec" id="f1">
+  <div class="ct">
+    <div class="sec-num">FINDING 01</div>
+    <h2>공급사의 93%는<br>관리할 수 없는 공급사입니다</h2>
+    <p class="lead">관리 비용이 절감 효과를 초과하는 구간. 공급사가 많을수록 비용은 오히려 증가합니다.</p>
+
+    <!-- DONUT + STORY (디자인팀: 시각 중심 전달) -->
+    <div class="donut-section">
+      <div class="donut-wrap">
+        <svg viewBox="0 0 200 200">
+          <!-- Tail (93.2%) — 큰 빨간/주황 호 -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="var(--g100)" stroke-width="32"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="var(--danger)" stroke-width="32"
+            stroke-dasharray="0 502.65" stroke-dashoffset="0" stroke-linecap="round"
+            class="donut-tail" data-target="468.47"/>
+          <!-- Core (6.8%) — 작은 블루 호 -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="var(--blue)" stroke-width="32"
+            stroke-dasharray="0 502.65" stroke-dashoffset="-468.47" stroke-linecap="round"
+            class="donut-core" data-target="34.18"/>
+        </svg>
+        <div class="donut-center">
+          <div class="donut-center-n" style="color:var(--danger)"><span class="cu" data-t="93.2" data-dc="1">0</span>%</div>
+          <div class="donut-center-l">Tail 공급사</div>
+        </div>
+        <div class="donut-legend">
+          <div class="donut-legend-i"><div class="donut-legend-d" style="background:var(--danger)"></div>Tail 93.2%<br><span style="font-size:11px;color:var(--g400)">관리 비용 > 절감 효과</span></div>
+          <div class="donut-legend-i"><div class="donut-legend-d" style="background:var(--blue)"></div>Core 6.8%<br><span style="font-size:11px;color:var(--g400)">지출 80% 집중</span></div>
+        </div>
+      </div>
+      <div class="donut-story">
+        <h3>당신이 관리하는 공급사는<br>전체의 <span style="color:var(--blue)">6.8%</span>에 불과합니다</h3>
+        <p>Pareto 80/20 법칙에 따르면, 전체 지출의 80%를 차지하는 소수 공급사가 Core입니다. 이 Core 공급사는 평균 <strong>6.8%</strong>에 불과합니다.</p>
+        <p>나머지 <strong style="color:var(--danger)">93.2%</strong>는 Tail — 건당 금액이 작아 협상 효과가 없지만, 발주·검수·정산에 동일한 관리 비용이 발생합니다.</p>
+        <div class="highlight">
+          <p><strong>즉, 공급사를 늘릴수록 절감이 아니라 비용이 증가하는 역설적 구조입니다.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세 바 차트 (디자인팀: 크게, 해석 포함) -->
+    <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:20px">기업별 Tail 공급사 비중</div>
+    <div class="tail-bars">
+      <div class="tail-bar"><div class="tail-bar-nm">D사 (제조/중규모)</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="99.0" style="width:0;background:var(--danger)"><span>99.0%</span></div></div><div class="tail-bar-val" style="color:var(--danger)">99.0%</div></div>
+      <div class="tail-bar"><div class="tail-bar-nm">B사 (물류/대규모)</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="98.9" style="width:0;background:var(--danger)"><span>98.9%</span></div></div><div class="tail-bar-val" style="color:var(--danger)">98.9%</div></div>
+      <div class="tail-bar"><div class="tail-bar-nm">C사 (금융/대규모)</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="98.3" style="width:0;background:var(--danger)"><span>98.3%</span></div></div><div class="tail-bar-val" style="color:var(--danger)">98.3%</div></div>
+      <div class="tail-bar"><div class="tail-bar-nm">E사 (금융/중규모)</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="97.9" style="width:0;background:var(--danger)"><span>97.9%</span></div></div><div class="tail-bar-val" style="color:var(--danger)">97.9%</div></div>
+      <div class="tail-bar"><div class="tail-bar-nm">A사 (제조/대규모)</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="89.6" style="width:0;background:var(--caution)"><span>89.6%</span></div></div><div class="tail-bar-val" style="color:var(--caution)">89.6%</div></div>
+      <div class="tail-bar is-avg"><div class="tail-bar-nm">16개사 평균</div><div class="tail-bar-track"><div class="tail-bar-fill" data-w="93.2" style="width:0;background:var(--blue)"><span>93.2%</span></div></div><div class="tail-bar-val">93.2%</div></div>
+    </div>
+
+    <div class="chart-annotation">
+      <strong>해석:</strong> 16개 기업 모두 Tail 비중이 83% 이상이며, 절반 이상이 97%를 초과합니다. 이는 산업이나 규모와 무관하게 나타나는 <strong>구조적 현상</strong>입니다. 개별 기업의 문제가 아니라 한국 간접구매 시장 전체의 특성입니다.
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-icon">!</div>
+      <div><h4>Key Takeaway</h4><p>Tail 구간의 지출은 개별 협상이 아니라 <strong>카탈로그 기반 통합 구매 플랫폼</strong>으로 전환해야 관리 비용을 절감할 수 있습니다.</p></div>
+    </div>
+    <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>발주 1건당 관리 비용을 계산해 본 적 있습니까?</p></div>
+    <div class="src"><b>산출 기준:</b> Pareto 80/20 — 누적 지출 상위 80%에 도달하는 데 필요한 공급사 = Core, 나머지 전부 = Tail.</div>
+  </div>
+</section>
+
+<!-- ================================================================
+   F2: 1회성 — ICON ARRAY + BARS
+   ================================================================ -->
+<section class="sec" id="f2">
+  <div class="ct">
+    <div class="sec-num">FINDING 02</div>
+    <h2>공급사 10곳 중 4곳은<br>한 번 쓰고 사라집니다</h2>
+    <p class="lead">공급사를 "선정"하는 것이 아니라 "그때그때 찾는" 구조. 반복 거래가 없으면 협상 레버리지도 없습니다.</p>
+
+    <!-- ICON ARRAY (디자인팀: 한눈에 4/10 전달) -->
+    <div class="icon-array">
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--danger)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--danger)"/></svg><span style="color:var(--danger)">1회성</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--danger)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--danger)"/></svg><span style="color:var(--danger)">1회성</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--danger)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--danger)"/></svg><span style="color:var(--danger)">1회성</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--danger)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--danger)"/></svg><span style="color:var(--danger)">1회성</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+      <div class="icon-person"><svg viewBox="0 0 36 36"><circle cx="18" cy="10" r="7" fill="var(--g200)"/><path d="M4 34c0-8 6-14 14-14s14 6 14 14" fill="var(--g200)"/></svg><span style="color:var(--g400)">반복</span></div>
+    </div>
+    <div style="text-align:center;font-size:14px;color:var(--g500);margin-bottom:48px"><span style="color:var(--danger);font-weight:800;font-size:18px">10곳 중 4곳</span>은 한 번 거래 후 다시 사용되지 않습니다 (16개사 평균 41.4%)</div>
+
+    <!-- BAR CHART -->
+    <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:20px">기업별 1회성 구매 공급사 비중 <span style="font-weight:400;color:var(--g400);font-size:12px">상위 5개사</span></div>
+    <div class="onetime-bars">
+      <div class="onetime-row"><div class="onetime-nm">D사 (제조/중규모)</div><div class="onetime-track"><div class="onetime-fill" data-w="84" style="width:0;background:var(--ink)"><span>67.4%</span></div></div><div class="onetime-val" style="color:var(--ink)">67.4%</div></div>
+      <div class="onetime-row"><div class="onetime-nm">F사 (IT/영세)</div><div class="onetime-track"><div class="onetime-fill" data-w="84" style="width:0;background:var(--ink)"><span>67.1%</span></div></div><div class="onetime-val" style="color:var(--ink)">67.1%</div></div>
+      <div class="onetime-row"><div class="onetime-nm">G사 (제조/영세)</div><div class="onetime-track"><div class="onetime-fill" data-w="79" style="width:0;background:var(--ink)"><span>63.0%</span></div></div><div class="onetime-val" style="color:var(--ink)">63.0%</div></div>
+      <div class="onetime-row"><div class="onetime-nm">E사 (금융/중규모)</div><div class="onetime-track"><div class="onetime-fill" data-w="76" style="width:0;background:var(--ink)"><span>60.6%</span></div></div><div class="onetime-val" style="color:var(--ink)">60.6%</div></div>
+      <div class="onetime-row"><div class="onetime-nm">H사 (모빌리티/소규모)</div><div class="onetime-track"><div class="onetime-fill" data-w="73" style="width:0;background:var(--ink)"><span>58.3%</span></div></div><div class="onetime-val" style="color:var(--ink)">58.3%</div></div>
+      <div class="onetime-row is-avg"><div class="onetime-nm">16개사 평균</div><div class="onetime-track"><div class="onetime-fill" data-w="52" style="width:0;background:var(--caution)"><span>41.4%</span></div></div><div class="onetime-val">41.4%</div></div>
+    </div>
+
+    <div class="chart-annotation">
+      <strong>해석:</strong> 상위 5개 기업은 공급사의 58~67%가 1회성입니다. 이는 <strong>구매 프로세스 자체가 부재</strong>하다는 뜻입니다. 공급사를 "선정"하는 것이 아니라 매번 새로 "찾고" 있으며, 반복 거래가 없어 볼륨 기반 단가 협상이 원천적으로 불가능합니다.
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-icon">!</div>
+      <div><h4>Key Takeaway</h4><p>선호 공급사 리스트(Preferred Supplier List)를 구축하고 반복 거래를 유도하면 볼륨 기반 단가 협상이 가능해집니다.</p></div>
+    </div>
+    <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>같은 품목을 매번 다른 공급사에서 구매하는 비용을 측정하고 계십니까?</p></div>
+    <div class="src"><b>산출 기준:</b> 분석 기간(2023~2025) 내 거래 횟수 = 1회인 고유 공급사 / 전체 고유 공급사.</div>
+  </div>
+</section>
+
+<!-- ================================================================
+   F3: PLATFORM — TREEMAP + RISKS
+   ================================================================ -->
+<section class="sec" id="f3">
+  <div class="ct">
+    <div class="sec-num">FINDING 03</div>
+    <h2>비품 구매의 3건 중 1건은<br>쿠팡에서 이루어집니다</h2>
+    <p class="lead">세금계산서 없이, 이력 없이, 협상 없이. 편리하지만 통제할 수 없는 구매.</p>
+
+    <div class="plat-layout">
+      <div>
+        <!-- TREEMAP (디자인팀: 면적으로 직관적 비중 전달) -->
+        <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">비품/소모품 내 B2C 플랫폼 점유율 <span style="font-weight:400;color:var(--g400);font-size:12px">(거래건수 기준)</span></div>
+        <div class="treemap">
+          <div class="treemap-cell" style="background:var(--blue);grid-row:1/3"><div class="treemap-cell-n">74.3%</div><div class="treemap-cell-l">쿠팡</div><div class="treemap-cell-sub">4건 중 3건</div></div>
+          <div class="treemap-cell" style="background:var(--teal)"><div class="treemap-cell-n" style="font-size:22px">12.5%</div><div class="treemap-cell-l">네이버</div></div>
+          <div class="treemap-cell" style="background:var(--g400);grid-column:2"><div class="treemap-cell-n" style="font-size:16px">4.0%</div><div class="treemap-cell-l">기타</div></div>
+        </div>
+
+        <div class="chart-annotation">
+          <strong>해석:</strong> B2C 플랫폼 구매의 <strong>74.3%가 쿠팡</strong>에 집중되어 있습니다. 비품/소모품 구매에서 쿠팡은 사실상 기업의 기본 조달 채널이 되었습니다. 하지만 세금계산서 미발행, 구매이력 분산, 가격비교 부재 문제가 동반됩니다.
+        </div>
+
+        <div class="ext-box" style="margin-top:24px">
+          <div class="ext-box-label">극단적 사례 — C사 (금융/대규모)</div>
+          <div class="ext-box-n"><span class="cu" data-t="37.4" data-dc="1">0</span>%</div>
+          <div class="ext-box-d">전체 간접구매의 37.4%가 B2C 플랫폼. <strong>3건 중 1건 이상</strong>이 쿠팡/네이버에서 발생합니다.</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">B2C 플랫폼 구매의 구조적 리스크</div>
+        <div class="risk-list">
+          <div class="risk-card"><h4>세금계산서 미발행</h4><p>법인카드 전표로만 처리. 매입세액공제 체계적 누락 가능성.</p></div>
+          <div class="risk-card"><h4>구매이력 분산</h4><p>개인 계정에 흩어져 조직 차원의 데이터 축적이 불가능합니다.</p></div>
+          <div class="risk-card"><h4>가격비교 부재</h4><p>개인 판단에 의존. 같은 물건을 부서마다 다른 가격에 구매합니다.</p></div>
+          <div class="risk-card"><h4>볼륨 할인 불가</h4><p>조직 전체 수요를 통합하지 못해 구매력 기반 협상이 불가능합니다.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-icon">!</div>
+      <div><h4>Key Takeaway</h4><p>B2C 플랫폼 구매를 "금지"하는 것은 해답이 아닙니다. <strong>동일한 편의성을 제공하는 B2B 구매 채널</strong>로 전환해야 합니다.</p></div>
+    </div>
+    <div class="src"><b>산출 기준:</b> 비품/소모품 대분류 내 B2C 7개 플랫폼(쿠팡, 네이버, SSG, 11번가, G마켓, 배민, 카카오) 거래건수 / 전체 거래건수.</div>
+  </div>
+</section>
+
+<!-- ================================================================
+   F4: HHI — ZONED CHART
+   ================================================================ -->
+<section class="sec" id="f4">
+  <div class="ct">
+    <div class="sec-num">FINDING 04</div>
+    <h2>소수 공급사 집중은<br>"효율"이 아니라 "리스크"입니다</h2>
+    <p class="lead">HHI(허핀달-허쉬만 지수)로 측정한 공급사 집중도. 대안이 없는 구조에서 협상력은 공급사 쪽에 있습니다.</p>
+
+    <!-- ZONED BAR CHART (디자인팀: 존 배경으로 위험도 직관 전달) -->
+    <div class="hhi-container">
+      <div class="hhi-zones-bg">
+        <!-- 위험 존 -->
+        <div class="hhi-zone-bg z-danger">
+          <div class="hhi-zone-line">2,500+</div>
+          <div class="hhi-zone-label z-danger">DANGER ZONE</div>
+          <div class="hhi-hbars" style="width:100%">
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">I사 (해운)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="97" style="width:0;background:var(--danger)"><span>2,918</span></div></div><div class="hhi-hrow-val" style="color:var(--danger)">2,918</div></div>
+          </div>
+        </div>
+        <!-- 주의 존 -->
+        <div class="hhi-zone-bg z-caution">
+          <div class="hhi-zone-line">1,000~2,500</div>
+          <div class="hhi-zone-label z-caution">CAUTION</div>
+          <div class="hhi-hbars" style="width:100%">
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">C사 (금융)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="48" style="width:0;background:var(--caution)"><span>1,432</span></div></div><div class="hhi-hrow-val" style="color:var(--caution)">1,432</div></div>
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">B사 (물류)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="42" style="width:0;background:var(--caution)"><span>1,273</span></div></div><div class="hhi-hrow-val" style="color:var(--caution)">1,273</div></div>
+          </div>
+        </div>
+        <!-- 안전 존 -->
+        <div class="hhi-zone-bg z-safe">
+          <div class="hhi-zone-line">1,000 미만</div>
+          <div class="hhi-zone-label z-safe">SAFE</div>
+          <div class="hhi-hbars" style="width:100%">
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">J사 (IT)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="30" style="width:0;background:var(--teal)"><span>894</span></div></div><div class="hhi-hrow-val" style="color:var(--teal)">894</div></div>
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">K사 (금융)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="16" style="width:0;background:var(--teal)"><span>478</span></div></div><div class="hhi-hrow-val" style="color:var(--teal)">478</div></div>
+            <div class="hhi-hrow"><div class="hhi-hrow-nm">A사 (제조)</div><div class="hhi-hrow-track"><div class="hhi-hrow-fill" data-w="6" style="width:0;background:var(--teal)"><span>172</span></div></div><div class="hhi-hrow-val" style="color:var(--teal)">172</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-annotation">
+      <strong>해석:</strong> I사는 HHI 2,918로 미국 법무부 '고도 집중' 기준(2,500)을 초과합니다. <strong>특정 공급사의 가격 인상, 납기 지연, 품질 저하에 대한 대응력이 사실상 없는 수준</strong>입니다. C사와 B사도 주의 구간에 진입했습니다.
+    </div>
+
+    <div class="hhi-legend">
+      <div class="hhi-legend-item z-danger">위험 (2,500+)<small>공급망 단절 위험</small></div>
+      <div class="hhi-legend-item z-caution">주의 (1,000~2,500)<small>대안 확보 필요</small></div>
+      <div class="hhi-legend-item z-safe">안전 (1,000 미만)<small>건전한 분산 구조</small></div>
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-icon">!</div>
+      <div><h4>Key Takeaway</h4><p>카테고리별 2nd Source 확보가 필수입니다. 공급사 집중은 단기적으로 효율적이지만, 장기적으로 <strong>가격 협상력을 공급사에게 넘기는 구조</strong>입니다.</p></div>
+    </div>
+    <div class="src"><b>HHI:</b> 각 공급사 지출 점유율(%)의 제곱합. 10,000 = 완전 독점. <b>미국 법무부(DOJ):</b> 2,500+ 고도집중, 1,500~2,500 보통집중.</div>
+  </div>
+</section>
+
+<!-- SEGMENT -->
+<section class="sec" id="segment">
+  <div class="ct">
+    <div class="sec-num">CROSS-SEGMENT ANALYSIS</div>
+    <h2>같은 규모 안에서<br>왜 효율이 다릅니까</h2>
+    <p class="lead">당신의 기업은 어디에 있습니까.</p>
+    <div class="seg-tabs" id="segtabs">
+      <div class="seg-tab on" data-sg="all">전체 16개사</div>
+      <div class="seg-tab" data-sg="A">대규모 (3)</div>
+      <div class="seg-tab" data-sg="B">중규모 (5)</div>
+      <div class="seg-tab" data-sg="C">소규모 (4)</div>
+      <div class="seg-tab" data-sg="D">영세 (4)</div>
+    </div>
+    <div class="seg-grid" id="seggrid"></div>
+    <div class="src" style="margin-top:32px"><b>종합등급:</b> 5개 지표 가중평균. A(~30), B(30~45), C(45~55), D(55+). <b>A등급 0개사.</b></div>
+  </div>
+</section>
+
+<!-- IMPLICATIONS -->
+<section class="sec" id="implications">
+  <div class="ct">
+    <div class="sec-num">IMPLICATIONS</div>
+    <h2>지출 구조를 설계하면<br>숫자가 바뀝니다</h2>
+    <p class="lead">16개 기업 평균 기반. BSM 도입 후 기대되는 구조 변화.</p>
+    <div class="impl-grid">
+      <div class="impl-side impl-before">
+        <div><div class="impl-item-label">총 공급사</div><div class="impl-item-val">23,640개</div><div class="impl-item-note">관리 불가능</div></div>
+        <div><div class="impl-item-label">1회성 공급사</div><div class="impl-item-val">41.4%</div><div class="impl-item-note">협상력 없음</div></div>
+        <div><div class="impl-item-label">B2C 플랫폼</div><div class="impl-item-val">32.6%</div><div class="impl-item-note">통제 사각지대</div></div>
+      </div>
+      <div class="impl-arrow">&rarr;</div>
+      <div class="impl-side impl-after">
+        <div><div class="impl-item-label">BSM 도입 후</div><div class="impl-item-val">5,000개 이하</div><div class="impl-item-note">핵심 공급사 재편</div></div>
+        <div><div class="impl-item-label">반복 계약 전환</div><div class="impl-item-val">10% 이하</div><div class="impl-item-note">단가 협상 가능</div></div>
+        <div><div class="impl-item-label">전용몰 전환</div><div class="impl-item-val">5% 이하</div><div class="impl-item-note">세금계산서 자동</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELF-ASSESSMENT -->
+<section class="sec" id="assess">
+  <div class="ct">
+    <div class="sec-num">SELF-ASSESSMENT</div>
+    <div class="assess-intro"><h3>당신의 간접구매는<br>통제되고 있습니까</h3><p>해당되는 항목을 체크하세요</p></div>
+    <div class="check-grid" id="checkgrid">
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">간접구매 총 지출액을 정확히 모른다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">전체 공급사 수를 파악하지 못한다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">부서별로 "알아서" 구매한다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">쿠팡/네이버에서 법인카드로 구매한다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">공급사 선정 시 가격비교 프로세스가 없다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">100만원 이하 소액 거래가 대부분이다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">한 번 거래하고 다시 안 쓰는 공급사가 많다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">간접구매 전담 인력이 없다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">구매 데이터는 ERP에 사후 기록만 된다</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="check-text">매년 비용절감 목표 달성이 어렵다</div></div>
+    </div>
+    <div class="assess-result">
+      <div class="assess-ring" id="assessRing"><div class="assess-ring-n" id="assessNum">0</div><div class="assess-ring-of">/10</div></div>
+      <div class="assess-grade" id="assessGrade">항목을 체크하세요</div>
+      <div class="assess-desc" id="assessDesc"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="sec" id="conclusion" style="padding-bottom:0">
+  <div class="ct">
+    <div class="conclusion">
+      <div class="conclusion-body">
+        <h3>이 리포트는 시작입니다</h3>
+        <p>16개 기업의 데이터가 말하는 것은 분명합니다.<br>간접구매 비효율은 예외가 아니라 구조입니다.<br>그리고 구조는 바꿀 수 있습니다.</p>
+        <div class="conclusion-btns">
+          <button class="btn-primary">전체 리포트 다운로드 (PDF)</button>
+          <button class="btn-secondary">무료 진단 상담 신청</button>
+        </div>
+        <div class="conclusion-brand">업무마켓9 Research by 캐스팅엔</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>&copy; 2026 <a href="#">캐스팅엔</a> &mdash; <a href="#" style="color:var(--teal)">업무마켓9</a> Research</footer>
+
+<script>
+const D=[
+{n:"삼양식품",s:"A",g:"B",sc:35.1,t:89.6,o:30.4,p:.2,h:172,u:41.7,sp:347.9},
+{n:"한진",s:"A",g:"B",sc:44.9,t:98.9,o:19.5,p:1,h:1273,u:52.8,sp:280.1},
+{n:"부산은행",s:"A",g:"D",sc:78,t:98.3,o:44.6,p:37.4,h:1432,u:73.5,sp:248.6},
+{n:"코아스",s:"B",g:"B",sc:41,t:92.6,o:28.1,p:.7,h:740,u:29.6,sp:191.6},
+{n:"바이오니아",s:"B",g:"B",sc:43.3,t:92.8,o:38.3,p:4.5,h:395,u:61,sp:124.7},
+{n:"미래에셋캐피탈",s:"B",g:"B",sc:39.9,t:89.7,o:31.5,p:2.3,h:478,u:41.1,sp:94.2},
+{n:"피에스텍",s:"B",g:"C",sc:54.6,t:99,o:67.4,p:1.5,h:495,u:93.7,sp:92.5},
+{n:"BNK금융지주",s:"B",g:"C",sc:55.1,t:97.9,o:60.6,p:9.3,h:366,u:89.4,sp:91.4},
+{n:"마크애니",s:"C",g:"B",sc:32.7,t:85.6,o:19,p:.4,h:429,u:44.1,sp:53.6},
+{n:"공차",s:"C",g:"B",sc:36.2,t:83.9,o:30.5,p:1.7,h:347,u:35.2,sp:44.7},
+{n:"아토텍",s:"C",g:"B",sc:33.6,t:83.8,o:18.2,p:.2,h:619,u:24,sp:40.8},
+{n:"차봇모빌리티",s:"C",g:"C",sc:57.1,t:98.2,o:54.2,p:7.2,h:894,u:88.4,sp:39.3},
+{n:"한국능률협회",s:"D",g:"C",sc:51.3,t:95.9,o:67.1,p:2.8,h:176,u:88.4,sp:25.8},
+{n:"한국오션플랫폼",s:"D",g:"C",sc:59.4,t:91.5,o:32.2,p:0,h:2918,u:42.4,sp:24.8},
+{n:"유라클",s:"D",g:"C",sc:52.9,t:97.1,o:58.3,p:7.7,h:324,u:94.8,sp:23.5},
+{n:"H2",s:"D",g:"C",sc:53.4,t:95.8,o:63,p:4.9,h:398,u:85.1,sp:20}
+];
+const AN="ABCDEFGHIJKLMNOP",SN={A:"대규모",B:"중규모",C:"소규모",D:"영세"};
+
+/* Progress */
+window.addEventListener('scroll',()=>{
+  document.getElementById('progress').style.width=window.scrollY/(document.body.scrollHeight-innerHeight)*100+'%';
+  document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* Reveal + Animate */
+const allSec=document.querySelectorAll('.sec,.cover');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  e.target.classList.add('vis');
+  // Bars
+  e.target.querySelectorAll('[data-w]').forEach(b=>{
+    const prop=b.tagName==='circle'?'stroke-dasharray':b.classList.contains('hhi-hrow-fill')?'width':'width';
+    b.style.width=b.dataset.w+'%';
+  });
+  e.target.querySelectorAll('.tail-bar-fill[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
+  e.target.querySelectorAll('.onetime-fill[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
+  e.target.querySelectorAll('.hhi-hrow-fill[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
+  // Donut
+  e.target.querySelectorAll('.donut-tail').forEach(c=>{c.style.strokeDasharray=c.dataset.target+' 502.65'});
+  e.target.querySelectorAll('.donut-core').forEach(c=>{c.style.strokeDasharray=c.dataset.target+' 502.65'});
+  // Count-up
+  e.target.querySelectorAll('.cu:not(.done)').forEach(el=>{el.classList.add('done');countUp(el)});
+}})},{threshold:.1});
+allSec.forEach(s=>obs.observe(s));
+
+/* SVG donut transition */
+document.querySelectorAll('.donut-tail,.donut-core').forEach(c=>{
+  c.style.transition='stroke-dasharray 1.5s cubic-bezier(.22,1,.36,1)';
+});
+
+function countUp(el){
+  const t=parseFloat(el.dataset.t),sx=el.dataset.sx||'',dc=parseInt(el.dataset.dc)||0,fm=el.dataset.f,dur=1400,st=performance.now();
+  (function tick(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3);let v=t*e;v=dc?v.toFixed(dc):Math.round(v);if(fm==='c')v=Number(v).toLocaleString();el.textContent=v+sx;if(p<1)requestAnimationFrame(tick)})(st);
+}
+
+/* Segments */
+function renderSeg(f){
+  const g=document.getElementById('seggrid'),d=f==='all'?D:D.filter(c=>c.s===f);
+  g.innerHTML=d.map((c,i)=>{const idx=D.indexOf(c);return`<div class="seg-card" data-g="${c.g}" style="animation:fadeUp .35s ${i*.03}s both">
+  <div class="seg-card-hd"><div class="seg-card-nm">${AN[idx]}사 (${SN[c.s]})</div><div class="seg-card-grade ${c.g}">${c.g}등급</div></div>
+  <div class="seg-card-rows">
+    <div class="seg-card-row"><span class="seg-card-row-n">Tail</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.t}%;background:${c.t>95?'var(--danger)':c.t>90?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.t}%</span></div>
+    <div class="seg-card-row"><span class="seg-card-row-n">1회성</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.o}%;background:${c.o>50?'var(--danger)':c.o>35?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.o}%</span></div>
+    <div class="seg-card-row"><span class="seg-card-row-n">B2C</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${Math.min(c.p*3,100)}%;background:${c.p>10?'var(--danger)':c.p>5?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.p}%</span></div>
+    <div class="seg-card-row"><span class="seg-card-row-n">종합</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.sc}%;background:${c.sc>55?'var(--danger)':c.sc>45?'var(--caution)':'var(--blue)'}"></div></div><span class="seg-card-row-v">${c.sc}</span></div>
+  </div></div>`}).join('');
+}
+document.getElementById('segtabs').addEventListener('click',e=>{if(!e.target.classList.contains('seg-tab'))return;document.querySelectorAll('.seg-tab').forEach(t=>t.classList.remove('on'));e.target.classList.add('on');renderSeg(e.target.dataset.sg)});
+renderSeg('all');
+
+/* Assessment */
+function toggleCheck(el){
+  el.classList.toggle('on');
+  const cnt=document.querySelectorAll('.check-item.on').length;
+  const ring=document.getElementById('assessRing'),num=document.getElementById('assessNum'),grade=document.getElementById('assessGrade'),desc=document.getElementById('assessDesc');
+  num.textContent=cnt;
+  const lvl=[{m:0,c:'var(--g200)',tc:'var(--g400)',l:'항목을 체크하세요',d:''},{m:3,c:'var(--teal)',tc:'var(--teal)',l:'양호',d:'기본 관리 체계 있음'},{m:5,c:'var(--blue)',tc:'var(--blue)',l:'개선 필요',d:'비효율 감지'},{m:7,c:'var(--caution)',tc:'var(--caution)',l:'구조적 비효율',d:'즉시 점검 필요'},{m:10,c:'var(--danger)',tc:'var(--danger)',l:'통제 부재',d:'전문 진단 필요'}];
+  const x=cnt===0?lvl[0]:lvl.find(l=>cnt<=l.m);
+  ring.style.borderColor=x.c;num.style.color=x.tc;grade.textContent=x.l;grade.style.color=x.tc;desc.textContent=x.d;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.cover .cu').forEach(el=>{el.classList.add('done');countUp(el)})});
+</script>
+</body>
+</html>
