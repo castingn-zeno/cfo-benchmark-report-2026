@@ -366,26 +366,42 @@ footer a{color:var(--blue);font-weight:600}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* ================================================================
-   SPECIAL FINDING
+   SPECIAL FINDING — 산점도
    ================================================================ */
-.sf-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:48px}
-.sf-group{padding:40px 32px;border-radius:var(--r);border:1px solid var(--g200);background:var(--white)}
-.sf-group-badge{display:inline-block;color:var(--white);font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:8px}
-.sf-group-sub{font-size:12px;color:var(--g400);margin-bottom:24px}
-.sf-metrics{display:flex;gap:32px;margin-bottom:20px}
-.sf-metric-val{font-size:36px;font-weight:800;line-height:1}
-.sf-metric-label{font-size:12px;color:var(--g400);margin-top:4px}
-.sf-desc{font-size:14px;color:var(--g500);line-height:1.7}
-.sf-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;gap:16px}
-.sf-vs-icon{font-size:14px;font-weight:800;color:var(--g300);letter-spacing:2px}
-.sf-vs-mult{text-align:center;font-size:13px;color:var(--g500);line-height:1.6}
+.sf-chart{position:relative;margin-bottom:32px;padding:20px 20px 20px 48px}
+.sf-chart-y{position:absolute;left:-8px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:0 0;font-size:11px;color:var(--g400);white-space:nowrap}
+.sf-chart-area{position:relative;height:400px;background:var(--g50);border:1px solid var(--g200);border-radius:var(--r-sm);overflow:hidden}
+.sf-chart-x{text-align:center;font-size:11px;color:var(--g400);margin-top:12px}
+.sf-hline{position:absolute;left:0;right:0;border-top:1px dashed var(--g200)}
+.sf-hline span{position:absolute;left:8px;top:-8px;font-size:10px;color:var(--g300);background:var(--g50);padding:0 4px}
+.sf-zone-high{position:absolute;top:0;left:60%;right:0;bottom:0;background:rgba(217,79,79,.04)}
+.sf-zone-low{position:absolute;top:50%;left:0;right:60%;bottom:0;background:rgba(47,172,142,.04)}
+.sf-dot{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);transition:all .8s cubic-bezier(.22,1,.36,1);opacity:0;cursor:default}
+.sf-dot.vis{opacity:1}
+.sf-dot-label{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;color:var(--g500);white-space:nowrap;pointer-events:none}
+.sf-chart-legend{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--g400);margin-bottom:32px;flex-wrap:wrap}
+.sf-legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.sf-summary{display:flex;align-items:center;justify-content:center;gap:32px;padding:32px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r);margin-bottom:48px}
+.sf-summary-item{text-align:center}
+.sf-summary-val{font-size:36px;font-weight:800;line-height:1}
+.sf-summary-label{font-size:12px;color:var(--g400);margin-top:8px;line-height:1.4}
+.sf-summary-vs{font-size:20px;font-weight:800;color:var(--danger);padding:8px 16px;background:rgba(217,79,79,.08);border-radius:20px}
 @media(max-width:768px){
-  .sf-compare{grid-template-columns:1fr;gap:16px}
-  .sf-vs{flex-direction:row;padding:8px 0}
+  .sf-chart-area{height:300px}
+  .sf-summary{flex-direction:column;gap:16px}
 }
 /* ================================================================
    GOOD vs BAD CASE
    ================================================================ */
+.gb-norm{padding:32px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r);margin-bottom:32px}
+.gb-norm-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:20px}
+.gb-norm-bars{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.gb-norm-row{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:center}
+.gb-norm-name{font-size:13px;color:var(--g500);display:flex;align-items:center;gap:8px}
+.gb-tag{display:inline-block;color:var(--white);font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px}
+.gb-norm-track{height:36px;background:var(--g50);border-radius:var(--r-xs);position:relative;overflow:hidden}
+.gb-norm-fill{height:100%;border-radius:var(--r-xs);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:12px;font-weight:700;color:var(--white);transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+.gb-norm-note{font-size:13px;color:var(--g500);text-align:center}
 .gb-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
 .gb-card{padding:36px;border-radius:var(--r);border:1px solid var(--g200);background:var(--white)}
 .gb-badge{display:inline-block;color:var(--white);font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:20px}
@@ -788,48 +804,44 @@ footer a{color:var(--blue);font-weight:600}
 </section>
 
 <!-- ================================================================
-   SPECIAL FINDING — B2C ↔ 공급사 관리 상관관계
+   SPECIAL FINDING — B2C ↔ 1회성 공급사 상관관계 (그래프)
    ================================================================ -->
 <section class="sec" id="special">
   <div class="ct">
     <div class="sec-num">SPECIAL FINDING</div>
     <h2>B2C에 의존할수록<br>공급사는 관리되지 않습니다</h2>
-    <p class="lead">16개 기업의 B2C 플랫폼 의존도와 1회성 공급사 비율을 교차 분석했습니다.<br>편의 구매가 만든 공급사 분산은, 비용 누수의 시작점입니다.</p>
+    <p class="lead">16개 기업의 B2C 플랫폼 거래 비중(가로축)과 1회성 공급사 비율(세로축)을 교차 분석했습니다.</p>
 
-    <div class="sf-compare">
-      <div class="sf-group sf-high">
-        <div class="sf-group-badge" style="background:var(--danger)">B2C 의존도 상위</div>
-        <div class="sf-group-sub">8개사 평균</div>
-        <div class="sf-metrics">
-          <div class="sf-metric">
-            <div class="sf-metric-val" style="color:var(--danger)"><span class="cu" data-t="56.4" data-dc="1">0</span>%</div>
-            <div class="sf-metric-label">1회성 공급사</div>
-          </div>
-          <div class="sf-metric">
-            <div class="sf-metric-val" style="color:var(--danger)"><span class="cu" data-t="97.5" data-dc="1">0</span>%</div>
-            <div class="sf-metric-label">Tail 공급사</div>
-          </div>
-        </div>
-        <div class="sf-desc">쿠팡·네이버로 편하게 사고, 다음 달 또 다른 곳에서 산다. 공급사는 쌓이고, 단가 협상은 불가능해진다.</div>
+    <!-- 산점도 스타일 차트 -->
+    <div class="sf-chart">
+      <div class="sf-chart-y">1회성 공급사 비율 (%)</div>
+      <div class="sf-chart-area" id="sfChartArea">
+        <!-- 가로 기준선 -->
+        <div class="sf-hline" style="bottom:70%"><span>70%</span></div>
+        <div class="sf-hline" style="bottom:50%"><span>50%</span></div>
+        <div class="sf-hline" style="bottom:30%"><span>30%</span></div>
+        <!-- 위험 구간 배경 -->
+        <div class="sf-zone-high"></div>
+        <div class="sf-zone-low"></div>
+        <!-- 점 16개 (JS로 위치 설정) -->
       </div>
-      <div class="sf-vs">
-        <div class="sf-vs-icon">VS</div>
-        <div class="sf-vs-mult">1회성 공급사<br><strong style="color:var(--danger);font-size:32px">1.8배</strong></div>
+      <div class="sf-chart-x">B2C 플랫폼 거래 비중 (%) →</div>
+    </div>
+    <div class="sf-chart-legend">
+      <span class="sf-legend-dot" style="background:var(--danger)"></span> B2C 높음 + 1회성 높음 (관리 미흡)
+      <span class="sf-legend-dot" style="background:var(--teal);margin-left:24px"></span> B2C 낮음 + 1회성 낮음 (관리 우수)
+      <span class="sf-legend-dot" style="background:var(--g300);margin-left:24px"></span> 기타
+    </div>
+
+    <div class="sf-summary">
+      <div class="sf-summary-item">
+        <div class="sf-summary-val" style="color:var(--danger)"><span class="cu" data-t="56.4" data-dc="1">0</span>%</div>
+        <div class="sf-summary-label">B2C 상위 8개사<br>1회성 공급사 평균</div>
       </div>
-      <div class="sf-group sf-low">
-        <div class="sf-group-badge" style="background:var(--teal)">B2C 의존도 하위</div>
-        <div class="sf-group-sub">8개사 평균</div>
-        <div class="sf-metrics">
-          <div class="sf-metric">
-            <div class="sf-metric-val" style="color:var(--teal)"><span class="cu" data-t="31.9" data-dc="1">0</span>%</div>
-            <div class="sf-metric-label">1회성 공급사</div>
-          </div>
-          <div class="sf-metric">
-            <div class="sf-metric-val" style="color:var(--teal)"><span class="cu" data-t="91.7" data-dc="1">0</span>%</div>
-            <div class="sf-metric-label">Tail 공급사</div>
-          </div>
-        </div>
-        <div class="sf-desc">B2B 계약 기반으로 정기 발주. 공급사 수가 적고, 품목별 담당 공급사가 지정되어 있다.</div>
+      <div class="sf-summary-vs">×1.8</div>
+      <div class="sf-summary-item">
+        <div class="sf-summary-val" style="color:var(--teal)"><span class="cu" data-t="31.9" data-dc="1">0</span>%</div>
+        <div class="sf-summary-label">B2C 하위 8개사<br>1회성 공급사 평균</div>
       </div>
     </div>
 
@@ -841,31 +853,44 @@ footer a{color:var(--blue);font-weight:600}
 </section>
 
 <!-- ================================================================
-   GOOD vs BAD CASE — 같은 제조업, 다른 결과
+   GOOD vs BAD — 비슷한 지출, 다른 관리
    ================================================================ -->
 <section class="sec" id="goodbad">
   <div class="ct">
     <div class="sec-num">CASE COMPARISON</div>
-    <h2>같은 제조업인데<br>공급사 관리는 33배 차이</h2>
-    <p class="lead">16개 기업 중 같은 제조업 내에서도 공급사 관리 수준은 극단적으로 갈렸습니다.</p>
+    <h2>비슷한 지출 규모인데<br>공급사 밀도는 6배 차이</h2>
+    <p class="lead">지출 규모가 비슷한(61억 vs 75억) 두 기업. 차이는 규모가 아니라 관리입니다.</p>
+
+    <div class="gb-norm">
+      <div class="gb-norm-title">핵심 지표: 지출 1억 원당 공급사 수</div>
+      <div class="gb-norm-bars">
+        <div class="gb-norm-row">
+          <div class="gb-norm-name"><span class="gb-tag" style="background:var(--teal)">B사</span> 61억 지출</div>
+          <div class="gb-norm-track"><div class="gb-norm-fill" data-w="16" style="width:0;background:var(--teal)"><span>11.5개/억</span></div></div>
+        </div>
+        <div class="gb-norm-row">
+          <div class="gb-norm-name"><span class="gb-tag" style="background:var(--danger)">D사</span> 75억 지출</div>
+          <div class="gb-norm-track"><div class="gb-norm-fill" data-w="97" style="width:0;background:var(--danger)"><span>69.4개/억</span></div></div>
+        </div>
+      </div>
+      <div class="gb-norm-note">D사는 B사보다 지출이 더 적은데, 공급사는 <strong style="color:var(--danger)">6배</strong> 많습니다.</div>
+    </div>
 
     <div class="gb-grid">
       <div class="gb-card gb-good">
-        <div class="gb-badge" style="background:var(--teal)">관리 우수 — B사 (제조)</div>
+        <div class="gb-badge" style="background:var(--teal)">관리 우수 — B사 (IT)</div>
         <div class="gb-hero-row">
-          <div class="gb-hero"><div class="gb-hero-val"><span class="cu" data-t="158">0</span>개</div><div class="gb-hero-label">총 공급사</div></div>
-          <div class="gb-hero"><div class="gb-hero-val"><span class="cu" data-t="18.4" data-dc="1">0</span>%</div><div class="gb-hero-label">1회성 공급사</div></div>
+          <div class="gb-hero"><div class="gb-hero-val"><span class="cu" data-t="707">0</span>개</div><div class="gb-hero-label">총 공급사</div></div>
+          <div class="gb-hero"><div class="gb-hero-val"><span class="cu" data-t="21.5" data-dc="1">0</span>%</div><div class="gb-hero-label">1회성 공급사</div></div>
         </div>
         <div class="gb-details">
-          <div class="gb-detail"><span class="gb-dt">B2C 의존도</span><span class="gb-dd" style="color:var(--teal)">0.1%</span></div>
-          <div class="gb-detail"><span class="gb-dt">Top5 집중도</span><span class="gb-dd">45.8%</span></div>
-          <div class="gb-detail"><span class="gb-dt">비품 공급사</span><span class="gb-dd">18개</span></div>
-          <div class="gb-detail"><span class="gb-dt">3회 이하 거래</span><span class="gb-dd" style="color:var(--teal)">34.2%</span></div>
-          <div class="gb-detail"><span class="gb-dt">품목당 공급사</span><span class="gb-dd">평균 19개</span></div>
-          <div class="gb-detail"><span class="gb-dt">절감 대상(1·2차)</span><span class="gb-dd">54.4%</span></div>
+          <div class="gb-detail"><span class="gb-dt">간접구매 지출</span><span class="gb-dd">61.4억</span></div>
+          <div class="gb-detail"><span class="gb-dt">공급사 밀도</span><span class="gb-dd" style="color:var(--teal)">11.5개/억</span></div>
+          <div class="gb-detail"><span class="gb-dt">B2C 의존도</span><span class="gb-dd" style="color:var(--teal)">0.3%</span></div>
+          <div class="gb-detail"><span class="gb-dt">3회 이하 거래</span><span class="gb-dd" style="color:var(--teal)">38.4%</span></div>
         </div>
         <div class="gb-verdict" style="border-color:var(--teal)">
-          <strong>진단:</strong> 품목별 공급사가 적정 수준으로 배치. B2B 계약 비중이 높아 단가 검증이 이루어지고 있음. 추가 절감 여지는 제한적.
+          <strong>진단:</strong> 반복 거래 기반 관리 구조. 공급사 수가 적정하여 품목별 단가 검증이 가능한 상태. 추가 절감 여지 제한적.
         </div>
       </div>
 
@@ -876,103 +901,84 @@ footer a{color:var(--blue);font-weight:600}
           <div class="gb-hero"><div class="gb-hero-val" style="color:var(--danger)"><span class="cu" data-t="65.9" data-dc="1">0</span>%</div><div class="gb-hero-label">1회성 공급사</div></div>
         </div>
         <div class="gb-details">
+          <div class="gb-detail"><span class="gb-dt">간접구매 지출</span><span class="gb-dd">75.4억</span></div>
+          <div class="gb-detail"><span class="gb-dt">공급사 밀도</span><span class="gb-dd" style="color:var(--danger)">69.4개/억</span></div>
           <div class="gb-detail"><span class="gb-dt">B2C 의존도</span><span class="gb-dd" style="color:var(--danger)">1.3%</span></div>
-          <div class="gb-detail"><span class="gb-dt">Top5 집중도</span><span class="gb-dd">29.4%</span></div>
-          <div class="gb-detail"><span class="gb-dt">비품 공급사</span><span class="gb-dd" style="color:var(--danger)">198개</span></div>
           <div class="gb-detail"><span class="gb-dt">3회 이하 거래</span><span class="gb-dd" style="color:var(--danger)">84.8%</span></div>
-          <div class="gb-detail"><span class="gb-dt">품목당 공급사</span><span class="gb-dd" style="color:var(--danger)">평균 721개</span></div>
-          <div class="gb-detail"><span class="gb-dt">절감 대상(1·2차)</span><span class="gb-dd">36.5%</span></div>
         </div>
         <div class="gb-verdict" style="border-color:var(--danger)">
-          <strong>진단:</strong> 비품/소모품에만 198개 공급사가 난립. 거래의 85%가 3회 이하 — 사실상 매번 새로운 곳에서 구매. 단가 검증 불가.
-        </div>
-      </div>
-    </div>
-
-    <div class="gb-insight">
-      <div class="gb-insight-row">
-        <div class="gb-insight-item">
-          <div class="gb-insight-mult">33<small>배</small></div>
-          <div class="gb-insight-label">공급사 수 차이</div>
-        </div>
-        <div class="gb-insight-item">
-          <div class="gb-insight-mult">11<small>배</small></div>
-          <div class="gb-insight-label">비품 공급사 차이</div>
-        </div>
-        <div class="gb-insight-item">
-          <div class="gb-insight-mult">3.6<small>배</small></div>
-          <div class="gb-insight-label">1회성 공급사 차이</div>
+          <strong>진단:</strong> 거래의 85%가 3회 이하 — 매번 새로운 곳에서 구매. 단가 검증 구조 자체가 없음. 비품/소모품에만 198개 공급사 난립.
         </div>
       </div>
     </div>
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>같은 제조업이라도 공급사 관리 수준에 따라 <strong>비용 절감 가능 영역이 완전히 달라집니다.</strong> D사처럼 공급사가 분산된 기업일수록, BSM 도입 후 절감 효과는 극대화됩니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>공급사 수의 차이는 기업 규모가 아니라 <strong>관리 수준</strong>에서 비롯됩니다. D사가 B사 수준(11.5개/억)으로 공급사를 정리하면, 5,239개 → 약 870개로 통합이 가능합니다.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ================================================================
-   CUSTOMER CASE — 제조업 A사
+   PROJECTION — D사가 B사 수준이 되면
    ================================================================ -->
 <section class="sec" id="casestudy">
   <div class="ct">
-    <div class="sec-num">CASE STUDY</div>
-    <h2>공급사 관리를 시작하자<br>비용이 줄었습니다</h2>
-    <p class="lead">제조업 A사. 연 간접구매 지출 약 100억 원. BSM 도입 전후 12개월 비교.</p>
+    <div class="sec-num">DATA-DRIVEN PROJECTION</div>
+    <h2>D사가 공급사를 정리하면<br>무엇이 바뀝니까</h2>
+    <p class="lead">위 비교에서 D사(69.4개/억)가 B사 수준(11.5개/억)으로 공급사 밀도를 낮출 경우의 시뮬레이션입니다. 실제 AP 데이터 기반.</p>
 
     <div class="cs-timeline">
       <div class="cs-phase cs-before">
-        <div class="cs-phase-tag">BEFORE — 도입 전</div>
+        <div class="cs-phase-tag">현재 D사 — 실측 데이터</div>
         <div class="cs-kpi-row">
-          <div class="cs-kpi"><div class="cs-kpi-val">~1,200개</div><div class="cs-kpi-label">등록 공급사</div></div>
-          <div class="cs-kpi"><div class="cs-kpi-val">45%</div><div class="cs-kpi-label">1회성 공급사</div></div>
-          <div class="cs-kpi"><div class="cs-kpi-val">7개 채널</div><div class="cs-kpi-label">사무용품 구매처</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val">5,239개</div><div class="cs-kpi-label">등록 공급사</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val">65.9%</div><div class="cs-kpi-label">1회성 공급사</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val">69.4개/억</div><div class="cs-kpi-label">공급사 밀도</div></div>
         </div>
         <div class="cs-bullets">
-          <div class="cs-bullet">부서별로 "알아서" 구매 — 쿠팡, 네이버, 동네 문구점, 오피스디포 혼용</div>
-          <div class="cs-bullet">같은 품목을 다른 가격에 구매하는 사례 반복</div>
-          <div class="cs-bullet">구매 내역은 ERP에 사후 기록만 — 실시간 파악 불가</div>
+          <div class="cs-bullet">거래의 84.8%가 3회 이하 — 반복 거래 구조가 아닌 스팟 구매 위주</div>
+          <div class="cs-bullet">비품/소모품 카테고리에만 198개 공급사 분산</div>
+          <div class="cs-bullet">절감 대상(1·2차) 금액: 27.5억 (전체의 36.5%)</div>
         </div>
       </div>
 
       <div class="cs-arrow">
         <div class="cs-arrow-line"></div>
-        <div class="cs-arrow-label">BSM 도입<br>12개월</div>
+        <div class="cs-arrow-label">BSM 도입<br>공급사 통합</div>
       </div>
 
       <div class="cs-phase cs-after">
-        <div class="cs-phase-tag" style="background:var(--teal)">AFTER — 도입 12개월 후</div>
+        <div class="cs-phase-tag" style="background:var(--teal)">목표 — B사 수준 도달 시</div>
         <div class="cs-kpi-row">
-          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">~360개</div><div class="cs-kpi-label">관리 공급사 <small style="color:var(--teal)">▼70%</small></div></div>
-          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">12%</div><div class="cs-kpi-label">1회성 공급사 <small style="color:var(--teal)">▼33%p</small></div></div>
-          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">2개 채널</div><div class="cs-kpi-label">사무용품 구매처 <small style="color:var(--teal)">▼71%</small></div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">~870개</div><div class="cs-kpi-label">관리 공급사 <small style="color:var(--teal)">▼83%</small></div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">~20%</div><div class="cs-kpi-label">1회성 공급사 <small style="color:var(--teal)">▼46%p</small></div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val" style="color:var(--teal)">11.5개/억</div><div class="cs-kpi-label">공급사 밀도 <small style="color:var(--teal)">▼83%</small></div></div>
         </div>
         <div class="cs-bullets">
-          <div class="cs-bullet" style="border-color:var(--teal)">전용몰 + B2B 단가 계약 → 사무용품 단가 평균 12% 절감</div>
-          <div class="cs-bullet" style="border-color:var(--teal)">비정기 지출 → 정기 발주 전환, 팀 단위 취합 구매 정착</div>
-          <div class="cs-bullet" style="border-color:var(--teal)">결제선 지정으로 누가, 무엇을, 얼마에 샀는지 실시간 파악</div>
+          <div class="cs-bullet" style="border-color:var(--teal)">스팟 구매 → B2B 단가 계약 전환으로 품목별 가격 검증 가능</div>
+          <div class="cs-bullet" style="border-color:var(--teal)">198개 비품 공급사 → 카테고리별 핵심 공급사 5~10개로 집약</div>
+          <div class="cs-bullet" style="border-color:var(--teal)">1회성 3,450개 공급사 중 반복 수요가 있는 거래를 정기 계약으로 전환</div>
         </div>
       </div>
     </div>
 
     <div class="cs-result">
       <div class="cs-result-main">
-        <div class="cs-result-num" style="color:var(--teal)">~8%</div>
-        <div class="cs-result-label">연간 간접구매 비용 절감</div>
-        <div class="cs-result-sub">약 100억 기준, 연 8억 원 절감 효과</div>
+        <div class="cs-result-num" style="color:var(--teal)">27.5억</div>
+        <div class="cs-result-label">절감 검토 대상 금액</div>
+        <div class="cs-result-sub">전체 75.4억 중 1·2차 절감 대상</div>
       </div>
       <div class="cs-result-extras">
-        <div class="cs-result-extra">구매 투명성 확보 — 불투명 구매 → 전 건 가시화</div>
-        <div class="cs-result-extra">감사 대응력 강화 — 구매 근거 + 승인 이력 자동 기록</div>
-        <div class="cs-result-extra">총무/구매팀 업무 시간 주 평균 6시간 절감</div>
+        <div class="cs-result-extra"><strong>근거 1:</strong> 공급사 밀도를 B사 수준으로 낮추면, 동일 품목 내 경쟁 입찰 및 볼륨 할인 협상이 가능해짐</div>
+        <div class="cs-result-extra"><strong>근거 2:</strong> 1회성 공급사 3,450개 중 반복 수요 패턴이 확인되는 거래를 정기 계약으로 전환</div>
+        <div class="cs-result-extra"><strong>근거 3:</strong> 비품/소모품 198개 공급사를 전용몰 1~2개로 통합 시, 단가 + 관리비용 동시 절감</div>
       </div>
     </div>
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p><strong>공급사를 줄이는 것만으로 비용이 절감됩니다.</strong> A사의 사례는 첨단 기술이 아닌, 구매 구조 정리만으로 달성한 결과입니다. 1,200개 공급사를 360개로 통합하자 단가 협상이 가능해졌고, 비정기 지출이 정기 계약으로 전환되었습니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>이것은 가상의 시나리오가 아닙니다. <strong>실제 데이터에서 확인된 두 기업의 차이</strong>를 기반으로 한 시뮬레이션입니다. 같은 지출 규모에서 공급사 관리만 달라도 구조가 완전히 바뀝니다.</p></div>
     </div>
   </div>
 </section>
@@ -1107,6 +1113,54 @@ const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
   e.target.querySelectorAll('.cu:not(.done)').forEach(el=>{el.classList.add('done');countUp(el)});
 }})},{threshold:.1});
 allSec.forEach(s=>obs.observe(s));
+
+/* Scatter plot — Special Finding */
+(function(){
+  const SF=[
+    {n:'부산은행',b:37.2,o:44.6},{n:'BNK금융',b:8.6,o:60.3},{n:'유라클',b:7.5,o:57.5},
+    {n:'차봇',b:6.8,o:53.7},{n:'H2',b:4.4,o:61.0},{n:'한국능률',b:2.7,o:66.4},
+    {n:'미래에셋',b:2.2,o:70.8},{n:'코아스',b:2.0,o:37.0},
+    {n:'공차',b:1.4,o:30.2},{n:'피에스텍',b:1.3,o:65.9},{n:'한진',b:0.8,o:19.0},
+    {n:'바이오니아',b:0.6,o:36.7},{n:'마크애니',b:0.3,o:21.5},{n:'삼양식품',b:0.2,o:30.2},
+    {n:'아토텍',b:0.1,o:18.4},{n:'오션플랫폼',b:0.0,o:33.3}
+  ];
+  const area=document.getElementById('sfChartArea');
+  if(!area) return;
+  const maxB=40;
+  SF.forEach(d=>{
+    const dot=document.createElement('div');
+    dot.className='sf-dot';
+    const x=Math.min(d.b/maxB*100,98);
+    const y=100-d.o;
+    dot.style.left=Math.max(x,2)+'%';
+    dot.style.bottom=y+'%';
+    if(d.b>2&&d.o>50) dot.style.background='var(--danger)';
+    else if(d.b<2&&d.o<40) dot.style.background='var(--teal)';
+    else dot.style.background='var(--g300)';
+    dot.title=d.n+': B2C '+d.b+'%, 1회성 '+d.o+'%';
+    const lbl=document.createElement('div');
+    lbl.className='sf-dot-label';
+    lbl.textContent=d.n;
+    dot.appendChild(lbl);
+    area.appendChild(dot);
+  });
+  /* animate dots on reveal */
+  const sfObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+    area.querySelectorAll('.sf-dot').forEach((d,i)=>{setTimeout(()=>d.classList.add('vis'),i*80)});
+    sfObs.unobserve(e.target);
+  }})},{threshold:.2});
+  sfObs.observe(area);
+
+  /* animate gb-norm bars on reveal */
+  const gbNorm=document.querySelector('.gb-norm');
+  if(gbNorm){
+    const gbObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+      gbNorm.querySelectorAll('.gb-norm-fill[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%'});
+      gbObs.unobserve(e.target);
+    }})},{threshold:.2});
+    gbObs.observe(gbNorm);
+  }
+})();
 
 /* SVG donut transition */
 document.querySelectorAll('.donut-tail,.donut-core').forEach(c=>{
