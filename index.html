@@ -55,9 +55,12 @@ a{color:inherit;text-decoration:none}
 .cover-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(13,138,231,.12);border:1px solid rgba(13,138,231,.2);border-radius:24px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:40px}
 .cover-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.cover h1{font-size:clamp(40px,6.5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:28px}
+.cover h1{font-size:clamp(40px,6.5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:12px}
 .cover h1 em{font-style:normal;color:var(--blue)}
-.cover-sub{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.55);line-height:1.6;max-width:600px;margin-bottom:48px}
+.cover-sub1{font-size:clamp(22px,3vw,32px);font-weight:600;color:rgba(255,255,255,.85);margin-bottom:32px;letter-spacing:-.3px}
+.cover-sub1 em{font-style:normal;color:var(--danger);font-weight:800}
+.cover-sub{font-size:clamp(15px,1.8vw,18px);color:rgba(255,255,255,.4);line-height:1.7;max-width:600px;margin-bottom:48px}
+.cover h1 .grade{display:inline-block;background:var(--danger);color:var(--white);padding:4px 20px;border-radius:8px;font-size:clamp(36px,5.5vw,64px);line-height:1;vertical-align:baseline;margin-left:8px;letter-spacing:0;position:relative;top:-2px}
 .cover-meta{display:flex;gap:36px;font-size:13px;color:rgba(255,255,255,.35)}
 .cover-meta strong{color:rgba(255,255,255,.7);font-weight:600}
 .cover-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.25);font-size:11px;letter-spacing:2px}
@@ -369,7 +372,8 @@ footer a{color:var(--blue);font-weight:600}
   </div>
   <div class="cover-body">
     <div class="cover-badge">한국 최초 간접구매 벤치마크 연구</div>
-    <h1>당신의 간접구매는<br><em>통제</em>되고 있습니까</h1>
+    <h1>국내에 간접구매 관리<br><span class="grade">A</span>등급은 없었습니다</h1>
+    <div class="cover-sub1"><em>귀사</em>는 어떻습니까</div>
     <div class="cover-sub">16개 기업, 57만 건 이상의 AP 데이터를 분석했습니다.<br>어떤 기업도 A등급을 받지 못했습니다.</div>
     <div class="cover-meta">
       <span><strong>16</strong> 기업</span>
