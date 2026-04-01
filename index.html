@@ -452,6 +452,25 @@ footer a{color:var(--blue);font-weight:600}
   .cs-result{grid-template-columns:1fr;gap:24px}
   .cs-result-main{padding-right:0;border-right:none;padding-bottom:24px;border-bottom:1px solid var(--g200)}
 }
+/* Deep Dive steps */
+.dd-step{margin-bottom:16px;margin-top:48px}
+.dd-step:first-of-type{margin-top:0}
+.dd-step-num{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--blue);margin-bottom:4px}
+.dd-step-title{font-size:20px;font-weight:700;color:var(--ink);line-height:1.3}
+.dd-sim{padding:32px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r);margin-bottom:48px}
+.dd-sim-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:16px}
+.dd-sim-item{text-align:center}
+.dd-sim-label{font-size:11px;color:var(--g400);margin-bottom:8px;font-weight:600}
+.dd-sim-before{font-size:18px;font-weight:700;color:var(--g400);text-decoration:line-through;text-decoration-color:var(--danger)}
+.dd-sim-arrow{font-size:16px;color:var(--g300);margin:4px 0}
+.dd-sim-after{font-size:24px;font-weight:800;color:var(--teal)}
+.dd-sim-delta{font-size:11px;color:var(--teal);font-weight:600;margin-top:2px}
+.dd-sim-note{font-size:13px;color:var(--g500);text-align:center;padding-top:16px;border-top:1px solid var(--g100)}
+@media(max-width:768px){
+  .dd-sim-row{grid-template-columns:1fr}
+  .dd-sim-item{display:flex;align-items:center;gap:12px;text-align:left}
+  .dd-sim-arrow{display:none}
+}
 </style>
 </head>
 <body>
@@ -1117,27 +1136,6 @@ document.querySelectorAll('.donut-tail,.donut-core').forEach(c=>{
 function countUp(el){
   const t=parseFloat(el.dataset.t),sx=el.dataset.sx||'',dc=parseInt(el.dataset.dc)||0,fm=el.dataset.f,dur=1400,st=performance.now();
   (function tick(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3);let v=t*e;v=dc?v.toFixed(dc):Math.round(v);if(fm==='c')v=Number(v).toLocaleString();el.textContent=v+sx;if(p<1)requestAnimationFrame(tick)})(st);
-}
-
-/* Deep Dive steps */
-.dd-step{margin-bottom:16px;margin-top:48px}
-.dd-step:first-of-type{margin-top:0}
-.dd-step-num{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--blue);margin-bottom:4px}
-.dd-step-title{font-size:20px;font-weight:700;color:var(--ink);line-height:1.3}
-/* Simulation strip */
-.dd-sim{padding:32px;background:var(--white);border:1px solid var(--g200);border-radius:var(--r);margin-bottom:48px}
-.dd-sim-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:16px}
-.dd-sim-item{text-align:center}
-.dd-sim-label{font-size:11px;color:var(--g400);margin-bottom:8px;font-weight:600}
-.dd-sim-before{font-size:18px;font-weight:700;color:var(--g400);text-decoration:line-through;text-decoration-color:var(--danger)}
-.dd-sim-arrow{font-size:16px;color:var(--g300);margin:4px 0}
-.dd-sim-after{font-size:24px;font-weight:800;color:var(--teal)}
-.dd-sim-delta{font-size:11px;color:var(--teal);font-weight:600;margin-top:2px}
-.dd-sim-note{font-size:13px;color:var(--g500);text-align:center;padding-top:16px;border-top:1px solid var(--g100)}
-@media(max-width:768px){
-  .dd-sim-row{grid-template-columns:1fr}
-  .dd-sim-item{display:flex;align-items:center;gap:12px;text-align:left}
-  .dd-sim-arrow{display:none}
 }
 
 /* Segments */
