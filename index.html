@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 간접구매 벤치마크 리포트 | 업무마켓9 Research</title>
+<title>2026 간접구매 벤치마크 리포트 | ZENO Research</title>
 <meta name="description" content="16개 기업, 57만 건 AP 데이터가 말하는 간접구매의 구조적 비효율.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" rel="stylesheet">
@@ -486,10 +486,11 @@ footer a{color:var(--blue);font-weight:600}
 /* ================================================================
    PART DIVIDERS
    ================================================================ */
-.part-div{padding:0;text-align:center;position:relative;background:linear-gradient(135deg,var(--ink) 0%,#0E1A30 100%);color:var(--white)}
-.part-div-inner{max-width:var(--ct);margin:0 auto;padding:56px 40px}
-.part-div-num{font-size:10px;font-weight:800;letter-spacing:8px;color:var(--blue);margin-bottom:12px}
-.part-div-title{font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--white);letter-spacing:-.8px}
+.part-div{padding:0;text-align:center;position:relative;background:linear-gradient(135deg,var(--ink) 0%,#0C1628 50%,#0E1A30 100%);color:var(--white);overflow:hidden}
+.part-div::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 20% 80%,rgba(10,127,219,.1),transparent),radial-gradient(ellipse 40% 60% at 80% 20%,rgba(30,158,126,.06),transparent)}
+.part-div-inner{max-width:var(--ct);margin:0 auto;padding:80px 40px;position:relative;z-index:1}
+.part-div-num{font-size:12px;font-weight:800;letter-spacing:10px;color:var(--blue);margin-bottom:16px}
+.part-div-title{font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.2}
 
 /* ================================================================
    2×2 MATURITY MATRIX
@@ -624,14 +625,14 @@ footer a{color:var(--blue);font-weight:600}
 <div id="progress"></div>
 
 <nav class="topbar" id="topbar">
-  <div class="topbar-brand"><div class="mark">9</div>업무마켓9 Research</div>
+  <div class="topbar-brand"><div class="mark">Z</div>ZENO Research</div>
   <button class="topbar-cta" onclick="document.getElementById('conclusion').scrollIntoView({behavior:'smooth'})">리포트 받기</button>
 </nav>
 
 <!-- COVER -->
 <section class="cover" id="cover">
   <div class="cover-top">
-    <div class="cover-brand"><div class="mark">9</div>업무마켓9 Research</div>
+    <div class="cover-brand"><div class="mark">Z</div>ZENO Research</div>
     <div class="cover-year">March 2026</div>
   </div>
   <div class="cover-body">
@@ -670,9 +671,9 @@ footer a{color:var(--blue);font-weight:600}
         </div>
       </div>
       <div class="company-card wm9">
-        <div class="company-card-tag" style="color:var(--blue)">WORKMARKET 9</div>
-        <h3>업무마켓9</h3>
-        <p>캐스팅엔의 <strong>BSM(Business Spend Management) 플랫폼</strong>입니다. 기업이 "무엇을, 어디서, 얼마에 사는지"를 실시간으로 파악하고 통제할 수 있게 합니다.</p>
+        <div class="company-card-tag" style="color:var(--blue)">ZENO</div>
+        <h3>제노(ZENO)</h3>
+        <p>캐스팅엔이 만든 <strong>국내 유일 BSM(Business Spend Management) 플랫폼</strong>입니다. 구매 거버넌스를 세팅하고, 구매를 실행하며, AI가 이상을 감지합니다.</p>
         <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
         <div class="company-nums">
           <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
@@ -682,7 +683,7 @@ footer a{color:var(--blue);font-weight:600}
       </div>
       <div class="company-why">
         <h4>이 연구의 의미</h4>
-        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 업무마켓9는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
+        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 제노(ZENO)는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
       </div>
     </div>
   </div>
@@ -808,7 +809,7 @@ footer a{color:var(--blue);font-weight:600}
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>Tail 구간의 지출은 개별 협상이 아니라 <strong>카탈로그 기반 통합 구매 플랫폼</strong>으로 전환해야 관리 비용을 절감할 수 있습니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>Tail 구간의 지출은 개별 협상이 아니라 <strong>카탈로그 기반 통합 구매 플랫폼</strong>으로 전환해야 관리 비용을 절감할 수 있습니다. 글로벌 구매 선진 기업은 Tail Spend를 전용몰·카탈로그로 이관하여, 발주 1건당 관리 비용을 80% 이상 절감합니다. 핵심은 Tail 공급사를 "제거"하는 것이 아니라, <strong>관리 방식을 바꾸는 것</strong>입니다.</p></div>
     </div>
     <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>발주 1건당 관리 비용을 계산해 본 적 있습니까?</p></div>
     <div class="src"><b>산출 기준:</b> Pareto 80/20 — 누적 지출 상위 80%에 도달하는 데 필요한 공급사 = Core, 나머지 전부 = Tail.</div>
@@ -856,7 +857,7 @@ footer a{color:var(--blue);font-weight:600}
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>선호 공급사 리스트(Preferred Supplier List)를 구축하고 반복 거래를 유도하면 볼륨 기반 단가 협상이 가능해집니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>선호 공급사 리스트(Preferred Supplier List)를 구축하고 반복 거래를 유도하면 볼륨 기반 단가 협상이 가능해집니다. 1회성 공급사의 핵심 문제는 "단가"가 아니라 <strong>"학습 비용"</strong>입니다 — 매번 새로운 공급사를 검증하고, 계약하고, 품질을 확인하는 데 드는 시간과 인력이 반복됩니다. 카테고리별 2~3개 선호 공급사를 지정하면 이 학습 비용이 0에 수렴합니다.</p></div>
     </div>
     <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>같은 품목을 매번 다른 공급사에서 구매하는 비용을 측정하고 계십니까?</p></div>
     <div class="src"><b>산출 기준:</b> 분석 기간(2023~2025) 내 거래 횟수 = 1회인 고유 공급사 / 전체 고유 공급사.</div>
@@ -906,7 +907,7 @@ footer a{color:var(--blue);font-weight:600}
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>B2C 플랫폼 구매는 구매 업계 용어로 <strong>Maverick Spend</strong>(통제 외 구매)에 해당합니다. "금지"가 아니라 <strong>동일한 편의성을 제공하는 B2B 구매 채널</strong>로 전환해야 합니다. IT의 Shadow IT와 같은 <strong>Shadow Procurement</strong> 현상입니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>B2C 플랫폼 구매는 구매 업계 용어로 <strong>Maverick Spend</strong>(통제 외 구매)에 해당합니다. "금지"가 아니라 <strong>동일한 편의성을 제공하는 B2B 구매 채널</strong>로 전환해야 합니다. 직원들이 쿠팡을 쓰는 이유는 "몰라서"가 아니라 <strong>"편해서"</strong>입니다. 다음 날 배송, 간편 결제, 비교 쇼핑 — 이 편의성을 B2B 전용몰이 이기지 못하면 Maverick Spend는 줄지 않습니다.</p></div>
     </div>
     <div class="src"><b>산출 기준:</b> 비품/소모품 대분류 내 B2C 7개 플랫폼(쿠팡, 네이버, SSG, 11번가, G마켓, 배민, 카카오) 거래건수 / 전체 거래건수.</div>
   </div>
@@ -966,7 +967,7 @@ footer a{color:var(--blue);font-weight:600}
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>카테고리별 2nd Source 확보가 필수입니다. 공급사 집중은 단기적으로 효율적이지만, 장기적으로 <strong>가격 협상력을 공급사에게 넘기는 구조</strong>입니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>카테고리별 2nd Source 확보가 필수입니다. 공급사 집중은 단기적으로 효율적이지만, 장기적으로 <strong>가격 협상력을 공급사에게 넘기는 구조</strong>입니다. 특히 HHI 2,500+인 카테고리는 해당 공급사가 가격을 10% 올려도 대안이 없습니다 — 이것이 "집중 리스크"의 실체입니다. 반대로 HHI가 너무 낮으면(100 이하) 공급사가 너무 분산되어 협상력이 없습니다. <strong>적정 HHI: 500~1,500</strong> 구간이 건전한 경쟁과 관리 효율이 공존하는 지점입니다.</p></div>
     </div>
     <div class="src"><b>HHI:</b> 각 공급사 지출 점유율(%)의 제곱합. 10,000 = 완전 독점. <b>미국 법무부(DOJ):</b> 2,500+ 고도집중, 1,500~2,500 보통집중.</div>
 
@@ -1169,7 +1170,7 @@ footer a{color:var(--blue);font-weight:600}
         <div class="sf-summary-label">B2C 하위 8개사<br>1회성 공급사 평균</div>
       </div>
     </div>
-    <div class="src" style="margin-bottom:0">그룹 평균 비교 기준 1.8배 차이. 개별 기업 단위 Pearson r = 0.33 (약한 양의 상관). 부산은행 제외 15개사 기준.</div>
+    <div class="src" style="margin-bottom:0">그룹 평균 비교 기준 1.8배 차이. 개별 기업 단위 Pearson r = 0.33 (약한 양의 상관). 금융/대규모 1개사 제외 15개사 기준.</div>
 
     <!-- STEP 2: 밀도 비교 -->
     <div class="dd-step">
@@ -1250,7 +1251,7 @@ footer a{color:var(--blue);font-weight:600}
 
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>B2C 편의 구매 → 공급사 분산 → 비용 누수. 이 구조는 15개 기업에서 반복되었고, <strong>같은 지출 규모에서 관리 수준만 달라도 공급사 밀도가 6배 벌어집니다.</strong> 공급사를 줄이는 것이 비용 절감의 시작입니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>B2C 편의 구매 → 공급사 분산 → 비용 누수. 이 구조는 15개 기업에서 반복되었습니다. <strong>같은 지출 규모에서 관리 수준만 달라도 공급사 밀도가 6배 벌어집니다.</strong> 공급사를 줄이는 것이 비용 절감의 시작점이며, 줄이는 방법은 "거래 중단"이 아니라 <strong>"카테고리별 통합 → 단가 계약 전환 → 정기 발주 구조 구축"</strong>의 3단계입니다. 이 구조가 잡히면 구매팀이 아닌 현업 담당자도 통제된 환경에서 자율 구매가 가능해집니다.</p></div>
     </div>
   </div>
 </section>
@@ -1461,33 +1462,33 @@ footer a{color:var(--blue);font-weight:600}
           </div>
         </div>
 
-        <div class="conclusion-brand">업무마켓9 Research by 캐스팅엔 · ZENO</div>
+        <div class="conclusion-brand">ZENO Research by 캐스팅엔</div>
         <div class="conclusion-disclaimer">본 리포트는 16개 기업의 실제 AP 데이터(333,071건)를 기반으로 작성되었습니다. 개별 기업이 식별되지 않도록 익명화·집계 처리되었습니다.</div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>&copy; 2026 <a href="#">캐스팅엔</a> &mdash; <a href="#" style="color:var(--teal)">업무마켓9 · ZENO</a> Research</footer>
+<footer>&copy; 2026 <a href="#">캐스팅엔</a> &mdash; <a href="#" style="color:var(--teal)">ZENO</a> Research</footer>
 
 <script>
 const D=[
-{n:"삼양식품",s:"A",g:"B",sc:35.1,t:89.6,o:30.4,p:.2,h:172,u:41.7,sp:347.9,ind:"제조",tx:82311,sup:1593,oh:23.7},
-{n:"한진",s:"A",g:"B",sc:44.9,t:98.9,o:19.5,p:1,h:1273,u:52.8,sp:280.1,ind:"물류",tx:18171,sup:966,oh:34.2},
-{n:"부산은행",s:"A",g:"D",sc:78,t:98.3,o:44.6,p:37.4,h:1432,u:73.5,sp:248.6,ind:"금융",tx:26419,sup:2154,oh:44.7},
-{n:"코아스",s:"B",g:"B",sc:41,t:92.6,o:28.1,p:.7,h:740,u:29.6,sp:191.6,ind:"제조",tx:3870,sup:324,oh:9.6},
-{n:"바이오니아",s:"B",g:"B",sc:43.3,t:92.8,o:38.3,p:4.5,h:395,u:61,sp:124.7,ind:"바이오",tx:20845,sup:1145,oh:18.1},
-{n:"미래에셋캐피탈",s:"B",g:"B",sc:39.9,t:89.7,o:31.5,p:2.3,h:478,u:41.1,sp:94.2,ind:"금융",tx:17236,sup:302,oh:33.9},
-{n:"피에스텍",s:"B",g:"C",sc:54.6,t:99,o:67.4,p:1.5,h:495,u:93.7,sp:92.5,ind:"IT",tx:33024,sup:5171,oh:27.5},
-{n:"BNK금융지주",s:"B",g:"C",sc:55.1,t:97.9,o:60.6,p:9.3,h:366,u:89.4,sp:91.4,ind:"금융",tx:23674,sup:5080,oh:34.7},
-{n:"마크애니",s:"C",g:"B",sc:32.7,t:85.6,o:19,p:.4,h:429,u:44.1,sp:53.6,ind:"IT",tx:21254,sup:641,oh:26.6},
-{n:"공차",s:"C",g:"B",sc:36.2,t:83.9,o:30.5,p:1.7,h:347,u:35.2,sp:44.7,ind:"F&B",tx:4850,sup:236,oh:22.8},
-{n:"아토텍",s:"C",g:"B",sc:33.6,t:83.8,o:18.2,p:.2,h:619,u:24,sp:40.8,ind:"제조",tx:3907,sup:154,oh:13.9},
-{n:"차봇모빌리티",s:"C",g:"C",sc:57.1,t:98.2,o:54.2,p:7.2,h:894,u:88.4,sp:39.3,ind:"모빌리티",tx:5308,sup:1274,oh:8.5},
-{n:"한국능률협회",s:"D",g:"C",sc:51.3,t:95.9,o:67.1,p:2.8,h:176,u:88.4,sp:25.8,ind:"서비스",tx:12591,sup:1862,oh:46.1},
-{n:"한국오션플랫폼",s:"D",g:"C",sc:59.4,t:91.5,o:32.2,p:0,h:2918,u:42.4,sp:24.8,ind:"해운",tx:1593,sup:59,oh:13.8},
-{n:"유라클",s:"D",g:"C",sc:52.9,t:97.1,o:58.3,p:7.7,h:324,u:94.8,sp:23.5,ind:"IT",tx:23200,sup:3388,oh:58.5},
-{n:"H2",s:"D",g:"C",sc:53.4,t:95.8,o:63,p:4.9,h:398,u:85.1,sp:20,ind:"IT",tx:3120,sup:843,oh:46.4}
+{n:"제조/대",s:"A",g:"B",sc:35.1,t:89.6,o:30.4,p:.2,h:172,u:41.7,sp:347.9,ind:"제조",tx:82311,sup:1593,oh:23.7},
+{n:"물류/대",s:"A",g:"B",sc:44.9,t:98.9,o:19.5,p:1,h:1273,u:52.8,sp:280.1,ind:"물류",tx:18171,sup:966,oh:34.2},
+{n:"금융/대",s:"A",g:"D",sc:78,t:98.3,o:44.6,p:37.4,h:1432,u:73.5,sp:248.6,ind:"금융",tx:26419,sup:2154,oh:44.7},
+{n:"제조/중①",s:"B",g:"B",sc:41,t:92.6,o:28.1,p:.7,h:740,u:29.6,sp:191.6,ind:"제조",tx:3870,sup:324,oh:9.6},
+{n:"바이오/중",s:"B",g:"B",sc:43.3,t:92.8,o:38.3,p:4.5,h:395,u:61,sp:124.7,ind:"바이오",tx:20845,sup:1145,oh:18.1},
+{n:"금융/중①",s:"B",g:"B",sc:39.9,t:89.7,o:31.5,p:2.3,h:478,u:41.1,sp:94.2,ind:"금융",tx:17236,sup:302,oh:33.9},
+{n:"IT/중",s:"B",g:"C",sc:54.6,t:99,o:67.4,p:1.5,h:495,u:93.7,sp:92.5,ind:"IT",tx:33024,sup:5171,oh:27.5},
+{n:"금융/중②",s:"B",g:"C",sc:55.1,t:97.9,o:60.6,p:9.3,h:366,u:89.4,sp:91.4,ind:"금융",tx:23674,sup:5080,oh:34.7},
+{n:"IT/소①",s:"C",g:"B",sc:32.7,t:85.6,o:19,p:.4,h:429,u:44.1,sp:53.6,ind:"IT",tx:21254,sup:641,oh:26.6},
+{n:"F&B/소",s:"C",g:"B",sc:36.2,t:83.9,o:30.5,p:1.7,h:347,u:35.2,sp:44.7,ind:"F&B",tx:4850,sup:236,oh:22.8},
+{n:"제조/소",s:"C",g:"B",sc:33.6,t:83.8,o:18.2,p:.2,h:619,u:24,sp:40.8,ind:"제조",tx:3907,sup:154,oh:13.9},
+{n:"모빌리티/소",s:"C",g:"C",sc:57.1,t:98.2,o:54.2,p:7.2,h:894,u:88.4,sp:39.3,ind:"모빌리티",tx:5308,sup:1274,oh:8.5},
+{n:"서비스/영",s:"D",g:"C",sc:51.3,t:95.9,o:67.1,p:2.8,h:176,u:88.4,sp:25.8,ind:"서비스",tx:12591,sup:1862,oh:46.1},
+{n:"해운/영",s:"D",g:"C",sc:59.4,t:91.5,o:32.2,p:0,h:2918,u:42.4,sp:24.8,ind:"해운",tx:1593,sup:59,oh:13.8},
+{n:"IT/영①",s:"D",g:"C",sc:52.9,t:97.1,o:58.3,p:7.7,h:324,u:94.8,sp:23.5,ind:"IT",tx:23200,sup:3388,oh:58.5},
+{n:"IT/영②",s:"D",g:"C",sc:53.4,t:95.8,o:63,p:4.9,h:398,u:85.1,sp:20,ind:"IT",tx:3120,sup:843,oh:46.4}
 ];
 const AN="ABCDEFGHIJKLMNOP",SN={A:"대규모",B:"중규모",C:"소규모",D:"영세"},IN_COLORS={"제조":"#3B82F6","금융":"#8B5CF6","IT":"#06B6D4","물류":"#F59E0B","바이오":"#10B981","F&B":"#EC4899","모빌리티":"#F97316","서비스":"#6366F1","해운":"#0EA5E9"};
 
@@ -1520,12 +1521,12 @@ allSec.forEach(s=>obs.observe(s));
 /* Scatter plot — Special Finding */
 (function(){
   const SF=[
-    {n:'BNK금융',b:8.6,o:60.3},{n:'유라클',b:7.5,o:57.5},
-    {n:'차봇',b:6.8,o:53.7},{n:'H2',b:4.4,o:61.0},{n:'한국능률',b:2.7,o:66.4},
-    {n:'미래에셋',b:2.2,o:70.8},{n:'코아스',b:2.0,o:37.0},
-    {n:'공차',b:1.4,o:30.2},{n:'피에스텍',b:1.3,o:65.9},{n:'한진',b:0.8,o:19.0},
-    {n:'바이오니아',b:0.6,o:36.7},{n:'마크애니',b:0.3,o:21.5},{n:'삼양식품',b:0.2,o:30.2},
-    {n:'아토텍',b:0.1,o:18.4},{n:'오션플랫폼',b:0.0,o:33.3}
+    {n:'금융/중②',b:8.6,o:60.3},{n:'IT/영①',b:7.5,o:57.5},
+    {n:'모빌리티/소',b:6.8,o:53.7},{n:'IT/영②',b:4.4,o:61.0},{n:'서비스/영',b:2.7,o:66.4},
+    {n:'금융/중①',b:2.2,o:70.8},{n:'제조/중①',b:2.0,o:37.0},
+    {n:'F&B/소',b:1.4,o:30.2},{n:'IT/중',b:1.3,o:65.9},{n:'물류/대',b:0.8,o:19.0},
+    {n:'바이오/중',b:0.6,o:36.7},{n:'IT/소①',b:0.3,o:21.5},{n:'제조/대',b:0.2,o:30.2},
+    {n:'제조/소',b:0.1,o:18.4},{n:'해운/영',b:0.0,o:33.3}
   ];
   const area=document.getElementById('sfChartArea');
   if(!area) return;
@@ -1566,15 +1567,15 @@ allSec.forEach(s=>obs.observe(s));
 
   /* 2x2 Matrix dots */
   const MX=[
-    {n:'삼양',x:3.1,y:56.6,c:'teal'},{n:'한진',x:2.3,y:72.1,c:'teal'},
-    {n:'코아스',x:1.1,y:59.9,c:'teal'},{n:'바이오',x:6.1,y:45.3,c:'teal'},
-    {n:'미래에셋',x:2.1,y:55.0,c:'teal'},{n:'마크애니',x:8.0,y:72.9,c:'teal'},
-    {n:'공차',x:3.5,y:56.4,c:'teal'},{n:'아토텍',x:2.5,y:74.0,c:'teal'},
-    {n:'오션',x:1.6,y:54.0,c:'teal'},
-    {n:'부산은행',x:5.8,y:36.3,c:'g300'},
-    {n:'피에스텍',x:37.3,y:3.7,c:'danger'},{n:'BNK',x:37.1,y:13.4,c:'danger'},
-    {n:'차봇',x:21.6,y:22.6,c:'danger'},{n:'능률협회',x:48.1,y:4.1,c:'danger'},
-    {n:'유라클',x:96.1,y:16.7,c:'danger'},{n:'H2',x:28.1,y:10.0,c:'danger'}
+    {n:'제조/대',x:3.1,y:56.6,c:'teal'},{n:'물류/대',x:2.3,y:72.1,c:'teal'},
+    {n:'제조/중①',x:1.1,y:59.9,c:'teal'},{n:'바이오/중',x:6.1,y:45.3,c:'teal'},
+    {n:'금융/중①',x:2.1,y:55.0,c:'teal'},{n:'IT/소①',x:8.0,y:72.9,c:'teal'},
+    {n:'F&B/소',x:3.5,y:56.4,c:'teal'},{n:'제조/소',x:2.5,y:74.0,c:'teal'},
+    {n:'해운/영',x:1.6,y:54.0,c:'teal'},
+    {n:'금융/대',x:5.8,y:36.3,c:'g300'},
+    {n:'IT/중',x:37.3,y:3.7,c:'danger'},{n:'금융/중②',x:37.1,y:13.4,c:'danger'},
+    {n:'모빌/소',x:21.6,y:22.6,c:'danger'},{n:'서비스/영',x:48.1,y:4.1,c:'danger'},
+    {n:'IT/영①',x:96.1,y:16.7,c:'danger'},{n:'IT/영②',x:28.1,y:10.0,c:'danger'}
   ];
   const mxArea=document.getElementById('mxArea');
   if(mxArea){
