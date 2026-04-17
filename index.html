@@ -473,6 +473,43 @@ footer a{color:var(--blue);font-weight:600}
 }
 
 /* ================================================================
+   PART DIVIDERS
+   ================================================================ */
+.part-div{padding:80px 0 20px;text-align:center}
+.part-div-inner{max-width:var(--ct);margin:0 auto;padding:0 40px}
+.part-div-num{font-size:11px;font-weight:800;letter-spacing:6px;color:var(--blue);margin-bottom:8px}
+.part-div-title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+
+/* ================================================================
+   2×2 MATURITY MATRIX
+   ================================================================ */
+.mx-chart{position:relative;margin-bottom:24px;padding:20px 20px 20px 48px}
+.mx-y-label{position:absolute;left:-8px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:0 0;font-size:11px;color:var(--g400);white-space:nowrap}
+.mx-area{position:relative;height:420px;border:1px solid var(--g200);border-radius:var(--r-sm);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.mx-quad{display:flex;align-items:flex-end;justify-content:flex-start;padding:12px;position:relative}
+.mx-quad span{font-size:10px;font-weight:700;letter-spacing:1px;opacity:.4}
+.mx-quad-a{background:rgba(47,172,142,.06)}
+.mx-quad-b{background:rgba(232,152,62,.06)}
+.mx-quad-c{background:rgba(232,152,62,.06)}
+.mx-quad-d{background:rgba(217,79,79,.06)}
+.mx-quad-b span,.mx-quad-c span{color:var(--caution)}
+.mx-quad-a span{color:var(--teal)}
+.mx-quad-d span{color:var(--danger)}
+.mx-line-h{position:absolute;left:0;right:0;top:57.1%;border-top:2px dashed var(--g200);z-index:2}
+.mx-line-v{position:absolute;top:0;bottom:0;left:10%;border-left:2px dashed var(--g200);z-index:2}
+.mx-x-label{text-align:center;font-size:11px;color:var(--g400);margin-top:12px}
+.mx-dot-pt{position:absolute;width:14px;height:14px;border-radius:50%;z-index:3;transform:translate(-50%,-50%);opacity:0;transition:opacity .6s}
+.mx-dot-pt.vis{opacity:1}
+.mx-dot-pt-label{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;color:var(--g500);white-space:nowrap}
+.mx-legend{display:flex;gap:20px;font-size:12px;color:var(--g400);margin-bottom:48px;flex-wrap:wrap}
+.mx-legend-item{display:flex;align-items:center;gap:6px}
+.mx-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+@media(max-width:768px){
+  .mx-area{height:300px}
+  .mx-legend{flex-direction:column}
+}
+
+/* ================================================================
    DECISION FLOW
    ================================================================ */
 .flow-chain{max-width:600px;margin:0 auto 40px}
@@ -692,6 +729,9 @@ footer a{color:var(--blue);font-weight:600}
     </div>
   </div>
 </section>
+
+<!-- PART DIVIDER -->
+<div class="part-div"><div class="part-div-inner"><div class="part-div-num">PART 2</div><div class="part-div-title">간접구매 지출의 6가지 패턴</div></div></div>
 
 <!-- ================================================================
    F1: TAIL SPEND — DONUT + VISUAL STORY
@@ -1069,6 +1109,9 @@ footer a{color:var(--blue);font-weight:600}
   </div>
 </section>
 
+<!-- PART DIVIDER -->
+<div class="part-div"><div class="part-div-inner"><div class="part-div-num">PART 3</div><div class="part-div-title">편의 구매가 만든 비용 누수의 구조</div></div></div>
+
 <!-- ================================================================
    DEEP DIVE — 편의 구매 → 공급사 분산 → 비용 누수
    ================================================================ -->
@@ -1197,6 +1240,44 @@ footer a{color:var(--blue);font-weight:600}
   </div>
 </section>
 
+<!-- ================================================================
+   2×2 MATURITY MATRIX — 구매 거버넌스 성숙도 (전략팀 + 디자인팀)
+   ================================================================ -->
+<section class="sec" id="matrix">
+  <div class="ct">
+    <div class="sec-num">MATURITY MATRIX</div>
+    <h2>귀사는 이 매트릭스<br>어디에 있습니까</h2>
+    <p class="lead">X축: 공급사 밀도(지출 1억당 공급사 수). Y축: 1회성 공급사 비율. 기준선: 밀도 15개/억, 1회성 40%.</p>
+
+    <div class="mx-chart">
+      <div class="mx-y-label">1회성 공급사 비율 (%) ↑</div>
+      <div class="mx-area" id="mxArea">
+        <!-- 4분면 배경 -->
+        <div class="mx-quad mx-quad-a"><span>A 관리 우수</span></div>
+        <div class="mx-quad mx-quad-b"><span>B 주의 (1회성↑)</span></div>
+        <div class="mx-quad mx-quad-c"><span>C 주의 (밀도↑)</span></div>
+        <div class="mx-quad mx-quad-d"><span>D 위험</span></div>
+        <!-- 기준선 -->
+        <div class="mx-line-h"></div>
+        <div class="mx-line-v"></div>
+        <!-- 16개 점은 JS로 -->
+      </div>
+      <div class="mx-x-label">공급사 밀도 (개/억) →</div>
+    </div>
+
+    <div class="mx-legend">
+      <div class="mx-legend-item"><span class="mx-dot" style="background:var(--teal)"></span> A분면: 밀도 ≤15 + 1회성 ≤40% (9개사)</div>
+      <div class="mx-legend-item"><span class="mx-dot" style="background:var(--danger)"></span> D분면: 밀도 >15 + 1회성 >40% (6개사)</div>
+      <div class="mx-legend-item"><span class="mx-dot" style="background:var(--g300)"></span> B·C분면: 한쪽만 초과 (1개사)</div>
+    </div>
+
+    <div class="takeaway">
+      <div class="takeaway-icon">!</div>
+      <div><h4>Key Takeaway</h4><p>16개 기업이 <strong>A분면(관리 우수)과 D분면(위험)으로 양극화</strong>되어 있습니다. 중간 지대가 거의 없다는 것은, 공급사 관리는 "하거나 안 하거나"의 문제라는 뜻입니다.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- SEGMENT -->
 <section class="sec" id="segment">
   <div class="ct">
@@ -1236,6 +1317,9 @@ footer a{color:var(--blue);font-weight:600}
     </div>
   </div>
 </section>
+
+<!-- PART DIVIDER -->
+<div class="part-div"><div class="part-div-inner"><div class="part-div-num">PART 5</div><div class="part-div-title">우리 기업의 2026년을 설계합시다</div></div></div>
 
 <!-- ================================================================
    DECISION FLOW — 5-STEP 의사결정 플로우차트
@@ -1463,6 +1547,40 @@ allSec.forEach(s=>obs.observe(s));
       gbObs.unobserve(e.target);
     }})},{threshold:.2});
     gbObs.observe(gbNorm);
+  }
+
+  /* 2x2 Matrix dots */
+  const MX=[
+    {n:'삼양',x:3.1,y:56.6,c:'teal'},{n:'한진',x:2.3,y:72.1,c:'teal'},
+    {n:'코아스',x:1.1,y:59.9,c:'teal'},{n:'바이오',x:6.1,y:45.3,c:'teal'},
+    {n:'미래에셋',x:2.1,y:55.0,c:'teal'},{n:'마크애니',x:8.0,y:72.9,c:'teal'},
+    {n:'공차',x:3.5,y:56.4,c:'teal'},{n:'아토텍',x:2.5,y:74.0,c:'teal'},
+    {n:'오션',x:1.6,y:54.0,c:'teal'},
+    {n:'부산은행',x:5.8,y:36.3,c:'g300'},
+    {n:'피에스텍',x:37.3,y:3.7,c:'danger'},{n:'BNK',x:37.1,y:13.4,c:'danger'},
+    {n:'차봇',x:21.6,y:22.6,c:'danger'},{n:'능률협회',x:48.1,y:4.1,c:'danger'},
+    {n:'유라클',x:96.1,y:16.7,c:'danger'},{n:'H2',x:28.1,y:10.0,c:'danger'}
+  ];
+  const mxArea=document.getElementById('mxArea');
+  if(mxArea){
+    MX.forEach(d=>{
+      const dot=document.createElement('div');
+      dot.className='mx-dot-pt';
+      dot.style.left=Math.max(d.x,2)+'%';
+      dot.style.bottom=d.y+'%';
+      dot.style.background='var(--'+d.c+')';
+      dot.title=d.n;
+      const lbl=document.createElement('div');
+      lbl.className='mx-dot-pt-label';
+      lbl.textContent=d.n;
+      dot.appendChild(lbl);
+      mxArea.appendChild(dot);
+    });
+    const mxObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+      mxArea.querySelectorAll('.mx-dot-pt').forEach((d,i)=>{setTimeout(()=>d.classList.add('vis'),i*60)});
+      mxObs.unobserve(e.target);
+    }})},{threshold:.2});
+    mxObs.observe(mxArea);
   }
 })();
 
