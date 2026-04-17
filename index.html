@@ -31,7 +31,7 @@ a{color:inherit;text-decoration:none}
 
 /* Topbar */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
-.topbar.scrolled{border-color:var(--g200)}
+.topbar.scrolled{border-color:var(--g200);box-shadow:0 4px 20px rgba(10,127,219,.06)}
 .topbar-brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink)}
 .topbar-brand .mark{width:24px;height:24px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:11px;font-weight:800}
 .topbar-cta{font-size:12px;font-weight:600;color:var(--white);background:var(--ink);padding:8px 20px;border-radius:20px;cursor:pointer;border:none;font-family:inherit;transition:background .2s}
@@ -40,8 +40,10 @@ a{color:inherit;text-decoration:none}
 /* Sections */
 .sec{padding:var(--gap) 0;opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .sec.vis{opacity:1;transform:none}
-/* Alt section — 연한 그레이 배경 (색상 충돌 없음) */
-.sec-alt{background:var(--g50);border-top:1px solid var(--g100);border-bottom:1px solid var(--g100)}
+/* Alt section — 블루 틴트 그라디언트 + 상단 액센트 라인 */
+.sec-alt{background:linear-gradient(180deg,#EDF3FC 0%,#F6F8FD 100%);position:relative}
+.sec-alt::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.25}
+.sec-alt::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(10,127,219,.06)}
 
 
 .sec-num{font-size:10px;font-weight:800;letter-spacing:6px;text-transform:uppercase;color:var(--blue);margin-bottom:20px;opacity:.7}
@@ -59,7 +61,7 @@ a{color:inherit;text-decoration:none}
 .cover-brand .mark{width:24px;height:24px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
 .cover-year{font-size:12px;color:var(--g400);padding:6px 16px;border:1px solid rgba(255,255,255,.12);border-radius:20px}
 .cover-body{max-width:900px;padding:0 64px;position:relative;z-index:1}
-.cover-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(13,138,231,.12);border:1px solid rgba(13,138,231,.2);border-radius:24px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:40px}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:rgba(10,127,219,.12);border:1px solid rgba(10,127,219,.25);border-radius:24px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:40px;box-shadow:0 0 30px rgba(10,127,219,.15)}
 .cover-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .cover h1{font-size:clamp(42px,7vw,80px);font-weight:800;line-height:1.02;letter-spacing:-2.5px;margin-bottom:16px}
@@ -96,7 +98,8 @@ a{color:inherit;text-decoration:none}
    METHODOLOGY
    ================================================================ */
 .meth-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px}
-.meth-stat{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r-sm);padding:28px 20px;text-align:center}
+.meth-stat{background:var(--white);border:1px solid var(--g200);border-radius:var(--r);padding:32px 20px;text-align:center;box-shadow:var(--sh);transition:transform .3s,box-shadow .3s}
+.meth-stat:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(10,127,219,.1)}
 .meth-stat-n{font-size:32px;font-weight:800;color:var(--ink);line-height:1}
 .meth-stat-n .u{font-size:14px;color:var(--g400)}
 .meth-stat-l{font-size:11px;color:var(--g400);margin-top:6px}
@@ -121,11 +124,11 @@ a{color:inherit;text-decoration:none}
 .exec-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-sm);padding:32px 24px;transition:background .2s}
 .exec-card:hover{background:rgba(255,255,255,.07)}
 .exec-card-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:2px;margin-bottom:16px}
-.exec-card-val{font-size:52px;font-weight:800;line-height:1;margin-bottom:10px;letter-spacing:-2px}
+.exec-card-val{font-size:56px;font-weight:800;line-height:1;margin-bottom:10px;letter-spacing:-2.5px;background:linear-gradient(135deg,var(--white),rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .exec-card-val .unit{font-size:18px;opacity:.6}
 .exec-card-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5}
-.exec-callout{margin-top:40px;padding:24px 32px;border-left:3px solid var(--danger);background:rgba(217,79,79,.06);border-radius:0 var(--r-xs) var(--r-xs) 0;display:flex;align-items:center;gap:16px}
-.exec-callout-n{font-size:48px;font-weight:800;color:var(--danger)}
+.exec-callout{margin-top:40px;padding:28px 36px;border-left:3px solid var(--danger);background:rgba(201,64,64,.08);border-radius:0 var(--r-sm) var(--r-sm) 0;display:flex;align-items:center;gap:20px;box-shadow:0 0 40px rgba(201,64,64,.08)}
+.exec-callout-n{font-size:64px;font-weight:800;color:var(--danger);text-shadow:0 0 40px rgba(201,64,64,.3)}
 .exec-callout-t{font-size:15px;color:rgba(255,255,255,.7);line-height:1.5}
 .exec-callout-t strong{color:var(--white)}
 
@@ -152,7 +155,7 @@ a{color:inherit;text-decoration:none}
    F1: TAIL SPEND — DONUT CHART (SVG) + VISUAL STORY
    ================================================================ */
 .donut-section{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:56px}
-.donut-wrap{position:relative;width:100%;max-width:380px;margin:0 auto}
+.donut-wrap{position:relative;width:100%;max-width:380px;margin:0 auto;filter:drop-shadow(0 0 40px rgba(201,64,64,.1))}
 .donut-wrap svg{width:100%;height:auto;transform:rotate(-90deg)}
 .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
 .donut-center-n{font-size:64px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-3px}
@@ -228,7 +231,7 @@ a{color:inherit;text-decoration:none}
 .hhi-container{position:relative;margin-bottom:24px}
 .hhi-zones-bg{display:flex;flex-direction:column;border-radius:var(--r-sm);overflow:hidden;position:relative}
 .hhi-zone-bg{padding:8px 16px;display:flex;align-items:flex-start;min-height:60px;position:relative}
-.hhi-zone-bg.z-danger{background:rgba(217,79,79,.04)}
+.hhi-zone-bg.z-danger{background:linear-gradient(90deg,rgba(201,64,64,.06),rgba(201,64,64,.02))}
 .hhi-zone-bg.z-caution{background:rgba(232,152,62,.04)}
 .hhi-zone-bg.z-safe{background:rgba(47,172,142,.04)}
 .hhi-zone-label{position:absolute;right:16px;top:8px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
@@ -483,11 +486,10 @@ footer a{color:var(--blue);font-weight:600}
 /* ================================================================
    PART DIVIDERS
    ================================================================ */
-.part-div{padding:100px 0 40px;text-align:center;position:relative}
-.part-div::before{content:'';position:absolute;top:40px;left:50%;transform:translateX(-50%);width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--g300),transparent)}
-.part-div-inner{max-width:var(--ct);margin:0 auto;padding:0 40px}
-.part-div-num{font-size:10px;font-weight:800;letter-spacing:8px;color:var(--blue);margin-bottom:12px;opacity:.6}
-.part-div-title{font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--ink);letter-spacing:-.8px}
+.part-div{padding:0;text-align:center;position:relative;background:linear-gradient(135deg,var(--ink) 0%,#0E1A30 100%);color:var(--white)}
+.part-div-inner{max-width:var(--ct);margin:0 auto;padding:56px 40px}
+.part-div-num{font-size:10px;font-weight:800;letter-spacing:8px;color:var(--blue);margin-bottom:12px}
+.part-div-title{font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--white);letter-spacing:-.8px}
 
 /* ================================================================
    2×2 MATURITY MATRIX
