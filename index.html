@@ -41,6 +41,26 @@ a{color:inherit;text-decoration:none}
 .sec{padding:var(--gap) 0;opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .sec.vis{opacity:1;transform:none}
 /* Alt section — 블루 틴트 그라디언트 + 상단 액센트 라인 */
+/* Accordion (아코디언 — 더 알아보기) */
+.accordion{margin-top:32px;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden}
+.accordion-trigger{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;font-size:14px;font-weight:700;color:var(--blue);cursor:pointer;background:var(--g50);list-style:none;transition:background .2s}
+.accordion-trigger:hover{background:var(--g100)}
+.accordion-trigger::after{content:'+';font-size:20px;font-weight:300;color:var(--g400);transition:transform .3s}
+.accordion[open] .accordion-trigger::after{transform:rotate(45deg)}
+.accordion-trigger::-webkit-details-marker{display:none}
+.accordion-body{padding:28px;border-top:1px solid var(--g200)}
+.accordion-body h3{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:12px}
+.accordion-body p{font-size:14px;color:var(--g500);line-height:1.7;margin-bottom:24px}
+
+/* SF Bars — STEP 1 두 그룹 비교 막대 */
+.sf-bars{margin-bottom:32px}
+.sf-bar-group{margin-bottom:20px}
+.sf-bar-label{font-size:14px;color:var(--g500);margin-bottom:8px}
+.sf-bar-track{height:48px;background:var(--g100);border-radius:var(--r-sm);overflow:hidden;position:relative}
+.sf-bar-fill{height:100%;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:flex-end;padding-right:16px;font-size:18px;font-weight:800;color:var(--white);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.sf-bar-desc{font-size:11px;color:var(--g400);margin-top:4px}
+.sf-bar-diff{text-align:center;padding:16px;font-size:14px;color:var(--g500)}
+
 .sec-alt{background:linear-gradient(180deg,#EDF3FC 0%,#F6F8FD 100%);position:relative}
 .sec-alt::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.25}
 .sec-alt::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(10,127,219,.06)}
@@ -650,82 +670,7 @@ footer a{color:var(--blue);font-weight:600}
   <div class="cover-scroll">&#8595; SCROLL</div>
 </section>
 
-<!-- ================================================================
-   COMPANY INTRO — 브랜드팀/전략팀
-   ================================================================ -->
-<section class="sec company" id="company">
-  <div class="ct">
-    <div class="sec-num">WHO WE ARE</div>
-    <h2>왜 우리가 이 데이터를<br>갖고 있는가</h2>
-    <p class="lead">이 리포트는 마케팅 자료가 아닙니다.<br>실제 기업의 구매 데이터를 다루는 플랫폼이기 때문에 가능한 연구입니다.</p>
-    <div class="company-grid">
-      <div class="company-card castingn">
-        <div class="company-card-tag" style="color:var(--ink)">CASTINGN</div>
-        <h3>캐스팅엔</h3>
-        <p>기업의 구매 업무를 디지털로 전환하는 <strong>기업 구매 OS</strong>를 만듭니다. 공급사 소싱부터 계약, 발주, 검수, 정산까지 — 흩어져 있던 간접구매 프로세스를 하나의 플랫폼으로 통합합니다.</p>
-        <p>2015년 설립 이후 금융, 제조, IT, 물류 등 다양한 산업의 기업들이 캐스팅엔을 통해 간접구매를 관리하고 있습니다.</p>
-        <div class="company-nums">
-          <div class="company-num"><div class="company-num-v">2015</div><div class="company-num-l">설립</div></div>
-          <div class="company-num"><div class="company-num-v">IPO</div><div class="company-num-l">추진 중</div></div>
-          <div class="company-num"><div class="company-num-v">BSM</div><div class="company-num-l">핵심 사업</div></div>
-        </div>
-      </div>
-      <div class="company-card wm9">
-        <div class="company-card-tag" style="color:var(--blue)">ZENO</div>
-        <h3>제노(ZENO)</h3>
-        <p>캐스팅엔이 만든 <strong>국내 유일 BSM(Business Spend Management) 플랫폼</strong>입니다. 구매 거버넌스를 세팅하고, 구매를 실행하며, AI가 이상을 감지합니다.</p>
-        <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
-        <div class="company-nums">
-          <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
-          <div class="company-num"><div class="company-num-v">25,000+</div><div class="company-num-l">등록 공급사</div></div>
-          <div class="company-num"><div class="company-num-v">1,744억</div><div class="company-num-l">관리 지출</div></div>
-        </div>
-      </div>
-      <div class="company-why">
-        <h4>이 연구의 의미</h4>
-        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 제노(ZENO)는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- METHODOLOGY -->
-<section class="sec" id="methodology">
-  <div class="ct">
-    <div class="sec-num">METHODOLOGY</div>
-    <h2>연구 방법론</h2>
-    <p class="lead">이 리포트의 모든 수치는 실제 기업 AP 전표에서 추출한 원본 데이터입니다.</p>
-    <div class="meth-stats">
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="16">0</span> <span class="u">개사</span></div><div class="meth-stat-l">분석 대상 기업</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="570000" data-f="c">0</span><span class="u">+</span></div><div class="meth-stat-l">AP 데이터 (원본)</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="25192" data-f="c">0</span></div><div class="meth-stat-l">고유 공급사 수</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="1744">0</span> <span class="u">억</span></div><div class="meth-stat-l">간접구매 총 지출</div></div>
-    </div>
-    <div class="meth-detail">
-      <div>
-        <h3>데이터 범위</h3>
-        <ul class="meth-list">
-          <li>기간: 2023.01 ~ 2025.12 (3개년)</li>
-          <li>대상: 16개 기업 (금융 4, 제조 3, IT 3, 물류 2, 서비스 2, 기타 2)</li>
-          <li>소스: ERP에서 추출한 AP 전표 원본 (570,000+ 건)</li>
-          <li>정제: 수수료/B2C 자체수수료 제외, 중복 제거 후 분석 대상 301,373건</li>
-          <li>분류: 대-중-소 3단계 카테고리 정규화</li>
-        </ul>
-      </div>
-      <div>
-        <h3>기업 규모 구분</h3>
-        <ul class="meth-list">
-          <li><strong>대규모:</strong> 간접구매 지출 200억원 이상 (3개사)</li>
-          <li><strong>중규모:</strong> 90~200억원 (5개사)</li>
-          <li><strong>소규모:</strong> 30~90억원 (4개사)</li>
-          <li><strong>영세:</strong> 30억원 미만 (4개사)</li>
-        </ul>
-        <p style="margin-top:16px;font-size:13px;color:var(--g400)">기업명은 A사~P사로 익명 처리했습니다.</p>
-      </div>
-    </div>
-    <div class="trust-box"><b>데이터 신뢰성:</b> 이 연구는 57만 건 이상의 AP 전표 원본 데이터에서 출발합니다. 각 데이터는 복수 상품 주문이 종합된 구매 오더(PO) 단위입니다. 수수료 등 불필요 데이터를 제거한 후 301,373건을 최종 분석 대상으로 정제했습니다. 설문 조사나 추정치가 아닌, 실제 발생한 거래 데이터입니다.</div>
-  </div>
-</section>
 
 <!-- EXECUTIVE SUMMARY -->
 <section class="sec exec" id="summary">
@@ -747,7 +692,7 @@ footer a{color:var(--blue);font-weight:600}
 </section>
 
 <!-- PART DIVIDER -->
-<div class="part-div"><div class="part-div-inner"><div class="part-div-num">PART 2</div><div class="part-div-title">간접구매 지출의 6가지 패턴</div></div></div>
+<div class="part-div"><div class="part-div-inner"><div class="part-div-num">PART 2</div><div class="part-div-title">간접구매 지출의 4가지 패턴</div></div></div>
 
 <!-- ================================================================
    F1: TAIL SPEND — DONUT + VISUAL STORY
@@ -813,6 +758,29 @@ footer a{color:var(--blue);font-weight:600}
     </div>
     <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>발주 1건당 관리 비용을 계산해 본 적 있습니까?</p></div>
     <div class="src"><b>산출 기준:</b> Pareto 80/20 — 누적 지출 상위 80%에 도달하는 데 필요한 공급사 = Core, 나머지 전부 = Tail.</div>
+
+    <details class="accordion">
+      <summary class="accordion-trigger">더 알아보기 — 1만 원의 진실</summary>
+      <div class="accordion-body">
+        <h3>간접구매 거래의 77%는 10만 원 이하입니다</h3>
+        <p>큰 거래가 문제가 아닙니다. 작은 거래가 수만 번 쌓이는 것이 문제입니다.</p>
+        <div class="kf-hero-grid">
+          <div class="kf-hero-card"><div class="kf-hero-num" style="color:var(--danger)">31.1%</div><div class="kf-hero-label">1만 원 이하</div><div class="kf-hero-sub">95,800건</div></div>
+          <div class="kf-hero-card"><div class="kf-hero-num" style="color:var(--caution)">32.9%</div><div class="kf-hero-label">1~5만 원</div><div class="kf-hero-sub">101,374건</div></div>
+          <div class="kf-hero-card"><div class="kf-hero-num">13.3%</div><div class="kf-hero-label">5~10만 원</div><div class="kf-hero-sub">40,923건</div></div>
+          <div class="kf-hero-card" style="border-color:var(--blue)"><div class="kf-hero-num" style="color:var(--blue)">22.7%</div><div class="kf-hero-label">10만 원 이상</div><div class="kf-hero-sub">금액의 97% 차지</div></div>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px">실제 AP 전표에 올라온 1만 원 거래들</div>
+        <div class="kf-receipt-grid">
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">거래처 미팅 다과 — 커피숍</div><div class="kf-receipt-cat">복지 서비스</div></div>
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">서울출장 항공편 취소 수수료</div><div class="kf-receipt-cat">출장 서비스</div></div>
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">야근자 편의점 식대</div><div class="kf-receipt-cat">복지 서비스</div></div>
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">출장 준비물 — 상비약</div><div class="kf-receipt-cat">출장 서비스</div></div>
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">고속도로 하이패스 통행료</div><div class="kf-receipt-cat">출장 서비스</div></div>
+          <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">디지털 연수 정보 수집 티타임</div><div class="kf-receipt-cat">복지 서비스</div></div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -861,6 +829,48 @@ footer a{color:var(--blue);font-weight:600}
     </div>
     <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>같은 품목을 매번 다른 공급사에서 구매하는 비용을 측정하고 계십니까?</p></div>
     <div class="src"><b>산출 기준:</b> 분석 기간(2023~2025) 내 거래 횟수 = 1회인 고유 공급사 / 전체 고유 공급사.</div>
+
+    <details class="accordion">
+      <summary class="accordion-trigger">더 알아보기 — 전표 폭발의 실체</summary>
+      <div class="accordion-body">
+        <h3>한 공급사에 28,824번 결제한 회사가 있습니다</h3>
+        <p>같은 금액, 같은 공급사. 화물 한 건마다 수수료를 따로 결제하는 구조. BSM ROI는 절감액이 아니라 건수 감축에서 나옵니다.</p>
+        <div class="kf-explosion">
+          <div class="kf-exp-case">
+            <div class="kf-exp-tag">제조 대기업 — 관세 수수료</div>
+            <div class="kf-exp-row">
+              <div class="kf-exp-stat"><div class="kf-exp-num">28,824</div><div class="kf-exp-label">연간 결제 건수</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">×</div><div class="kf-exp-label">&nbsp;</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">₩8,878</div><div class="kf-exp-label">건당 평균 금액</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">=</div><div class="kf-exp-label">&nbsp;</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">2.56억</div><div class="kf-exp-label">연간 총액</div></div>
+            </div>
+            <div class="kf-exp-fix">
+              <div class="kf-exp-fix-title">단가 계약 + 월 묶음 정산 전환 시</div>
+              <div class="kf-exp-fix-row">
+                <div class="kf-exp-before">28,824건/년</div><div class="kf-exp-arrow">→</div><div class="kf-exp-after">12건/년</div><div class="kf-exp-delta">▼99.96%</div>
+              </div>
+            </div>
+          </div>
+          <div class="kf-exp-case">
+            <div class="kf-exp-tag">금융 중견 — 법인카드 전표</div>
+            <div class="kf-exp-row">
+              <div class="kf-exp-stat"><div class="kf-exp-num">4,666</div><div class="kf-exp-label">연간 결제 건수</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">×</div><div class="kf-exp-label">&nbsp;</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">₩8,797</div><div class="kf-exp-label">건당 평균 금액</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">=</div><div class="kf-exp-label">&nbsp;</div></div>
+              <div class="kf-exp-stat"><div class="kf-exp-num">4,104만</div><div class="kf-exp-label">연간 총액</div></div>
+            </div>
+            <div class="kf-exp-fix">
+              <div class="kf-exp-fix-title">월별 합산 정산 전환 시</div>
+              <div class="kf-exp-fix-row">
+                <div class="kf-exp-before">4,666건/년</div><div class="kf-exp-arrow">→</div><div class="kf-exp-after">12건/년</div><div class="kf-exp-delta">▼99.7%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -978,114 +988,6 @@ footer a{color:var(--blue);font-weight:600}
 </section>
 
 <!-- ================================================================
-   BONUS FINDING: 1만원의 진실 (콘텐츠팀 + 디자인팀①)
-   ================================================================ -->
-<section class="sec" id="f5">
-  <div class="ct">
-    <div class="sec-num">BONUS FINDING</div>
-    <h2>간접구매 거래의 77%는<br>10만 원 이하입니다</h2>
-    <p class="lead">큰 거래가 문제가 아닙니다. 작은 거래가 수만 번 쌓이는 것이 문제입니다.</p>
-
-    <div class="kf-hero-grid">
-      <div class="kf-hero-card">
-        <div class="kf-hero-num" style="color:var(--danger)"><span class="cu" data-t="31.1" data-dc="1">0</span>%</div>
-        <div class="kf-hero-label">1만 원 이하</div>
-        <div class="kf-hero-sub">95,800건</div>
-      </div>
-      <div class="kf-hero-card">
-        <div class="kf-hero-num" style="color:var(--caution)"><span class="cu" data-t="32.9" data-dc="1">0</span>%</div>
-        <div class="kf-hero-label">1~5만 원</div>
-        <div class="kf-hero-sub">101,374건</div>
-      </div>
-      <div class="kf-hero-card">
-        <div class="kf-hero-num"><span class="cu" data-t="13.3" data-dc="1">0</span>%</div>
-        <div class="kf-hero-label">5~10만 원</div>
-        <div class="kf-hero-sub">40,923건</div>
-      </div>
-      <div class="kf-hero-card" style="border-color:var(--blue)">
-        <div class="kf-hero-num" style="color:var(--blue)"><span class="cu" data-t="22.7" data-dc="1">0</span>%</div>
-        <div class="kf-hero-label">10만 원 이상</div>
-        <div class="kf-hero-sub">금액의 97% 차지</div>
-      </div>
-    </div>
-
-    <div class="chart-annotation" style="margin-bottom:32px">
-      <strong>해석:</strong> 전체 33만 건 거래 중 <strong>77.3%가 10만 원 이하</strong>입니다. 이 구간은 전체 지출 금액의 <strong>3.2%에 불과</strong>하지만, 발주·검수·정산에 동일한 관리 비용이 발생합니다. 건당 처리 인건비(2~3만 원)를 고려하면, <strong style="color:var(--danger)">1만 원 거래 1건 = 순손실</strong>입니다.
-    </div>
-
-    <!-- 실제 적요 샘플 (콘텐츠팀: 충격 요소) -->
-    <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">실제 AP 전표에 올라온 1만 원 거래들</div>
-    <div class="kf-receipt-grid">
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">거래처 미팅 다과 — 커피숍</div><div class="kf-receipt-cat">복지 서비스</div></div>
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">서울출장 항공편 취소 수수료</div><div class="kf-receipt-cat">출장 서비스</div></div>
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">야근자 편의점 식대</div><div class="kf-receipt-cat">복지 서비스</div></div>
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">출장 준비물 — 상비약</div><div class="kf-receipt-cat">출장 서비스</div></div>
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">고속도로 하이패스 통행료</div><div class="kf-receipt-cat">출장 서비스</div></div>
-      <div class="kf-receipt"><div class="kf-receipt-amt">₩10,000</div><div class="kf-receipt-desc">디지털 연수 정보 수집 티타임</div><div class="kf-receipt-cat">복지 서비스</div></div>
-    </div>
-
-    <div class="cfo-q"><div class="cfo-q-label">CFO에게 묻습니다</div><p>귀사는 1만 원 결제 1건을 AP 시스템에 올리는 비용을 계산해 보셨습니까?</p></div>
-  </div>
-</section>
-
-<!-- ================================================================
-   BONUS FINDING 2: 전표 폭발 (콘텐츠팀 + 디자인팀①)
-   ================================================================ -->
-<section class="sec sec-alt" id="f6">
-  <div class="ct">
-    <div class="sec-num">BONUS FINDING</div>
-    <h2>한 공급사에<br>28,824번 결제한 회사가 있습니다</h2>
-    <p class="lead">같은 금액, 같은 공급사. 화물 한 건마다 수수료를 따로 결제하는 구조. BSM ROI는 절감액이 아니라 건수 감축에서 나옵니다.</p>
-
-    <div class="kf-explosion">
-      <div class="kf-exp-case">
-        <div class="kf-exp-tag">제조 대기업 — 관세 수수료</div>
-        <div class="kf-exp-row">
-          <div class="kf-exp-stat"><div class="kf-exp-num"><span class="cu" data-t="28824" data-f="c">0</span></div><div class="kf-exp-label">연간 결제 건수</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">×</div><div class="kf-exp-label">&nbsp;</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">₩8,878</div><div class="kf-exp-label">건당 평균 금액</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">=</div><div class="kf-exp-label">&nbsp;</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">2.56억</div><div class="kf-exp-label">연간 총액</div></div>
-        </div>
-        <div class="kf-exp-fix">
-          <div class="kf-exp-fix-title">단가 계약 + 월 묶음 정산 전환 시</div>
-          <div class="kf-exp-fix-row">
-            <div class="kf-exp-before">28,824건/년</div>
-            <div class="kf-exp-arrow">→</div>
-            <div class="kf-exp-after">12건/년</div>
-            <div class="kf-exp-delta">▼99.96%</div>
-          </div>
-        </div>
-      </div>
-      <div class="kf-exp-case">
-        <div class="kf-exp-tag">금융 중견 — 법인카드 전표</div>
-        <div class="kf-exp-row">
-          <div class="kf-exp-stat"><div class="kf-exp-num"><span class="cu" data-t="4666" data-f="c">0</span></div><div class="kf-exp-label">연간 결제 건수</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">×</div><div class="kf-exp-label">&nbsp;</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">₩8,797</div><div class="kf-exp-label">건당 평균 금액</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">=</div><div class="kf-exp-label">&nbsp;</div></div>
-          <div class="kf-exp-stat"><div class="kf-exp-num">4,104만</div><div class="kf-exp-label">연간 총액</div></div>
-        </div>
-        <div class="kf-exp-fix">
-          <div class="kf-exp-fix-title">월별 합산 정산 전환 시</div>
-          <div class="kf-exp-fix-row">
-            <div class="kf-exp-before">4,666건/년</div>
-            <div class="kf-exp-arrow">→</div>
-            <div class="kf-exp-after">12건/년</div>
-            <div class="kf-exp-delta">▼99.7%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="takeaway">
-      <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>BSM 도입의 진짜 ROI는 <strong>"얼마를 아끼느냐"가 아니라 "몇 건을 줄이느냐"</strong>입니다. 같은 금액이라도 28,824건을 12건으로 줄이면, 관리 비용이 사라집니다.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
    BENCHMARK: 구매 성숙 기업의 기준선 (전략팀 + 디자인팀①)
    ================================================================ -->
 <section class="sec" id="benchmark">
@@ -1143,34 +1045,20 @@ footer a{color:var(--blue);font-weight:600}
       <div class="dd-step-title">B2C 의존도가 높을수록, 1회성 공급사가 늘어난다</div>
     </div>
 
-    <div class="sf-chart">
-      <div class="sf-chart-y">1회성 공급사 비율 (%)</div>
-      <div class="sf-chart-area" id="sfChartArea">
-        <div class="sf-hline" style="bottom:70%"><span>70%</span></div>
-        <div class="sf-hline" style="bottom:50%"><span>50%</span></div>
-        <div class="sf-hline" style="bottom:30%"><span>30%</span></div>
-        <div class="sf-zone-high"></div>
-        <div class="sf-zone-low"></div>
+    <div class="sf-bars">
+      <div class="sf-bar-group">
+        <div class="sf-bar-label">B2C 의존도 <strong style="color:var(--danger)">상위 7개사</strong></div>
+        <div class="sf-bar-track"><div class="sf-bar-fill" data-w="83" style="width:0;background:var(--danger)"><span>58.1%</span></div></div>
+        <div class="sf-bar-desc">평균 1회성 공급사 비율</div>
       </div>
-      <div class="sf-chart-x">B2C 플랫폼 거래 비중 (%) →</div>
-    </div>
-    <div class="sf-chart-legend">
-      <span class="sf-legend-dot" style="background:var(--danger)"></span> B2C 높음 + 1회성 높음
-      <span class="sf-legend-dot" style="background:var(--teal);margin-left:24px"></span> B2C 낮음 + 1회성 낮음
-      <span class="sf-legend-dot" style="background:var(--g300);margin-left:24px"></span> 기타
-    </div>
-    <div class="sf-summary">
-      <div class="sf-summary-item">
-        <div class="sf-summary-val" style="color:var(--danger)"><span class="cu" data-t="58.1" data-dc="1">0</span>%</div>
-        <div class="sf-summary-label">B2C 상위 7개사<br>1회성 공급사 평균</div>
+      <div class="sf-bar-group">
+        <div class="sf-bar-label">B2C 의존도 <strong style="color:var(--teal)">하위 8개사</strong></div>
+        <div class="sf-bar-track"><div class="sf-bar-fill" data-w="46" style="width:0;background:var(--teal)"><span>31.9%</span></div></div>
+        <div class="sf-bar-desc">평균 1회성 공급사 비율</div>
       </div>
-      <div class="sf-summary-vs">×1.8</div>
-      <div class="sf-summary-item">
-        <div class="sf-summary-val" style="color:var(--teal)"><span class="cu" data-t="31.9" data-dc="1">0</span>%</div>
-        <div class="sf-summary-label">B2C 하위 8개사<br>1회성 공급사 평균</div>
-      </div>
+      <div class="sf-bar-diff">차이 <strong style="color:var(--danger);font-size:28px">×1.8배</strong></div>
     </div>
-    <div class="src" style="margin-bottom:0">그룹 평균 비교 기준 1.8배 차이. 개별 기업 단위 Pearson r = 0.33 (약한 양의 상관). 금융/대규모 1개사 제외 15개사 기준.</div>
+    <div class="src" style="margin-bottom:0;margin-top:20px">그룹 평균 비교 기준. 개별 기업 단위 Pearson r = 0.33 (약한 양의 상관). 금융/대규모 1개사 제외 15개사 기준.</div>
 
     <!-- STEP 2: 밀도 비교 -->
     <div class="dd-step">
@@ -1331,6 +1219,7 @@ footer a{color:var(--blue);font-weight:600}
         <div><div class="impl-item-label">전용몰 전환</div><div class="impl-item-val">5% 이하</div><div class="impl-item-note">세금계산서 자동</div></div>
       </div>
     </div>
+    <div class="src" style="margin-top:20px"><b>수치 근거:</b> 캐스팅엔 BSM(ZENO) 도입 고객사 기준. 공급사 통합은 도입 12개월 내 평균치, 1회성·B2C 전환율은 도입 18개월 내 보수적 추정치. 기업 규모·산업에 따라 차이가 발생할 수 있습니다.</div>
   </div>
 </section>
 
@@ -1413,6 +1302,83 @@ footer a{color:var(--blue);font-weight:600}
       <div class="assess-desc" id="assessDesc"></div>
       <div class="assess-action" id="assessAction"></div>
     </div>
+  </div>
+</section>
+
+<!-- ================================================================
+   COMPANY INTRO — 브랜드팀/전략팀
+   ================================================================ -->
+<section class="sec company" id="company">
+  <div class="ct">
+    <div class="sec-num">WHO WE ARE</div>
+    <h2>왜 우리가 이 데이터를<br>갖고 있는가</h2>
+    <p class="lead">이 리포트는 마케팅 자료가 아닙니다.<br>실제 기업의 구매 데이터를 다루는 플랫폼이기 때문에 가능한 연구입니다.</p>
+    <div class="company-grid">
+      <div class="company-card castingn">
+        <div class="company-card-tag" style="color:var(--ink)">CASTINGN</div>
+        <h3>캐스팅엔</h3>
+        <p>기업의 구매 업무를 디지털로 전환하는 <strong>기업 구매 OS</strong>를 만듭니다. 공급사 소싱부터 계약, 발주, 검수, 정산까지 — 흩어져 있던 간접구매 프로세스를 하나의 플랫폼으로 통합합니다.</p>
+        <p>2015년 설립 이후 금융, 제조, IT, 물류 등 다양한 산업의 기업들이 캐스팅엔을 통해 간접구매를 관리하고 있습니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">2015</div><div class="company-num-l">설립</div></div>
+          <div class="company-num"><div class="company-num-v">IPO</div><div class="company-num-l">추진 중</div></div>
+          <div class="company-num"><div class="company-num-v">BSM</div><div class="company-num-l">핵심 사업</div></div>
+        </div>
+      </div>
+      <div class="company-card wm9">
+        <div class="company-card-tag" style="color:var(--blue)">ZENO</div>
+        <h3>제노(ZENO)</h3>
+        <p>캐스팅엔이 만든 <strong>국내 유일 BSM(Business Spend Management) 플랫폼</strong>입니다. 구매 거버넌스를 세팅하고, 구매를 실행하며, AI가 이상을 감지합니다.</p>
+        <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
+          <div class="company-num"><div class="company-num-v">25,000+</div><div class="company-num-l">등록 공급사</div></div>
+          <div class="company-num"><div class="company-num-v">1,744억</div><div class="company-num-l">관리 지출</div></div>
+        </div>
+      </div>
+      <div class="company-why">
+        <h4>이 연구의 의미</h4>
+        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 제노(ZENO)는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="sec" id="methodology">
+  <div class="ct">
+    <div class="sec-num">METHODOLOGY</div>
+    <h2>연구 방법론</h2>
+    <p class="lead">이 리포트의 모든 수치는 실제 기업 AP 전표에서 추출한 원본 데이터입니다.</p>
+    <div class="meth-stats">
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="16">0</span> <span class="u">개사</span></div><div class="meth-stat-l">분석 대상 기업</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="570000" data-f="c">0</span><span class="u">+</span></div><div class="meth-stat-l">AP 데이터 (원본)</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="25192" data-f="c">0</span></div><div class="meth-stat-l">고유 공급사 수</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="1744">0</span> <span class="u">억</span></div><div class="meth-stat-l">간접구매 총 지출</div></div>
+    </div>
+    <div class="meth-detail">
+      <div>
+        <h3>데이터 범위</h3>
+        <ul class="meth-list">
+          <li>기간: 2023.01 ~ 2025.12 (3개년)</li>
+          <li>대상: 16개 기업 (금융 4, 제조 3, IT 3, 물류 2, 서비스 2, 기타 2)</li>
+          <li>소스: ERP에서 추출한 AP 전표 원본 (570,000+ 건)</li>
+          <li>정제: 수수료/B2C 자체수수료 제외, 중복 제거 후 분석 대상 301,373건</li>
+          <li>분류: 대-중-소 3단계 카테고리 정규화</li>
+        </ul>
+      </div>
+      <div>
+        <h3>기업 규모 구분</h3>
+        <ul class="meth-list">
+          <li><strong>대규모:</strong> 간접구매 지출 200억원 이상 (3개사)</li>
+          <li><strong>중규모:</strong> 90~200억원 (5개사)</li>
+          <li><strong>소규모:</strong> 30~90억원 (4개사)</li>
+          <li><strong>영세:</strong> 30억원 미만 (4개사)</li>
+        </ul>
+        <p style="margin-top:16px;font-size:13px;color:var(--g400)">기업명은 A사~P사로 익명 처리했습니다.</p>
+      </div>
+    </div>
+    <div class="trust-box"><b>데이터 신뢰성:</b> 이 연구는 57만 건 이상의 AP 전표 원본 데이터에서 출발합니다. 각 데이터는 복수 상품 주문이 종합된 구매 오더(PO) 단위입니다. 수수료 등 불필요 데이터를 제거한 후 301,373건을 최종 분석 대상으로 정제했습니다. 설문 조사나 추정치가 아닌, 실제 발생한 거래 데이터입니다.</div>
   </div>
 </section>
 
@@ -1520,40 +1486,7 @@ allSec.forEach(s=>obs.observe(s));
 
 /* Scatter plot — Special Finding */
 (function(){
-  const SF=[
-    {n:'금융/중②',b:8.6,o:60.3},{n:'IT/영①',b:7.5,o:57.5},
-    {n:'모빌리티/소',b:6.8,o:53.7},{n:'IT/영②',b:4.4,o:61.0},{n:'서비스/영',b:2.7,o:66.4},
-    {n:'금융/중①',b:2.2,o:70.8},{n:'제조/중①',b:2.0,o:37.0},
-    {n:'F&B/소',b:1.4,o:30.2},{n:'IT/중',b:1.3,o:65.9},{n:'물류/대',b:0.8,o:19.0},
-    {n:'바이오/중',b:0.6,o:36.7},{n:'IT/소①',b:0.3,o:21.5},{n:'제조/대',b:0.2,o:30.2},
-    {n:'제조/소',b:0.1,o:18.4},{n:'해운/영',b:0.0,o:33.3}
-  ];
-  const area=document.getElementById('sfChartArea');
-  if(!area) return;
-  const maxB=10;
-  SF.forEach(d=>{
-    const dot=document.createElement('div');
-    dot.className='sf-dot';
-    const x=Math.min(d.b/maxB*100,98);
-    const y=100-d.o;
-    dot.style.left=Math.max(x,2)+'%';
-    dot.style.bottom=y+'%';
-    if(d.b>2&&d.o>50) dot.style.background='var(--danger)';
-    else if(d.b<2&&d.o<40) dot.style.background='var(--teal)';
-    else dot.style.background='var(--g300)';
-    dot.title=d.n+': B2C '+d.b+'%, 1회성 '+d.o+'%';
-    const lbl=document.createElement('div');
-    lbl.className='sf-dot-label';
-    lbl.textContent=d.n;
-    dot.appendChild(lbl);
-    area.appendChild(dot);
-  });
-  /* animate dots on reveal */
-  const sfObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-    area.querySelectorAll('.sf-dot').forEach((d,i)=>{setTimeout(()=>d.classList.add('vis'),i*80)});
-    sfObs.unobserve(e.target);
-  }})},{threshold:.2});
-  sfObs.observe(area);
+  /* SF bars animated by main IntersectionObserver via [data-w] */
 
   /* animate gb-norm bars on reveal */
   const gbNorm=document.querySelector('.gb-norm');
