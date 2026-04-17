@@ -670,12 +670,157 @@ footer a{color:var(--blue);font-weight:600}
 .bm-calc-std{font-size:11px;color:var(--teal)}
 .bm-calc-note{font-size:13px;color:rgba(255,255,255,.5);text-align:center}
 
+/* Grade Explorer — 좋음/중간/나쁨 인터랙션 */
+.gx-filter{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.gx-btn{text-align:left;padding:22px 24px;border:1.5px solid var(--g200);background:var(--white);border-radius:var(--r-sm);cursor:pointer;transition:all .22s;font-family:inherit;color:inherit;position:relative;overflow:hidden}
+.gx-btn:hover{border-color:var(--g400);transform:translateY(-2px);box-shadow:var(--sh)}
+.gx-btn.on{border-color:var(--ink);box-shadow:var(--sh-lg)}
+.gx-btn-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.gx-btn-dot{width:10px;height:10px;border-radius:50%}
+.gx-btn-good .gx-btn-dot{background:var(--blue)}
+.gx-btn-mid .gx-btn-dot{background:var(--caution)}
+.gx-btn-bad .gx-btn-dot{background:var(--danger)}
+.gx-btn-label{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
+.gx-btn-count{font-size:28px;font-weight:800;color:var(--ink);line-height:1;margin-bottom:8px;font-family:'Inter','Pretendard',sans-serif}
+.gx-btn-good.on .gx-btn-count{color:var(--blue)}
+.gx-btn-mid.on .gx-btn-count{color:var(--caution)}
+.gx-btn-bad.on .gx-btn-count{color:var(--danger)}
+.gx-btn-desc{font-size:12px;color:var(--g500);line-height:1.55}
+.gx-btn.on::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.gx-btn-good.on::after{background:var(--blue)}
+.gx-btn-mid.on::after{background:var(--caution)}
+.gx-btn-bad.on::after{background:var(--danger)}
+
+.gx-intro{margin-bottom:18px}
+.gx-intro-in{padding:18px 22px;background:var(--g50);border-radius:var(--r-xs);font-size:13.5px;color:var(--g700);line-height:1.8;border-left:2px solid var(--g400)}
+.gx-intro-in b{color:var(--ink);font-weight:700}
+
+.gx-lines{display:flex;flex-direction:column;gap:8px}
+.gx-line{background:var(--white);border:1px solid var(--g100);border-radius:var(--r-sm);overflow:hidden;transition:all .2s}
+.gx-line:hover{border-color:var(--g300);box-shadow:var(--sh-sm)}
+.gx-line.open{border-color:var(--ink);box-shadow:var(--sh)}
+.gx-line-head{width:100%;display:flex;align-items:center;gap:16px;padding:18px 22px;background:transparent;border:none;cursor:pointer;font-family:inherit;color:inherit;text-align:left;transition:background .2s}
+.gx-line-head:hover{background:var(--g50)}
+.gx-line.open .gx-line-head{background:var(--g50);border-bottom:1px solid var(--g100)}
+.gx-line-left{display:flex;align-items:center;gap:10px;min-width:0;flex-shrink:0}
+.gx-line-idx{font-size:11px;font-weight:700;color:var(--g400);font-family:'Inter','Pretendard',sans-serif;letter-spacing:.5px;min-width:20px}
+.gx-line-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;line-height:1;flex-shrink:0}
+.gx-line-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap}
+.gx-line-mid{flex:1;display:flex;gap:18px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.gx-line-kpi{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.gx-line-kpi b{font-size:16px;font-weight:800;color:var(--ink);font-family:'Inter','Pretendard',sans-serif}
+.gx-line-kpi span{font-size:10px;color:var(--g400);margin-top:3px;letter-spacing:.3px}
+.gx-line-kpi-ok b{color:var(--blue)}
+.gx-line-kpi-warn b{color:var(--caution)}
+.gx-line-kpi-bad b{color:var(--danger)}
+.gx-line-right{display:flex;align-items:center;gap:6px;color:var(--g400);flex-shrink:0}
+.gx-line-chev{font-size:11px;font-weight:600;letter-spacing:.3px}
+.gx-line-arr{transition:transform .3s}
+.gx-line.open .gx-line-arr{transform:rotate(180deg)}
+.gx-line.open .gx-line-chev{color:var(--ink)}
+.gx-line.open .gx-line-right{color:var(--ink)}
+.gx-line-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.22,1,.36,1)}
+.gx-line.open .gx-line-body{max-height:1400px}
+
+.gx-line-profile{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--g100);margin:0}
+.gx-pf-row{background:var(--white);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.gx-pf-k{font-size:10px;color:var(--g400);letter-spacing:.3px;text-transform:uppercase;font-weight:600}
+.gx-pf-v{font-size:14px;color:var(--ink);font-weight:700;letter-spacing:-.2px}
+.gx-pf-v b{font-weight:800}
+
+.gx-line-why{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--g100)}
+.gx-why-col{background:var(--white);padding:22px 22px 22px}
+.gx-why-good{background:linear-gradient(180deg,rgba(13,138,231,.02),var(--white))}
+.gx-why-bad{background:linear-gradient(180deg,rgba(217,79,79,.02),var(--white))}
+.gx-why-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.2px}
+.gx-why-good .gx-why-h{color:var(--blue)}
+.gx-why-bad .gx-why-h{color:var(--danger)}
+.gx-why-ic{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--white)}
+.gx-why-good .gx-why-ic{background:var(--blue)}
+.gx-why-bad .gx-why-ic{background:var(--danger)}
+.gx-why-cnt{margin-left:auto;font-size:11px;color:var(--g400);font-weight:600}
+.gx-why-item{padding:10px 0;border-top:1px solid var(--g100)}
+.gx-why-item:first-of-type{border-top:none;padding-top:4px}
+.gx-why-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.2px}
+.gx-why-d{font-size:12px;color:var(--g600);line-height:1.6}
+.gx-why-empty{font-size:12.5px;color:var(--g500);line-height:1.7;padding:8px 0;font-style:italic}
+
+.gx-line-plan{padding:18px 22px;background:var(--ink);color:rgba(255,255,255,.88);font-size:13.5px;line-height:1.75;letter-spacing:-.2px}
+.gx-line-plan b{color:var(--white);font-weight:700}
+
+@media(max-width:768px){
+  .gx-filter{grid-template-columns:1fr;gap:8px;margin-bottom:20px}
+  .gx-btn{padding:16px 18px}
+  .gx-btn-count{font-size:22px}
+  .gx-line-head{flex-wrap:wrap;gap:10px;padding:14px 16px}
+  .gx-line-mid{gap:12px;justify-content:flex-start;width:100%;padding-top:8px;border-top:1px dashed var(--g100)}
+  .gx-line-kpi b{font-size:14px}
+  .gx-line-right{width:100%;justify-content:flex-end}
+  .gx-line-profile{grid-template-columns:1fr 1fr}
+  .gx-line-why{grid-template-columns:1fr}
+  .gx-why-col{padding:18px 18px}
+  .gx-line-plan{padding:14px 18px;font-size:12.5px}
+}
+
+/* Matrix — guide + self-check */
+.mx-guide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:40px}
+.mx-guide-item{display:flex;gap:14px;padding:22px 22px;background:var(--white);border:1px solid var(--g100);border-radius:var(--r-sm)}
+.mx-guide-n{font-size:20px;font-weight:800;color:var(--blue);line-height:1;min-width:28px}
+.mx-guide-b{flex:1}
+.mx-guide-t{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:-.2px}
+.mx-guide-d{font-size:13px;color:var(--g600);line-height:1.75;letter-spacing:-.15px}
+.mx-guide-d b{color:var(--ink);font-weight:700}
+
+.mx-self{margin-top:40px;padding:32px;background:linear-gradient(180deg,#F4F7FA,#EAEEF3);border-radius:var(--r-sm)}
+.mx-self-h{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:20px;letter-spacing:-.3px}
+.mx-self-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.mx-self-step{padding:20px;background:var(--white);border-radius:var(--r-xs);border:1px solid var(--g100)}
+.mx-self-num{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--white);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.mx-self-t{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.mx-self-d{font-size:12.5px;color:var(--g600);line-height:1.7}
+.mx-self-d b{color:var(--ink);font-weight:700}
+.mx-self-note{font-size:12px;color:var(--g500);font-style:italic;padding-top:4px}
+@media(max-width:768px){
+  .mx-guide{grid-template-columns:1fr;gap:10px;margin-bottom:28px}
+  .mx-self-grid{grid-template-columns:1fr}
+  .mx-self{padding:22px 20px;margin-top:28px}
+}
+
+/* DD explain blocks */
+.dd-explain{margin:32px 0 0;padding:28px 32px;background:linear-gradient(180deg,#FBFCFD,#F4F7FA);border-radius:var(--r-sm);border-left:3px solid var(--blue);position:relative}
+.dd-explain-h{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.8px;text-transform:uppercase;margin-bottom:16px;font-family:'Inter','Pretendard',sans-serif}
+.dd-explain p{font-size:15px;color:var(--g700);line-height:1.85;letter-spacing:-.2px;margin:0 0 14px}
+.dd-explain p:last-child{margin-bottom:0}
+.dd-explain p b{color:var(--ink);font-weight:700}
+@media(max-width:768px){
+  .dd-explain{padding:22px 20px;margin-top:24px}
+  .dd-explain p{font-size:13.5px;line-height:1.75}
+}
+
+/* BM list (rewritten 7 thresholds) */
+.bm-list{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+.bm-row{display:flex;gap:20px;padding:28px 28px;background:var(--white);border:1px solid var(--g100);border-radius:var(--r-sm);transition:all .2s;position:relative;overflow:hidden}
+.bm-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+.bm-row:hover{border-color:var(--g300);box-shadow:var(--sh)}
+.bm-row-num{font-size:32px;font-weight:800;color:var(--blue);line-height:1;min-width:52px;font-family:'Inter','Pretendard',sans-serif;letter-spacing:-.5px}
+.bm-row-main{flex:1}
+.bm-row-title{font-size:18px;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:14px;letter-spacing:-.3px}
+.bm-row-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.bm-stat{font-size:12px;color:var(--g600);padding:6px 12px;background:var(--g50);border-radius:14px;line-height:1}
+.bm-stat b{color:var(--g400);font-weight:600;margin-right:6px;font-size:11px}
+.bm-stat-bad{background:rgba(217,79,79,.06);color:var(--danger)}
+.bm-stat-bad b{color:var(--danger);opacity:.7}
+.bm-row-exp{font-size:14.5px;color:var(--g700);line-height:1.75;letter-spacing:-.2px}
 @media(max-width:768px){
   .kf-hero-grid{grid-template-columns:repeat(2,1fr)}
   .kf-receipt-grid{grid-template-columns:1fr}
   .kf-exp-row{flex-direction:column;gap:8px}
   .bm-grid{grid-template-columns:1fr}
   .bm-calc-grid{grid-template-columns:1fr}
+  .bm-row{flex-direction:column;gap:10px;padding:22px 20px}
+  .bm-row-num{font-size:24px;min-width:auto}
+  .bm-row-title{font-size:16px}
+  .bm-row-exp{font-size:13.5px;line-height:1.7}
 }
 </style>
 </head>
@@ -1142,36 +1287,91 @@ footer a{color:var(--blue);font-weight:600}
 <section class="sec" id="benchmark">
   <div class="ct">
     <div class="sec-num">PROCUREMENT BENCHMARK</div>
-    <h2>구매 성숙 기업의<br>7가지 기준선</h2>
-    <p class="lead">16개 기업 분석 + 글로벌 구매 성숙도 연구에서 도출한 기준입니다. 귀사는 몇 개를 충족합니까?</p>
+    <h2>구매를 제대로 하는 회사의<br>7가지 공통점</h2>
+    <p class="lead">16개사 AP 데이터와 글로벌 구매 성숙도 연구를 포갠 결과, 잘 관리하는 기업들은 아래 7가지 숫자를 지키고 있었네. 귀사는 지금 몇 개 걸쳐 있나 세어보게.</p>
 
-    <div class="bm-grid">
-      <div class="bm-item"><div class="bm-num">01</div><div class="bm-body"><div class="bm-metric">공급사 밀도</div><div class="bm-threshold">≤ 15개/억</div><div class="bm-actual">16개사 평균: 28.7개/억</div></div></div>
-      <div class="bm-item"><div class="bm-num">02</div><div class="bm-body"><div class="bm-metric">1회성 공급사</div><div class="bm-threshold">≤ 20%</div><div class="bm-actual">16개사 평균: 41.4%</div></div></div>
-      <div class="bm-item"><div class="bm-num">03</div><div class="bm-body"><div class="bm-metric">B2C 플랫폼</div><div class="bm-threshold">≤ 5%</div><div class="bm-actual">16개사 평균: 5.3%</div></div></div>
-      <div class="bm-item"><div class="bm-num">04</div><div class="bm-body"><div class="bm-metric">HHI (집중도)</div><div class="bm-threshold">500 ~ 1,500</div><div class="bm-actual">16개사 범위: 172~2,918</div></div></div>
-      <div class="bm-item"><div class="bm-num">05</div><div class="bm-body"><div class="bm-metric">10만 원 이하 비중</div><div class="bm-threshold">≤ 70%</div><div class="bm-actual">16개사 평균: 77.3%</div></div></div>
-      <div class="bm-item"><div class="bm-num">06</div><div class="bm-body"><div class="bm-metric">Top 10 집중도</div><div class="bm-threshold">55 ~ 75%</div><div class="bm-actual">16개사 평균: 52.6%</div></div></div>
-      <div class="bm-item bm-item-full"><div class="bm-num">07</div><div class="bm-body"><div class="bm-metric">SUM (Spend Under Management)</div><div class="bm-threshold">≥ 70%</div><div class="bm-actual">구매팀이 관리하는 지출 비율. 글로벌 선진 기업 기준 70% 이상.</div></div></div>
+    <div class="bm-list">
+      <div class="bm-row">
+        <div class="bm-row-num">01</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">지출 1억당 공급사가 15곳을 넘지 않는가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 15개/억 이하</span><span class="bm-stat bm-stat-bad"><b>16개사 평균</b> 28.7개/억</span></div>
+          <div class="bm-row-exp">지출 규모와 무관하게 공급사가 많으면, 관리해야 할 창구가 그만큼 늘어난다는 뜻이네. 글로벌 선진 구매 조직은 이 숫자를 10~15개 사이로 유지하고 있구먼. 16개사 평균 28.7개/억은 — 1억 쓰는 데 공급사 29곳을 상대했다는 얘기야. 담당자 한 사람이 맨눈으로 관리할 수 있는 한계를 이미 넘어선 구조네.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">02</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">한 번만 발주하고 끝난 공급사가 전체의 20% 이하인가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 20% 이하</span><span class="bm-stat bm-stat-bad"><b>16개사 평균</b> 41.4%</span></div>
+          <div class="bm-row-exp">한 번 사고 다시 거래가 없는 공급사가 많다는 건, 계약이 아니라 임기응변으로 굴러간다는 증거야. 반복 거래가 있어야 단가 협상도 되고, 품질 관리도 되고, 대체 공급원도 확보되네. 16개사는 평균 41.4% — 공급사 열 곳 중 네 곳이 "첫 거래이자 마지막 거래"였다는 뜻이구먼. 이걸 20% 아래로 끌어내리는 일이 구매 조직의 첫 과제야.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">03</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">쿠팡·네이버 같은 B2C 채널 구매가 전체 지출의 5% 이내인가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 5% 이하</span><span class="bm-stat bm-stat-bad"><b>16개사 평균</b> 5.3% / 최악 37.4%</span></div>
+          <div class="bm-row-exp">편해서 쓰는 건 아네. 그런데 B2C 플랫폼은 세금계산서도, 계약 단가도, 결제조건도 전부 소비자 기준이야. 비중이 5%를 넘기기 시작하면 세무·감사 리스크부터 슬금슬금 쌓이네. 16개사 평균은 5.3%로 기준을 살짝 넘겼고, 최악은 37.4% — 전체 지출의 3분의 1이 B2C였다는 얘기야. 이건 구매 관리가 아니라 직원 개인 결제 대납이구먼.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">04</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">공급사 집중도(HHI)가 500에서 1,500 사이에 들어오는가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 500~1,500</span><span class="bm-stat bm-stat-bad"><b>16개사 범위</b> 172~2,918</span></div>
+          <div class="bm-row-exp">경제학과 공정거래법에서 쓰는 표준 집중도 지수야. 500 미만이면 공급사가 너무 흩어져서 규모의 경제가 안 생기고, 1,500을 넘기면 상위 몇 곳에 몰빵이라 공급망 하나가 끊기면 즉시 타격을 받네. 500~1,500 사이가 "충분히 집중돼서 협상력 있되, 의존하지는 않는" 구간일세. 16개사 중 절반 넘는 기업이 이 밴드 밖에 나가 있었구먼.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">05</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">10만 원 이하 소액 전표 비중이 70%를 넘기지 않는가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 70% 이하</span><span class="bm-stat bm-stat-bad"><b>16개사 평균</b> 77.3% / 최악 94.8%</span></div>
+          <div class="bm-row-exp">소액 전표가 많다는 건 결제·승인·세금계산서 처리를 일일이 사람 손으로 돌린다는 뜻이네. 한 건에 원가 1만~2만 원 가량의 관리비가 숨어 있어. 10만 원짜리 소모품 사면서 관리비 2만 원 들어가면 20% 오버헤드야 — 16개사 평균은 77.3%고, 최악 기업은 거래 20건 중 19건이 10만 원 이하였네. 카탈로그·전용몰로 소액을 묶어내는 구조가 없으면 이 숫자는 절대 안 떨어지네.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">06</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">상위 10개 공급사에 전체 지출의 55~75%가 모여 있는가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 55~75%</span><span class="bm-stat"><b>16개사 평균</b> 52.6%</span></div>
+          <div class="bm-row-exp">상위 10곳에 과반이 묶여야 구매팀이 "협상 지렛대"를 갖네. 55% 미만이면 공급사가 너무 분산돼서 단가 협상 자체가 성립 안 되고, 75%를 넘으면 의존도가 위험 구간에 들어가네. 16개사 평균 52.6%는 — 약간 덜 모여 있다는 얘긴데, 이건 카테고리 통합이 덜 됐다는 신호야. 문방구·소모품·IT 장비 이런 식으로 묶어서 대표 공급사 두세 곳을 박아두면 자연스럽게 올라가네.</div>
+        </div>
+      </div>
+
+      <div class="bm-row">
+        <div class="bm-row-num">07</div>
+        <div class="bm-row-main">
+          <div class="bm-row-title">전체 간접구매 중 구매팀이 "실제로 관리하는 지출"(SUM)이 70% 이상인가</div>
+          <div class="bm-row-stats"><span class="bm-stat"><b>기준선</b> 70% 이상 / Spend Under Management</span></div>
+          <div class="bm-row-exp">SUM — 글로벌 CPO들이 매년 자기 조직 성숙도를 따질 때 쓰는 공식 지표야. 주의할 건, 결재만 받는 건 관리가 아니라는 점이네. 공급사를 사전에 평가하고, 계약서로 단가를 박아두고, 대체 공급원까지 확보했을 때 비로소 "관리된 지출"로 치네. 70%를 넘겨야 비로소 "이 회사에 구매 조직이 있다"고 말할 수 있구먼. 한국 기업 대부분이 30~50%에 머물러 있는 게 현실일세.</div>
+        </div>
+      </div>
     </div>
 
     <div class="bm-calc">
-      <div class="bm-calc-title">📊 지금 계산해보세요</div>
+      <div class="bm-calc-title">지금 간단하게 계산해보게</div>
       <div class="bm-calc-grid">
         <div class="bm-calc-item">
           <div class="bm-calc-formula">공급사 밀도 = 간접구매 공급사 수 ÷ 간접구매 지출(억)</div>
-          <div class="bm-calc-std">기준: 15개/억 이하 = 우수</div>
+          <div class="bm-calc-std">15개/억 이하면 우수</div>
         </div>
         <div class="bm-calc-item">
-          <div class="bm-calc-formula">1회성 비율 = 1회 발주 공급사 ÷ 전체 공급사</div>
-          <div class="bm-calc-std">기준: 20% 이하 = 우수</div>
+          <div class="bm-calc-formula">1회성 비율 = 1회만 거래한 공급사 ÷ 전체 공급사</div>
+          <div class="bm-calc-std">20% 이하면 우수</div>
         </div>
         <div class="bm-calc-item">
-          <div class="bm-calc-formula">SUM = 구매팀 관리 지출 ÷ 전체 간접구매 지출</div>
-          <div class="bm-calc-std">기준: 70% 이상 = 우수</div>
+          <div class="bm-calc-formula">SUM = 구매팀 통제 지출 ÷ 전체 간접구매 지출</div>
+          <div class="bm-calc-std">70% 이상이면 우수</div>
         </div>
       </div>
-      <div class="bm-calc-note">세 가지 모두 충족하면 구매 성숙 A등급. <strong>16개 분석 기업 중 A등급 = 0개사.</strong></div>
+      <div class="bm-calc-note">세 항목 모두 충족하면 구매 성숙 A등급. <strong>이번에 분석한 16개 기업 중 A등급은 0개사였네.</strong></div>
     </div>
   </div>
 </section>
@@ -1208,6 +1408,13 @@ footer a{color:var(--blue);font-weight:600}
       <div class="sf-bar-diff">차이 <strong style="color:var(--danger);font-size:28px">×1.8배</strong></div>
     </div>
     <div class="src" style="margin-bottom:0;margin-top:20px">그룹 평균 비교 기준. 개별 기업 단위 Pearson r = 0.33 (약한 양의 상관). 금융/대규모 1개사 제외 15개사 기준.</div>
+
+    <div class="dd-explain">
+      <div class="dd-explain-h">왜 이 두 숫자가 같이 움직이는가</div>
+      <p><b>B2C 플랫폼을 자주 쓴다</b>는 말은, 현업 담당자가 "필요할 때 가장 빠른 곳에서 산다"는 뜻이야. 쿠팡이 오늘 싸면 쿠팡, 내일 네이버가 싸면 네이버, 모레 11번가에서 쿠폰이 뜨면 거기 — 이런 식으로 공급사가 매번 바뀌게 되네. 그러니까 <b>1회성 공급사가 자동으로 늘어나는 구조</b>가 되는 거야.</p>
+      <p>그룹 평균으로 보면 차이는 1.8배로 명확하네 — B2C 의존도가 높은 상위 7개사는 1회성 공급사가 58.1%, 하위 8개사는 31.9%. 개별 기업 단위로 보면 상관계수 r=0.33 정도라 "완벽한 1대1 관계"는 아니지만, 구매 관리 문헌에서 r=0.3 이상이면 "구조적 연관"으로 해석하네. 즉 예외는 있어도 <b>경향은 분명하다</b>는 얘기야.</p>
+      <p>이게 왜 문제냐 — 한 번 산 공급사하고는 단가 협상을 못 해. 다음 주문이 언제 올지 모르니 상대 쪽도 할인을 안 주네. 결제조건도 매번 리셋이고, 세금계산서 발행도 안 되는 개인 결제가 섞여 들어가네. <b>편의 구매는 한 건 한 건 보면 합리적이지만, 쌓이면 조직 차원의 협상력을 갉아먹는 구조</b>라는 점을 기억해두게.</p>
+    </div>
 
     <!-- STEP 2: 밀도 비교 -->
     <div class="dd-step">
@@ -1253,6 +1460,13 @@ footer a{color:var(--blue);font-weight:600}
       </div>
     </div>
 
+    <div class="dd-explain">
+      <div class="dd-explain-h">"공급사 밀도 개/억"이 뭔 말인가</div>
+      <p>간단한 개념이네. <b>간접구매 지출 1억 원마다 몇 개의 공급사와 거래했는가</b>를 나타내는 지표야. 지출 규모가 큰 대기업과 작은 소기업을 같은 잣대로 볼 수 있도록 "1억당"으로 정규화한 거네. 글로벌 선진 구매 조직은 이 값을 10~15개로 유지하구먼.</p>
+      <p>α사는 61억을 쓰는데 공급사가 707개 — 11.5개/억이네. 반복 거래 기반이라 1회성 공급사는 21.5%밖에 안 되고, 3회 이상 거래한 공급사가 대다수야. β사는 75억을 쓰면서 공급사가 5,239개 — <b>지출은 α사보다 더 많은데, 공급사는 6배</b>일세. 1회성이 65.9%, 3회 이하가 84.8%라는 건 "한두 번 사고 마는 거래"가 전체의 5분의 4 이상이라는 얘기네.</p>
+      <p>β사 데이터에서 특히 눈에 들어온 건 — <b>비품 카테고리 하나에만 공급사가 198개</b>라는 점이야. 회사에서 쓰는 A4 용지, 볼펜, 프린터 토너 이런 걸 198곳에서 사고 있다는 뜻이네. 담당자가 그때그때 네이버 검색해서 제일 빨리 오는 데 주문한 결과일세. 이런 구조에선 "우리 회사가 A4 한 박스에 얼마를 내는가"라는 질문에 아무도 대답을 못 하네. <b>공급사 숫자가 많다는 건 단순히 지저분한 문제가 아니라, 단가 자체를 모른다는 뜻</b>이야.</p>
+    </div>
+
     <!-- STEP 3: 시뮬레이션 -->
     <div class="dd-step">
       <div class="dd-step-num">STEP 3</div>
@@ -1286,6 +1500,13 @@ footer a{color:var(--blue);font-weight:600}
       <div class="dd-sim-note">공급사 통합만으로 — 경쟁 입찰, 볼륨 할인, 정기 계약 전환이 가능해집니다.<br><span style="color:var(--g400);font-size:11px">절감 검토 대상(27.5억) 중 업계 평균 절감률 10~15% 적용 시 → <strong style="color:var(--teal)">실질 절감 기대: 2.7~4.1억/년</strong></span></div>
     </div>
 
+    <div class="dd-explain">
+      <div class="dd-explain-h">이 숫자들이 어떻게 나왔는가</div>
+      <p><b>870개라는 숫자</b>는 α사 수준의 공급사 밀도(약 11.5개/억)를 β사 지출 규모(75억)에 적용해서 뽑은 값이야. 5,239개를 870개로 줄인다는 건 공급사를 '잘라낸다'는 뜻이 아니네 — <b>카테고리별로 대표 공급사 2~3곳을 정해서 거기로 수요를 모아준다</b>는 뜻이야. 비품 198개 공급사를 예로 들면, 주력 3곳과 계약 맺고 나머지 195곳은 "대표 3곳 없을 때만 예외 발주"로 돌리는 거구먼.</p>
+      <p><b>"절감 검토 대상 27.5억"</b>은 전체 지출 75억 중 <b>반복성·예측성이 확보돼서 단가 협상이 가능한 구간</b>을 추정한 수치야. 1회성 공급사 비중을 65.9%에서 20%로 내리면, 나머지 80%는 반복 거래가 되고, 그중 절반쯤은 카테고리 통합이 가능한 품목이네. 전체의 36.5%, 즉 27.5억 정도가 협상 테이블에 올라온다는 계산이야.</p>
+      <p><b>10~15% 절감률</b>은 BCG·맥킨지·Hackett Group이 공통으로 제시한 '공급사 통합 프로젝트' 평균 성과구먼. 볼륨 할인(5~8%), 단가 표준화(3~5%), 소액 전표 통합에 따른 처리비 절감(2~4%) — 이 세 가지를 합친 수치네. β사 기준으로 <b>연 2.7억~4.1억</b>이라는 얘기고, 일회성이 아니라 매년 반복되는 구조적 절감일세. <span style="color:var(--g400)">시뮬레이션은 16개사 데이터와 Hackett Group의 Indirect Procurement 벤치마크를 결합해 추정한 값으로, 실제 도입 시 산업별 편차가 있을 수 있네.</span></p>
+    </div>
+
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
       <div><h4>Key Takeaway</h4><p>B2C 편의 구매 → 공급사 분산 → 비용 누수. 이 구조는 15개 기업에서 반복되었습니다. <strong>같은 지출 규모에서 관리 수준만 달라도 공급사 밀도가 6배 벌어집니다.</strong> 공급사를 줄이는 것이 비용 절감의 시작점이며, 줄이는 방법은 "거래 중단"이 아니라 <strong>"카테고리별 통합 → 단가 계약 전환 → 정기 발주 구조 구축"</strong>의 3단계입니다. 이 구조가 잡히면 구매팀이 아닌 현업 담당자도 통제된 환경에서 자율 구매가 가능해집니다.</p></div>
@@ -1299,8 +1520,33 @@ footer a{color:var(--blue);font-weight:600}
 <section class="sec" id="matrix">
   <div class="ct">
     <div class="sec-num">MATURITY MATRIX</div>
-    <h2>귀사는 이 매트릭스<br>어디에 있습니까</h2>
-    <p class="lead">X축: 공급사 밀도(지출 1억당 공급사 수). Y축: 1회성 공급사 비율. 기준선: 밀도 15개/억, 1회성 40%.</p>
+    <h2>귀사는 이 지도<br>어디쯤 찍힐 것 같은가</h2>
+    <p class="lead">16개 기업을 두 개의 잣대로 흩뿌려 봤네. 가로는 "지출 1억당 공급사가 몇 곳인가(공급사 밀도)", 세로는 "1회성으로 끝난 공급사가 몇 퍼센트인가". 이 두 숫자가 구매 관리 성숙도의 가장 빠른 체온계네.</p>
+
+    <!-- 읽는 법 가이드 -->
+    <div class="mx-guide">
+      <div class="mx-guide-item">
+        <div class="mx-guide-n">①</div>
+        <div class="mx-guide-b">
+          <div class="mx-guide-t">가로축 ― 공급사 밀도</div>
+          <div class="mx-guide-d"><b>15개/억</b>을 기준선으로 썼네. 1억 쓰는 데 공급사 15곳 이내면 "담당자 한 사람이 얼굴 알고 관리 가능한" 수준이야. 15를 넘기면 그때부터는 엑셀로도, 사람으로도 통제가 안 되네. 오른쪽으로 갈수록 공급사가 넘쳐나는 상태구먼.</div>
+        </div>
+      </div>
+      <div class="mx-guide-item">
+        <div class="mx-guide-n">②</div>
+        <div class="mx-guide-b">
+          <div class="mx-guide-t">세로축 ― 1회성 공급사 비율</div>
+          <div class="mx-guide-d"><b>40%</b>를 기준선으로 잡았네. 10곳 중 4곳이 한 번 거래하고 말았다는 얘기야. 이 비율이 높을수록 "계약 없이 즉흥적으로 사는" 비중이 크다는 뜻이네. 위로 올라갈수록 단가 협상도, 품질 관리도 안 되는 구조일세.</div>
+        </div>
+      </div>
+      <div class="mx-guide-item">
+        <div class="mx-guide-n">③</div>
+        <div class="mx-guide-b">
+          <div class="mx-guide-t">분면 4개 ― 각각 뭔 뜻인가</div>
+          <div class="mx-guide-d"><b>좌하단 A</b>는 밀도·1회성 모두 낮은 <span style="color:var(--teal);font-weight:700">관리 우수</span>. <b>우상단 D</b>는 둘 다 높은 <span style="color:var(--danger);font-weight:700">위험 구간</span>. <b>좌상단 B</b>는 공급사는 적은데 1회성이 많은 곳(계약이 짧음), <b>우하단 C</b>는 공급사는 많은데 반복은 하는 곳(난립은 됐으나 거래는 이어짐). 보통 D에서 → C → A 순서로 개선되네.</div>
+        </div>
+      </div>
+    </div>
 
     <div class="mx-chart">
       <div class="mx-y-label">1회성 공급사 비율 (%) ↑</div>
@@ -1324,28 +1570,65 @@ footer a{color:var(--blue);font-weight:600}
       <div class="mx-legend-item"><span class="mx-dot" style="background:var(--g300)"></span> B·C분면: 한쪽만 초과 (1개사)</div>
     </div>
 
+    <!-- 귀사는 어디쯤 찾는 가이드 -->
+    <div class="mx-self">
+      <div class="mx-self-h">귀사는 어디에 찍힐까 — 30초 자가 진단</div>
+      <div class="mx-self-grid">
+        <div class="mx-self-step">
+          <div class="mx-self-num">1</div>
+          <div class="mx-self-t">가로축 계산</div>
+          <div class="mx-self-d">작년 간접구매 공급사 총수 ÷ 간접구매 지출액(억). 예: 공급사 800곳, 지출 40억 → <b>20개/억</b></div>
+        </div>
+        <div class="mx-self-step">
+          <div class="mx-self-num">2</div>
+          <div class="mx-self-t">세로축 계산</div>
+          <div class="mx-self-d">작년 중 1회만 발주한 공급사 수 ÷ 전체 공급사 수. 예: 380곳 ÷ 800곳 → <b>47.5%</b></div>
+        </div>
+        <div class="mx-self-step">
+          <div class="mx-self-num">3</div>
+          <div class="mx-self-t">위치 확인</div>
+          <div class="mx-self-d">가로 20, 세로 47.5면 → 둘 다 기준선 초과 → <b style="color:var(--danger)">D분면(위험)</b>에 찍히네</div>
+        </div>
+      </div>
+      <div class="mx-self-note">계산이 어렵거든 ERP 구매 모듈에서 "작년 발주건별 공급사 리스트"만 뽑아서 피벗하면 되네. 10분이면 나오는 숫자야.</div>
+    </div>
+
     <div class="takeaway">
       <div class="takeaway-icon">!</div>
-      <div><h4>Key Takeaway</h4><p>16개 기업이 <strong>A분면(관리 우수)과 D분면(위험)으로 양극화</strong>되어 있습니다. 중간 지대가 거의 없다는 것은, 공급사 관리는 "하거나 안 하거나"의 문제라는 뜻입니다.</p></div>
+      <div><h4>Key Takeaway</h4><p>16개 기업이 <strong>A분면(관리 우수) 9곳, D분면(위험) 6곳, 중간 지대 1곳</strong> — 거의 양극화돼 있네. 이 분포가 주는 교훈은 두 가지야. 첫째, 공급사 관리는 <b>하는 회사와 안 하는 회사로 딱 갈린다</b>는 점. "조금 하고 있다"는 애매한 상태는 실전에서 거의 존재하지 않구먼. 둘째, D분면에서 A분면으로 점프하는 경로는 <b>C를 경유</b>하는 게 일반적이야. 공급사 수는 그대로 두고 1회성부터 줄이거나(B→A 드문 경로), 1회성은 그대로 두고 공급사 수부터 줄이거나(C→A 흔한 경로) — 대부분 후자로 가네. <b>"공급사 정리 먼저, 계약 표준화는 그다음"</b>이라는 얘길세.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SEGMENT -->
+<!-- GRADE EXPLORER — 등급별 라인 인터랙션 -->
 <section class="sec" id="segment">
   <div class="ct">
-    <div class="sec-num">CROSS-SEGMENT ANALYSIS</div>
-    <h2>같은 규모 안에서<br>왜 효율이 다릅니까</h2>
-    <p class="lead">당신의 기업은 어디에 있습니까.</p>
-    <div class="seg-tabs" id="segtabs">
-      <div class="seg-tab on" data-sg="all">전체 16개사</div>
-      <div class="seg-tab" data-sg="A">대규모 (3)</div>
-      <div class="seg-tab" data-sg="B">중규모 (5)</div>
-      <div class="seg-tab" data-sg="C">소규모 (4)</div>
-      <div class="seg-tab" data-sg="D">영세 (4)</div>
+    <div class="sec-num">COMPANY EXPLORER</div>
+    <h2>16개사를 등급별로<br>줄 세워 봤네</h2>
+    <p class="lead">세 등급 중 하나를 골라보게. 해당 기업을 한 줄씩 뽑아놨고, 줄을 누르면 어떤 숫자가 좋아서·나빠서 그 등급에 들었는지, 당장 뭘 고쳐야 하는지가 펼쳐지네. A등급은 없었네 — 그래서 세 등급만 뜨네.</p>
+
+    <div class="gx-filter">
+      <button class="gx-btn on gx-btn-good" data-gr="B">
+        <div class="gx-btn-top"><span class="gx-btn-dot"></span><span class="gx-btn-label">좋음</span></div>
+        <div class="gx-btn-count">8개사</div>
+        <div class="gx-btn-desc">B등급 — 구조는 어느 정도 갖췄으나 A엔 못 미친 곳</div>
+      </button>
+      <button class="gx-btn gx-btn-mid" data-gr="C">
+        <div class="gx-btn-top"><span class="gx-btn-dot"></span><span class="gx-btn-label">중간</span></div>
+        <div class="gx-btn-count">7개사</div>
+        <div class="gx-btn-desc">C등급 — 부분적 비효율, 즉시 개선 착수 권고</div>
+      </button>
+      <button class="gx-btn gx-btn-bad" data-gr="D">
+        <div class="gx-btn-top"><span class="gx-btn-dot"></span><span class="gx-btn-label">나쁨</span></div>
+        <div class="gx-btn-count">1개사</div>
+        <div class="gx-btn-desc">D등급 — 구조적 통제 부재, 즉시 전문 진단 필요</div>
+      </button>
     </div>
-    <div class="seg-grid" id="seggrid"></div>
-    <div class="src" style="margin-top:32px"><b>종합등급:</b> 5개 지표 가중평균. A(~30), B(30~45), C(45~55), D(55+). <b>A등급 0개사.</b></div>
+
+    <div class="gx-intro" id="gxIntro"></div>
+    <div class="gx-lines" id="gxLines"></div>
+
+    <div class="src" style="margin-top:32px"><b>종합등급:</b> Tail·1회성·B2C·HHI·오버헤드 5개 지표 가중평균. A(~30), B(30~45), C(45~55), D(55+). <b>A등급 0개사.</b></div>
   </div>
 </section>
 
@@ -1617,46 +1900,127 @@ function countUp(el){
   (function tick(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3);let v=t*e;v=dc?v.toFixed(dc):Math.round(v);if(fm==='c')v=Number(v).toLocaleString();el.textContent=v+sx;if(p<1)requestAnimationFrame(tick)})(st);
 }
 
-/* Segments */
-function getDiag(c){
-  const issues=[];
-  if(c.t>97) issues.push('Tail 공급사 거의 전부 — 관리 체계 부재');
-  else if(c.t>93) issues.push('Tail 비중 과다 — 공급사 통합 시급');
-  if(c.o>60) issues.push('1회성 구매 '+c.o+'% — 반복 계약 전환 필요');
-  else if(c.o>40) issues.push('1회성 구매 '+c.o+'% — 선호공급사 미구축');
-  if(c.p>10) issues.push('B2C 플랫폼 '+c.p+'% — 통제 불가 구매 과다');
-  if(c.h>2500) issues.push('HHI '+c.h.toLocaleString()+' — 공급망 단절 위험');
-  else if(c.h>1000) issues.push('HHI '+c.h.toLocaleString()+' — 공급사 집중도 주의');
-  if(c.oh>40) issues.push('오버헤드 '+c.oh+'% — 간접비 비중 과다');
-  if(!issues.length) issues.push('상대적으로 양호 — 지속 모니터링 권장');
-  const top=issues[0];
-  const cls=c.g==='D'?'bad':c.g==='C'?'warn':'ok';
-  return{text:top,cls:cls,count:issues.length};
+/* Grade Explorer — 좋음/중간/나쁨 라인 인터랙션 */
+function gxPros(c){
+  const pros=[];
+  if(c.p<=1) pros.push(['B2C 플랫폼 '+c.p+'%','기준선 5% 대비 매우 낮음. 직원 개인 결제형 구매가 거의 없어 통제 양호.']);
+  else if(c.p<=5) pros.push(['B2C 플랫폼 '+c.p+'%','기준선 5% 이내. 세무·감사 리스크 낮음.']);
+  if(c.o<=25) pros.push(['1회성 비율 '+c.o+'%','기준선 20%에 근접. 반복 거래 기반 구조.']);
+  else if(c.o<=35) pros.push(['1회성 비율 '+c.o+'%','16개사 평균 41.4%보다 낮음. 거래 지속성 있음.']);
+  if(c.h>=500&&c.h<=1500) pros.push(['HHI '+c.h.toLocaleString(),'적정 구간(500~1,500). 협상력은 있되 몰빵은 아님.']);
+  else if(c.h<500) pros.push(['HHI '+c.h.toLocaleString(),'공급사가 충분히 분산됨 — 공급망 단절 위험 낮음.']);
+  const density=c.sup/c.sp;
+  if(density<=15) pros.push(['공급사 밀도 '+density.toFixed(1)+'개/억','기준선 15개/억 이내. 관리 가능한 숫자.']);
+  if(c.oh<=25) pros.push(['오버헤드 '+c.oh+'%','간접비 비중 적정 (기준 25% 이하).']);
+  if(c.u<=70) pros.push(['10만원 이하 비중 '+c.u+'%','기준선 70% 이내. 소액 전표 통제 양호.']);
+  return pros;
 }
-function renderSeg(f){
-  const g=document.getElementById('seggrid'),d=f==='all'?D:D.filter(c=>c.s===f);
-  g.innerHTML=d.map((c,i)=>{const idx=D.indexOf(c);const diag=getDiag(c);const ic=IN_COLORS[c.ind]||'var(--g400)';return`<div class="seg-card" data-g="${c.g}" style="animation:fadeUp .35s ${i*.03}s both">
-  <div class="seg-card-hd"><div class="seg-card-nm">${AN[idx]}사</div><div class="seg-card-grade ${c.g}">${c.g}등급</div></div>
-  <div class="seg-card-profile">
-    <span class="seg-card-tag" style="background:${ic}15;color:${ic}">${c.ind}</span>
-    <span class="seg-card-tag" style="background:var(--g100);color:var(--g600)">${SN[c.s]}</span>
-  </div>
-  <div class="seg-card-meta">
-    <div class="seg-card-meta-item"><div class="v">${c.sp>=100?Math.round(c.sp):c.sp}억</div><div class="l">간접구매 지출</div></div>
-    <div class="seg-card-meta-item"><div class="v">${c.tx>=10000?(c.tx/10000).toFixed(1)+'만':c.tx>=1000?Math.round(c.tx/1000)+'K':c.tx.toLocaleString()}</div><div class="l">거래건수</div></div>
-    <div class="seg-card-meta-item"><div class="v">${c.sup>=1000?(c.sup/1000).toFixed(1)+'K':c.sup.toLocaleString()}</div><div class="l">공급사</div></div>
-  </div>
-  <div class="seg-card-rows">
-    <div class="seg-card-row"><span class="seg-card-row-n">Tail</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.t}%;background:${c.t>95?'var(--danger)':c.t>90?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.t}%</span></div>
-    <div class="seg-card-row"><span class="seg-card-row-n">1회성</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.o}%;background:${c.o>50?'var(--danger)':c.o>35?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.o}%</span></div>
-    <div class="seg-card-row"><span class="seg-card-row-n">B2C</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${Math.min(c.p*3,100)}%;background:${c.p>10?'var(--danger)':c.p>5?'var(--caution)':'var(--teal)'}"></div></div><span class="seg-card-row-v">${c.p}%</span></div>
-    <div class="seg-card-row"><span class="seg-card-row-n">종합</span><div class="seg-card-row-bar"><div class="seg-card-row-fill" style="width:${c.sc}%;background:${c.sc>55?'var(--danger)':c.sc>45?'var(--caution)':'var(--blue)'}"></div></div><span class="seg-card-row-v">${c.sc}</span></div>
-  </div>
-  <div class="seg-card-diag ${diag.cls}">${diag.text}${diag.count>1?' 외 '+(diag.count-1)+'건':''}</div>
-  </div>`}).join('');
+function gxCons(c){
+  const cons=[];
+  const density=c.sup/c.sp;
+  if(density>50) cons.push(['공급사 밀도 '+density.toFixed(1)+'개/억','기준선 15의 '+(density/15).toFixed(1)+'배. 담당자가 관리 가능한 한계 초과.']);
+  else if(density>15) cons.push(['공급사 밀도 '+density.toFixed(1)+'개/억','기준선 15개/억 초과. 공급사 통합 필요.']);
+  if(c.o>60) cons.push(['1회성 비율 '+c.o+'%','공급사 3곳 중 2곳이 첫 거래이자 마지막. 단가 협상 불가 구조.']);
+  else if(c.o>40) cons.push(['1회성 비율 '+c.o+'%','기준선 20% 대비 2배 이상. 선호공급사 체계 부재.']);
+  if(c.p>10) cons.push(['B2C 플랫폼 '+c.p+'%','기준선 5%의 '+(c.p/5).toFixed(1)+'배. 세무·감사 리스크 상당.']);
+  else if(c.p>5) cons.push(['B2C 플랫폼 '+c.p+'%','기준선 5% 초과. 통제 밖 구매 발생.']);
+  if(c.h>2500) cons.push(['HHI '+c.h.toLocaleString(),'초고위험 구간. 상위 공급사 단절 시 즉시 운영 타격.']);
+  else if(c.h>1500) cons.push(['HHI '+c.h.toLocaleString(),'집중도 과다. 의존 공급사 이원화 필요.']);
+  else if(c.h<200) cons.push(['HHI '+c.h.toLocaleString(),'지나치게 분산. 협상력 자체가 형성 안 됨.']);
+  if(c.t>97) cons.push(['Tail 비중 '+c.t+'%','공급사 거의 전부가 꼬리 지출 — 관리 체계 부재.']);
+  else if(c.t>93) cons.push(['Tail 비중 '+c.t+'%','기준선 과다. 상위 20%에 집중할 카테고리 재편 필요.']);
+  if(c.oh>45) cons.push(['오버헤드 '+c.oh+'%','간접비가 전체의 절반 수준. 고정비 구조 점검 필요.']);
+  else if(c.oh>40) cons.push(['오버헤드 '+c.oh+'%','기준 25% 대비 과다.']);
+  if(c.u>90) cons.push(['10만원 이하 비중 '+c.u+'%','20건 중 19건이 소액 전표. 처리비 오버헤드 과다.']);
+  else if(c.u>80) cons.push(['10만원 이하 비중 '+c.u+'%','소액 전표 통합 시급.']);
+  return cons;
 }
-document.getElementById('segtabs').addEventListener('click',e=>{if(!e.target.classList.contains('seg-tab'))return;document.querySelectorAll('.seg-tab').forEach(t=>t.classList.remove('on'));e.target.classList.add('on');renderSeg(e.target.dataset.sg)});
-renderSeg('all');
+function gxPlan(c){
+  const density=c.sup/c.sp;
+  if(c.g==='D'){
+    return '<b>즉시 Spend Analysis 착수.</b> 카테고리별 공급사 목록부터 뽑아서 상위 20% 공급사가 누구인지, 나머지 80%는 어떻게 정리할지 3개월 플랜을 만들어야 하네. BSM 도입 여부 의사결정도 함께 가져가게.';
+  }
+  if(c.g==='C'){
+    if(c.o>60) return '<b>반복 계약 전환이 1순위일세.</b> 1회성 '+c.o+'%를 40% 이하로 내리는 게 목표야. 월 10건 이상 반복 발주되는 공급사부터 연간계약으로 묶어보게.';
+    if(density>30) return '<b>공급사 통합이 1순위일세.</b> 지금 밀도 '+density.toFixed(1)+'개/억은 관리 불가 구간이야. 비품·소모품 카테고리부터 대표 공급사 3곳으로 좁혀보게.';
+    if(c.u>85) return '<b>소액 전표 통합이 1순위일세.</b> 10만원 이하 '+c.u+'%는 처리비만으로도 연간 수천만 원이 빠져나가는 구조야. 전용몰 또는 카탈로그 도입 검토.';
+    return '<b>부분적 개선으로 B등급 진입 가능하네.</b> 위 아쉬운 점 중 가장 큰 지표부터 3개월 단위로 하나씩 개선해보게.';
+  }
+  // B등급
+  if(c.o>25) return '<b>A등급 진입까지 한 발자국.</b> 1회성 '+c.o+'%를 20% 이하로 내리면 A야. 신규 공급사 등록 전 "선호공급사 먼저 확인" 프로세스를 넣어보게.';
+  if(density>15) return '<b>A등급 진입까지 한 발자국.</b> 공급사 밀도 '+density.toFixed(1)+'개/억을 15 이하로 내리면 A야. 거래 3회 이하 공급사부터 통합 대상 후보로 분류해보게.';
+  return '<b>구조는 잘 잡혀 있네.</b> 현 수준 유지 + SUM(구매팀 관리 지출 비율)을 70% 이상으로 끌어올리는 고도화 단계로 넘어가보게.';
+}
+function gxIntroText(gr){
+  if(gr==='B') return '<b>B등급 8개사</b> — 16개사 중 가장 많은 그룹이네. 공급사 분산 또는 1회성 비율 중 한두 지표에서 기준선을 살짝 넘겼을 뿐, 구조는 잡혀 있는 상태야. <b>A등급까지 한 뼘</b>이라, 집중 개선 한 번으로 넘어갈 수 있는 기업들이구먼.';
+  if(gr==='C') return '<b>C등급 7개사</b> — 공급사 밀도, 1회성 비율, 소액 전표 비중 중 두 개 이상이 기준선을 크게 벗어난 그룹이네. <b>"조금 개선"으로는 안 올라오는</b> 구간이고, 분기 단위 프로젝트로 구조 개선을 착수해야 하는 기업들이야.';
+  if(gr==='D') return '<b>D등급 1개사</b> — 5개 지표 중 4개가 동시에 위험 구간에 들어간 기업이네. B2C 플랫폼 비중 37.4%, 1회성 44.6%, 오버헤드 44.7% — <b>"구매 관리"라는 체계 자체가 부재</b>한 상태야. 즉시 전문 진단이 필요한 수준이구먼.';
+  return '';
+}
+function renderGx(gr){
+  document.getElementById('gxIntro').innerHTML='<div class="gx-intro-in">'+gxIntroText(gr)+'</div>';
+  const list=D.map((c,i)=>({c,i})).filter(x=>x.c.g===gr);
+  const box=document.getElementById('gxLines');
+  box.innerHTML=list.map((x,n)=>{
+    const c=x.c,idx=x.i;
+    const ic=IN_COLORS[c.ind]||'var(--g400)';
+    const pros=gxPros(c),cons=gxCons(c);
+    const density=(c.sup/c.sp).toFixed(1);
+    return `<div class="gx-line" data-g="${c.g}" style="animation:fadeUp .35s ${n*.04}s both">
+      <button class="gx-line-head" onclick="gxToggle(this)" aria-expanded="false">
+        <div class="gx-line-left">
+          <span class="gx-line-idx">${(n+1).toString().padStart(2,'0')}</span>
+          <span class="gx-line-tag" style="background:${ic}15;color:${ic}">${c.ind}</span>
+          <span class="gx-line-name">${AN[idx]}사 · ${SN[c.s]}</span>
+        </div>
+        <div class="gx-line-mid">
+          <span class="gx-line-kpi"><b>${c.sp>=100?Math.round(c.sp):c.sp}</b>억<span>지출</span></span>
+          <span class="gx-line-kpi"><b>${c.sup>=1000?(c.sup/1000).toFixed(1)+'K':c.sup.toLocaleString()}</b><span>공급사</span></span>
+          <span class="gx-line-kpi"><b>${density}</b><span>개/억</span></span>
+          <span class="gx-line-kpi"><b>${c.o}</b>%<span>1회성</span></span>
+          <span class="gx-line-kpi gx-line-kpi-${c.sc>55?'bad':c.sc>45?'warn':'ok'}"><b>${c.sc}</b>점<span>종합</span></span>
+        </div>
+        <div class="gx-line-right">
+          <span class="gx-line-chev">열어보기</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="gx-line-arr"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </button>
+      <div class="gx-line-body">
+        <div class="gx-line-profile">
+          <div class="gx-pf-row"><span class="gx-pf-k">업태 · 규모</span><span class="gx-pf-v">${c.ind} · ${SN[c.s]}</span></div>
+          <div class="gx-pf-row"><span class="gx-pf-k">간접구매 지출</span><span class="gx-pf-v">${c.sp}억 / 연</span></div>
+          <div class="gx-pf-row"><span class="gx-pf-k">거래 건수</span><span class="gx-pf-v">${c.tx.toLocaleString()}건</span></div>
+          <div class="gx-pf-row"><span class="gx-pf-k">총 공급사 수</span><span class="gx-pf-v">${c.sup.toLocaleString()}개 (밀도 ${density}개/억)</span></div>
+          <div class="gx-pf-row"><span class="gx-pf-k">종합 점수</span><span class="gx-pf-v">${c.sc}점 · <b style="color:var(--${c.g==='D'?'danger':c.g==='C'?'caution':'blue'})">${c.g}등급</b></span></div>
+        </div>
+        <div class="gx-line-why">
+          <div class="gx-why-col gx-why-good">
+            <div class="gx-why-h"><span class="gx-why-ic">✓</span>좋은 점 <span class="gx-why-cnt">${pros.length}</span></div>
+            ${pros.length ? pros.map(p=>`<div class="gx-why-item"><div class="gx-why-t">${p[0]}</div><div class="gx-why-d">${p[1]}</div></div>`).join('') : '<div class="gx-why-empty">5개 지표 중 기준선을 통과한 항목이 없었네. 구조 전반의 재설계가 필요한 단계야.</div>'}
+          </div>
+          <div class="gx-why-col gx-why-bad">
+            <div class="gx-why-h"><span class="gx-why-ic">!</span>아쉬운 점 <span class="gx-why-cnt">${cons.length}</span></div>
+            ${cons.length ? cons.map(p=>`<div class="gx-why-item"><div class="gx-why-t">${p[0]}</div><div class="gx-why-d">${p[1]}</div></div>`).join('') : '<div class="gx-why-empty">주요 지표에서 기준선 초과 항목이 없네. SUM 지표 고도화 단계로 넘어가보게.</div>'}
+          </div>
+        </div>
+        <div class="gx-line-plan">${gxPlan(c)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function gxToggle(btn){
+  const line=btn.closest('.gx-line');
+  const open=line.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open?'true':'false');
+}
+document.querySelectorAll('.gx-btn').forEach(b=>{
+  b.addEventListener('click',e=>{
+    document.querySelectorAll('.gx-btn').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderGx(b.dataset.gr);
+  });
+});
+renderGx('B');
 
 /* Assessment */
 function toggleCheck(el){
