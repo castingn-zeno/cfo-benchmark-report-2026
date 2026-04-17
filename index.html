@@ -40,131 +40,9 @@ a{color:inherit;text-decoration:none}
 /* Sections */
 .sec{padding:var(--gap) 0;opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .sec.vis{opacity:1;transform:none}
-/* Dark section variant — 모든 텍스트 기본색 화이트 */
-.sec-dark{background:var(--ink);color:rgba(255,255,255,.8)}
-/* nuclear: 인라인 style 포함 모든 color를 강제 상속 */
-.sec-dark *{color:inherit !important}
-/* 색이 필요한 요소만 복원 */
-.sec-dark .cu{color:inherit !important}
-.sec-dark .danger,.sec-dark [style*="color:var(--danger)"]{color:var(--danger) !important}
-.sec-dark [style*="color:var(--teal)"]{color:var(--teal) !important}
-.sec-dark [style*="color:var(--caution)"]{color:var(--caution) !important}
-.sec-dark [style*="color:var(--blue)"]{color:var(--blue) !important}
-.sec-dark .kf-receipt-amt{color:var(--danger) !important}
-.sec-dark .kf-exp-after{color:var(--teal) !important}
-.sec-dark .kf-exp-delta{color:var(--teal) !important}
-.sec-dark .kf-exp-fix-title{color:var(--teal) !important}
-.sec-dark .kf-exp-tag{color:var(--blue) !important}
-.sec-dark .gb-tag{color:var(--white) !important}
-.sec-dark .sf-summary-vs{color:var(--danger) !important}
-.sec-dark .dd-sim-after{color:var(--teal) !important}
-.sec-dark .dd-sim-delta{color:var(--teal) !important}
-.sec-dark .onetime-fill,.sec-dark .tail-bar-fill,.sec-dark .hhi-hrow-fill{color:var(--white) !important}
-.sec-dark .onetime-fill span,.sec-dark .tail-bar-fill span,.sec-dark .hhi-hrow-fill span{color:var(--white) !important}
-.sec-dark svg *{color:unset !important;fill:revert !important}
-.sec-dark .donut-center-n{color:var(--white) !important}
-.sec-dark .takeaway-icon{color:var(--white) !important}
-.sec-dark .sec-num{color:rgba(10,127,219,.6) !important}
-.sec-dark h2{color:var(--white) !important}
-.sec-dark .lead{color:rgba(255,255,255,.4) !important}
-.sec-dark .chart-annotation{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
-.sec-dark .chart-annotation strong{color:rgba(255,255,255,.85)}
-.sec-dark .takeaway{background:rgba(10,127,219,.06);border-color:rgba(10,127,219,.15)}
-.sec-dark .takeaway p{color:rgba(255,255,255,.65)}
-.sec-dark .takeaway h4{color:var(--blue)}
-.sec-dark .cfo-q{background:rgba(214,138,50,.06);border-color:var(--caution)}
-.sec-dark .cfo-q p{color:var(--white)}
-.sec-dark .src{border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3)}
-.sec-dark .src b{color:rgba(255,255,255,.5)}
-.sec-dark .highlight{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
-.sec-dark .highlight p{color:rgba(255,255,255,.8)}
-.sec-dark .onetime-nm,.sec-dark .tail-bar-nm,.sec-dark .hhi-hrow-nm{color:rgba(255,255,255,.7)}
-.sec-dark .onetime-track,.sec-dark .tail-bar-track,.sec-dark .hhi-hrow-track{background:rgba(255,255,255,.06)}
-.sec-dark .onetime-val,.sec-dark .tail-bar-val{color:rgba(255,255,255,.5)}
-.sec-dark .act{color:rgba(255,255,255,.35)}
-.sec-dark .act b{color:rgba(255,255,255,.55)}
-.sec-dark .icon-person span{color:rgba(255,255,255,.4) !important}
-.sec-dark .gb-card{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .gb-badge{opacity:.9}
-.sec-dark .gb-details{background:rgba(255,255,255,.03)}
-.sec-dark .gb-dt{color:rgba(255,255,255,.4)}
-.sec-dark .gb-dd{color:var(--white)}
-.sec-dark .gb-verdict{background:rgba(255,255,255,.03);color:rgba(255,255,255,.6)}
-.sec-dark .gb-norm{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .gb-norm-title{color:var(--white)}
-.sec-dark .gb-norm-name{color:rgba(255,255,255,.6)}
-.sec-dark .gb-norm-track{background:rgba(255,255,255,.06)}
-.sec-dark .gb-norm-note{color:rgba(255,255,255,.5)}
-.sec-dark .sf-chart-area{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .sf-hline{border-color:rgba(255,255,255,.08)}
-.sec-dark .sf-hline span{background:transparent;color:rgba(255,255,255,.2)}
-.sec-dark .sf-summary{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .sf-summary-label{color:rgba(255,255,255,.4)}
-.sec-dark .dd-step-title{color:var(--white)}
-.sec-dark .dd-sim{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .dd-sim-label{color:rgba(255,255,255,.4)}
-.sec-dark .dd-sim-before{color:rgba(255,255,255,.35)}
-.sec-dark .dd-sim-note{border-color:rgba(255,255,255,.06);color:rgba(255,255,255,.4)}
-.sec-dark .kf-hero-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-.sec-dark .kf-hero-label{color:rgba(255,255,255,.5)}
-.sec-dark .kf-hero-sub{color:rgba(255,255,255,.3)}
-.sec-dark .kf-receipt{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-.sec-dark .kf-receipt-desc{color:var(--white)}
-.sec-dark .kf-receipt-cat{color:rgba(255,255,255,.3)}
-.sec-dark .kf-exp-case{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-.sec-dark .kf-exp-num{color:var(--white)}
-.sec-dark .kf-exp-label{color:rgba(255,255,255,.4)}
-.sec-dark .kf-exp-fix{background:rgba(255,255,255,.03)}
-/* f2: icon array + onetime bars */
-.sec-dark .icon-array svg circle,.sec-dark .icon-array svg path{opacity:.9}
-.sec-dark .onetime-fill span,.sec-dark .tail-bar-fill span{color:var(--white)}
-.sec-dark .is-avg .onetime-nm,.sec-dark .is-avg .tail-bar-nm{color:rgba(255,255,255,.8)}
-/* f4: HHI zones */
-.sec-dark .hhi-zones-bg{background:transparent}
-.sec-dark .hhi-zone-bg{border-color:rgba(255,255,255,.06)}
-.sec-dark .hhi-zone-line{color:rgba(255,255,255,.3)}
-.sec-dark .hhi-zone-label{opacity:.5}
-.sec-dark .hhi-hrow-val{color:rgba(255,255,255,.7) !important}
-.sec-dark .hhi-legend{color:rgba(255,255,255,.5)}
-.sec-dark .hhi-legend-item small{color:rgba(255,255,255,.3)}
-/* f6: explosion tags + arrows */
-.sec-dark .kf-exp-tag{color:var(--blue)}
-.sec-dark .kf-exp-arrow{color:rgba(255,255,255,.3)}
-.sec-dark .kf-exp-after{color:var(--teal)}
-.sec-dark .kf-exp-delta{color:var(--teal);background:rgba(30,158,126,.15)}
-.sec-dark .kf-exp-fix-title{color:var(--teal)}
-.sec-dark .kf-exp-before{color:rgba(255,255,255,.35);text-decoration-color:var(--danger)}
-/* deepdive: scatter plot extras */
-.sec-dark .sf-chart-x,.sec-dark .sf-chart-y{color:rgba(255,255,255,.3)}
-.sec-dark .sf-chart-legend{color:rgba(255,255,255,.4)}
-.sec-dark .sf-summary-vs{color:var(--danger);background:rgba(201,64,64,.15)}
-.sec-dark .sf-dot-label{color:rgba(255,255,255,.5)}
-.sec-dark .dd-step-num{color:var(--blue)}
-.sec-dark .dd-sim-arrow{color:rgba(255,255,255,.2)}
-.sec-dark .dd-sim-after{color:var(--teal)}
-.sec-dark .dd-sim-delta{color:var(--teal)}
-/* general: all remaining dark text */
-.sec-dark div[style*="color:var(--ink)"]{color:var(--white) !important}
-.sec-dark strong{color:rgba(255,255,255,.9)}
-.sec-dark .donut-center-n{color:var(--white) !important}
-.sec-dark .donut-center-l{color:rgba(255,255,255,.5)}
-.sec-dark .donut-legend-i{color:rgba(255,255,255,.6)}
-.sec-dark .donut-story h3{color:var(--white)}
-.sec-dark .donut-story p{color:rgba(255,255,255,.6)}
-.sec-dark .risk-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-.sec-dark .risk-card h4{color:var(--white)}
-.sec-dark .risk-card p{color:rgba(255,255,255,.5)}
-.sec-dark .risk-list{color:rgba(255,255,255,.6)}
-.sec-dark .plat-layout{color:rgba(255,255,255,.7)}
-.sec-dark .treemap-cell{opacity:.95}
-.sec-dark .ext-box{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-.sec-dark .ext-box-label{color:var(--blue)}
-.sec-dark .ext-box-d{color:rgba(255,255,255,.6)}
-/* inline style overrides for dark */
-.sec-dark [style*="color:var(--ink)"]{color:var(--white) !important}
-.sec-dark [style*="background:var(--ink)"]{background:var(--blue) !important}
-.sec-dark .onetime-fill[style*="background:var(--ink)"] span{color:var(--white)}
-.sec-dark .onetime-val[style*="color:var(--ink)"]{color:var(--white) !important}
+/* Alt section — 연한 그레이 배경 (색상 충돌 없음) */
+.sec-alt{background:var(--g50);border-top:1px solid var(--g100);border-bottom:1px solid var(--g100)}
+
 
 .sec-num{font-size:10px;font-weight:800;letter-spacing:6px;text-transform:uppercase;color:var(--blue);margin-bottom:20px;opacity:.7}
 .sec h2{font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-1.2px;color:var(--ink);margin-bottom:20px}
@@ -938,7 +816,7 @@ footer a{color:var(--blue);font-weight:600}
 <!-- ================================================================
    F2: 1회성 — ICON ARRAY + BARS
    ================================================================ -->
-<section class="sec sec-dark" id="f2">
+<section class="sec sec-alt" id="f2">
   <div class="ct">
     <div class="sec-num">FINDING 02</div>
     <h2>공급사 10곳 중 4곳은<br>한 번 쓰고 사라집니다</h2>
@@ -1035,7 +913,7 @@ footer a{color:var(--blue);font-weight:600}
 <!-- ================================================================
    F4: HHI — ZONED CHART
    ================================================================ -->
-<section class="sec sec-dark" id="f4">
+<section class="sec sec-alt" id="f4">
   <div class="ct">
     <div class="sec-num">FINDING 04</div>
     <h2>소수 공급사 집중은<br>"효율"이 아니라 "리스크"입니다</h2>
@@ -1150,7 +1028,7 @@ footer a{color:var(--blue);font-weight:600}
 <!-- ================================================================
    BONUS FINDING 2: 전표 폭발 (콘텐츠팀 + 디자인팀①)
    ================================================================ -->
-<section class="sec sec-dark" id="f6">
+<section class="sec sec-alt" id="f6">
   <div class="ct">
     <div class="sec-num">BONUS FINDING</div>
     <h2>한 공급사에<br>28,824번 결제한 회사가 있습니다</h2>
@@ -1250,7 +1128,7 @@ footer a{color:var(--blue);font-weight:600}
 <!-- ================================================================
    DEEP DIVE — 편의 구매 → 공급사 분산 → 비용 누수
    ================================================================ -->
-<section class="sec sec-dark" id="deepdive">
+<section class="sec sec-alt" id="deepdive">
   <div class="ct">
     <div class="sec-num">DEEP DIVE</div>
     <h2>편의 구매가 만든<br>비용 누수의 구조</h2>
