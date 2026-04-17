@@ -41,6 +41,39 @@ a{color:inherit;text-decoration:none}
 .sec{padding:var(--gap) 0;opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .sec.vis{opacity:1;transform:none}
 /* Alt section — 블루 틴트 그라디언트 + 상단 액센트 라인 */
+/* TABLE OF CONTENTS */
+.toc-sec{padding:80px 0}
+.toc-sec h2{margin-bottom:40px}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.toc-item{display:flex;gap:16px;padding:24px;border:1px solid var(--g200);border-radius:var(--r);background:var(--white);text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.toc-item:hover{transform:translateY(-2px);box-shadow:var(--sh-lg);border-color:var(--blue)}
+.toc-num{font-size:24px;font-weight:800;color:var(--blue);opacity:.3;min-width:36px}
+.toc-label{font-size:14px;font-weight:700;color:var(--ink);line-height:1.4}
+.toc-label small{font-weight:400;color:var(--g400);font-size:12px}
+
+/* SIDE NAV (PC — 좌측 고정 도트) */
+.side-nav{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:998;display:flex;flex-direction:column;gap:12px}
+.side-nav-dot{width:10px;height:10px;display:block;position:relative}
+.side-nav-dot span{display:block;width:10px;height:10px;border-radius:50%;background:var(--g300);transition:all .3s}
+.side-nav-dot.active span{background:var(--blue);transform:scale(1.4);box-shadow:0 0 8px rgba(10,127,219,.4)}
+.side-nav-dot::after{content:attr(data-label);position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:600;color:var(--g400);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.side-nav-dot:hover::after,.side-nav-dot.active::after{opacity:1}
+
+/* BOTTOM NAV (Mobile — 하단 고정 바) */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-top:1px solid var(--g200);padding:8px 12px;justify-content:space-around;box-shadow:0 -2px 12px rgba(0,0,0,.06)}
+.bottom-nav a{font-size:11px;font-weight:600;color:var(--g400);text-decoration:none;padding:8px 4px;text-align:center;transition:color .2s}
+.bottom-nav a.active{color:var(--blue)}
+
+@media(max-width:768px){
+  .toc-grid{grid-template-columns:1fr}
+  .side-nav{display:none}
+  .bottom-nav{display:flex}
+  body{padding-bottom:56px}
+}
+@media(min-width:769px){
+  .bottom-nav{display:none}
+}
+
 /* Accordion (아코디언 — 더 알아보기) */
 .accordion{margin-top:32px;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden}
 .accordion-trigger{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;font-size:14px;font-weight:700;color:var(--blue);cursor:pointer;background:var(--g50);list-style:none;transition:background .2s}
@@ -644,6 +677,24 @@ footer a{color:var(--blue);font-weight:600}
 <body>
 <div id="progress"></div>
 
+<!-- SIDE NAV (PC) + BOTTOM NAV (Mobile) -->
+<nav class="side-nav" id="sideNav">
+  <a href="#summary" class="side-nav-dot" data-label="Summary"><span></span></a>
+  <a href="#f1" class="side-nav-dot" data-label="패턴 분석"><span></span></a>
+  <a href="#benchmark" class="side-nav-dot" data-label="기준선"><span></span></a>
+  <a href="#deepdive" class="side-nav-dot" data-label="Deep Dive"><span></span></a>
+  <a href="#matrix" class="side-nav-dot" data-label="매트릭스"><span></span></a>
+  <a href="#flow" class="side-nav-dot" data-label="실행 설계"><span></span></a>
+  <a href="#conclusion" class="side-nav-dot" data-label="결론"><span></span></a>
+</nav>
+<nav class="bottom-nav" id="bottomNav">
+  <a href="#summary">Summary</a>
+  <a href="#f1">패턴</a>
+  <a href="#benchmark">기준선</a>
+  <a href="#deepdive">분석</a>
+  <a href="#flow">실행</a>
+</nav>
+
 <nav class="topbar" id="topbar">
   <div class="topbar-brand"><div class="mark">Z</div>ZENO Research</div>
   <button class="topbar-cta" onclick="document.getElementById('conclusion').scrollIntoView({behavior:'smooth'})">리포트 받기</button>
@@ -668,6 +719,99 @@ footer a{color:var(--blue);font-weight:600}
     </div>
   </div>
   <div class="cover-scroll">&#8595; SCROLL</div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section class="sec toc-sec" id="toc">
+  <div class="ct">
+    <div class="sec-num">CONTENTS</div>
+    <h2>목차</h2>
+    <div class="toc-grid">
+      <a href="#summary" class="toc-item"><span class="toc-num">01</span><span class="toc-label">Executive Summary<br><small>CFO 인사이트 4</small></span></a>
+      <a href="#f1" class="toc-item"><span class="toc-num">02</span><span class="toc-label">PART 2 — 4가지 패턴<br><small>Tail·1회성·B2C·집중도</small></span></a>
+      <a href="#benchmark" class="toc-item"><span class="toc-num">03</span><span class="toc-label">구매 성숙 기준선<br><small>7가지 벤치마크 + 계산 공식</small></span></a>
+      <a href="#deepdive" class="toc-item"><span class="toc-num">04</span><span class="toc-label">PART 3 — Deep Dive<br><small>편의 구매 → 비용 누수</small></span></a>
+      <a href="#matrix" class="toc-item"><span class="toc-num">05</span><span class="toc-label">성숙도 매트릭스<br><small>16개사 포지셔닝</small></span></a>
+      <a href="#flow" class="toc-item"><span class="toc-num">06</span><span class="toc-label">PART 5 — 실행 설계<br><small>플로우차트 + 셀프 진단</small></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+   COMPANY INTRO — 브랜드팀/전략팀
+   ================================================================ -->
+<section class="sec company" id="company">
+  <div class="ct">
+    <div class="sec-num">WHO WE ARE</div>
+    <h2>왜 우리가 이 데이터를<br>갖고 있는가</h2>
+    <p class="lead">이 리포트는 마케팅 자료가 아닙니다.<br>실제 기업의 구매 데이터를 다루는 플랫폼이기 때문에 가능한 연구입니다.</p>
+    <div class="company-grid">
+      <div class="company-card castingn">
+        <div class="company-card-tag" style="color:var(--ink)">CASTINGN</div>
+        <h3>캐스팅엔</h3>
+        <p>기업의 구매 업무를 디지털로 전환하는 <strong>기업 구매 OS</strong>를 만듭니다. 공급사 소싱부터 계약, 발주, 검수, 정산까지 — 흩어져 있던 간접구매 프로세스를 하나의 플랫폼으로 통합합니다.</p>
+        <p>2015년 설립 이후 금융, 제조, IT, 물류 등 다양한 산업의 기업들이 캐스팅엔을 통해 간접구매를 관리하고 있습니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">2015</div><div class="company-num-l">설립</div></div>
+          <div class="company-num"><div class="company-num-v">IPO</div><div class="company-num-l">추진 중</div></div>
+          <div class="company-num"><div class="company-num-v">BSM</div><div class="company-num-l">핵심 사업</div></div>
+        </div>
+      </div>
+      <div class="company-card wm9">
+        <div class="company-card-tag" style="color:var(--blue)">ZENO</div>
+        <h3>제노(ZENO)</h3>
+        <p>캐스팅엔이 만든 <strong>국내 유일 BSM(Business Spend Management) 플랫폼</strong>입니다. 구매 거버넌스를 세팅하고, 구매를 실행하며, AI가 이상을 감지합니다.</p>
+        <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
+        <div class="company-nums">
+          <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
+          <div class="company-num"><div class="company-num-v">25,000+</div><div class="company-num-l">등록 공급사</div></div>
+          <div class="company-num"><div class="company-num-v">1,744억</div><div class="company-num-l">관리 지출</div></div>
+        </div>
+      </div>
+      <div class="company-why">
+        <h4>이 연구의 의미</h4>
+        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 제노(ZENO)는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="sec" id="methodology">
+  <div class="ct">
+    <div class="sec-num">METHODOLOGY</div>
+    <h2>연구 방법론</h2>
+    <p class="lead">이 리포트의 모든 수치는 실제 기업 AP 전표에서 추출한 원본 데이터입니다.</p>
+    <div class="meth-stats">
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="16">0</span> <span class="u">개사</span></div><div class="meth-stat-l">분석 대상 기업</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="570000" data-f="c">0</span><span class="u">+</span></div><div class="meth-stat-l">AP 데이터 (원본)</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="25192" data-f="c">0</span></div><div class="meth-stat-l">고유 공급사 수</div></div>
+      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="1744">0</span> <span class="u">억</span></div><div class="meth-stat-l">간접구매 총 지출</div></div>
+    </div>
+    <div class="meth-detail">
+      <div>
+        <h3>데이터 범위</h3>
+        <ul class="meth-list">
+          <li>기간: 2023.01 ~ 2025.12 (3개년)</li>
+          <li>대상: 16개 기업 (금융 4, 제조 3, IT 3, 물류 2, 서비스 2, 기타 2)</li>
+          <li>소스: ERP에서 추출한 AP 전표 원본 (570,000+ 건)</li>
+          <li>정제: 수수료/B2C 자체수수료 제외, 중복 제거 후 분석 대상 301,373건</li>
+          <li>분류: 대-중-소 3단계 카테고리 정규화</li>
+        </ul>
+      </div>
+      <div>
+        <h3>기업 규모 구분</h3>
+        <ul class="meth-list">
+          <li><strong>대규모:</strong> 간접구매 지출 200억원 이상 (3개사)</li>
+          <li><strong>중규모:</strong> 90~200억원 (5개사)</li>
+          <li><strong>소규모:</strong> 30~90억원 (4개사)</li>
+          <li><strong>영세:</strong> 30억원 미만 (4개사)</li>
+        </ul>
+        <p style="margin-top:16px;font-size:13px;color:var(--g400)">기업명은 A사~P사로 익명 처리했습니다.</p>
+      </div>
+    </div>
+    <div class="trust-box"><b>데이터 신뢰성:</b> 이 연구는 57만 건 이상의 AP 전표 원본 데이터에서 출발합니다. 각 데이터는 복수 상품 주문이 종합된 구매 오더(PO) 단위입니다. 수수료 등 불필요 데이터를 제거한 후 301,373건을 최종 분석 대상으로 정제했습니다. 설문 조사나 추정치가 아닌, 실제 발생한 거래 데이터입니다.</div>
+  </div>
 </section>
 
 
@@ -1305,82 +1449,7 @@ footer a{color:var(--blue);font-weight:600}
   </div>
 </section>
 
-<!-- ================================================================
-   COMPANY INTRO — 브랜드팀/전략팀
-   ================================================================ -->
-<section class="sec company" id="company">
-  <div class="ct">
-    <div class="sec-num">WHO WE ARE</div>
-    <h2>왜 우리가 이 데이터를<br>갖고 있는가</h2>
-    <p class="lead">이 리포트는 마케팅 자료가 아닙니다.<br>실제 기업의 구매 데이터를 다루는 플랫폼이기 때문에 가능한 연구입니다.</p>
-    <div class="company-grid">
-      <div class="company-card castingn">
-        <div class="company-card-tag" style="color:var(--ink)">CASTINGN</div>
-        <h3>캐스팅엔</h3>
-        <p>기업의 구매 업무를 디지털로 전환하는 <strong>기업 구매 OS</strong>를 만듭니다. 공급사 소싱부터 계약, 발주, 검수, 정산까지 — 흩어져 있던 간접구매 프로세스를 하나의 플랫폼으로 통합합니다.</p>
-        <p>2015년 설립 이후 금융, 제조, IT, 물류 등 다양한 산업의 기업들이 캐스팅엔을 통해 간접구매를 관리하고 있습니다.</p>
-        <div class="company-nums">
-          <div class="company-num"><div class="company-num-v">2015</div><div class="company-num-l">설립</div></div>
-          <div class="company-num"><div class="company-num-v">IPO</div><div class="company-num-l">추진 중</div></div>
-          <div class="company-num"><div class="company-num-v">BSM</div><div class="company-num-l">핵심 사업</div></div>
-        </div>
-      </div>
-      <div class="company-card wm9">
-        <div class="company-card-tag" style="color:var(--blue)">ZENO</div>
-        <h3>제노(ZENO)</h3>
-        <p>캐스팅엔이 만든 <strong>국내 유일 BSM(Business Spend Management) 플랫폼</strong>입니다. 구매 거버넌스를 세팅하고, 구매를 실행하며, AI가 이상을 감지합니다.</p>
-        <p>이 플랫폼 위에서 발생하는 실거래 데이터 — AP 전표, 공급사 정보, 카테고리 분류 — 가 이 리포트의 원천입니다.</p>
-        <div class="company-nums">
-          <div class="company-num"><div class="company-num-v">57만+</div><div class="company-num-l">AP 데이터</div></div>
-          <div class="company-num"><div class="company-num-v">25,000+</div><div class="company-num-l">등록 공급사</div></div>
-          <div class="company-num"><div class="company-num-v">1,744억</div><div class="company-num-l">관리 지출</div></div>
-        </div>
-      </div>
-      <div class="company-why">
-        <h4>이 연구의 의미</h4>
-        <p>한국에는 간접구매에 대한 체계적 벤치마크가 존재하지 않습니다. 직접구매에는 SCM, 글로벌 소싱 전략이 있지만, 간접구매는 여전히 "알아서 사는 영역"으로 남아 있습니다. 제노(ZENO)는 실거래 데이터를 기반으로 <strong>한국 기업의 간접구매 지출 구조를 최초로 정량 분석</strong>했습니다. 설문 조사가 아닌, 실제 AP 전표에서 추출한 원본 데이터입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- METHODOLOGY -->
-<section class="sec" id="methodology">
-  <div class="ct">
-    <div class="sec-num">METHODOLOGY</div>
-    <h2>연구 방법론</h2>
-    <p class="lead">이 리포트의 모든 수치는 실제 기업 AP 전표에서 추출한 원본 데이터입니다.</p>
-    <div class="meth-stats">
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="16">0</span> <span class="u">개사</span></div><div class="meth-stat-l">분석 대상 기업</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="570000" data-f="c">0</span><span class="u">+</span></div><div class="meth-stat-l">AP 데이터 (원본)</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="25192" data-f="c">0</span></div><div class="meth-stat-l">고유 공급사 수</div></div>
-      <div class="meth-stat"><div class="meth-stat-n"><span class="cu" data-t="1744">0</span> <span class="u">억</span></div><div class="meth-stat-l">간접구매 총 지출</div></div>
-    </div>
-    <div class="meth-detail">
-      <div>
-        <h3>데이터 범위</h3>
-        <ul class="meth-list">
-          <li>기간: 2023.01 ~ 2025.12 (3개년)</li>
-          <li>대상: 16개 기업 (금융 4, 제조 3, IT 3, 물류 2, 서비스 2, 기타 2)</li>
-          <li>소스: ERP에서 추출한 AP 전표 원본 (570,000+ 건)</li>
-          <li>정제: 수수료/B2C 자체수수료 제외, 중복 제거 후 분석 대상 301,373건</li>
-          <li>분류: 대-중-소 3단계 카테고리 정규화</li>
-        </ul>
-      </div>
-      <div>
-        <h3>기업 규모 구분</h3>
-        <ul class="meth-list">
-          <li><strong>대규모:</strong> 간접구매 지출 200억원 이상 (3개사)</li>
-          <li><strong>중규모:</strong> 90~200억원 (5개사)</li>
-          <li><strong>소규모:</strong> 30~90억원 (4개사)</li>
-          <li><strong>영세:</strong> 30억원 미만 (4개사)</li>
-        </ul>
-        <p style="margin-top:16px;font-size:13px;color:var(--g400)">기업명은 A사~P사로 익명 처리했습니다.</p>
-      </div>
-    </div>
-    <div class="trust-box"><b>데이터 신뢰성:</b> 이 연구는 57만 건 이상의 AP 전표 원본 데이터에서 출발합니다. 각 데이터는 복수 상품 주문이 종합된 구매 오더(PO) 단위입니다. 수수료 등 불필요 데이터를 제거한 후 301,373건을 최종 분석 대상으로 정제했습니다. 설문 조사나 추정치가 아닌, 실제 발생한 거래 데이터입니다.</div>
-  </div>
-</section>
 
 <!-- CONCLUSION -->
 <section class="sec" id="conclusion" style="padding-bottom:0">
@@ -1601,7 +1670,19 @@ function toggleCheck(el){
   else{act.style.display='block';act.innerHTML='<strong style="color:var(--danger)">다음 행동:</strong> 즉시 전문 진단이 필요합니다. 귀사의 AP 데이터를 분석하면 이 리포트와 같은 구조적 문제를 구체적으로 확인할 수 있습니다. <a href="https://info.workmarket9.com/contact?utm_source=report&utm_medium=report&utm_campaign=cforeport202604" target="_blank" style="color:var(--blue);font-weight:700">→ 무료 구매 진단 신청</a>'}
 }
 
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.cover .cu').forEach(el=>{el.classList.add('done');countUp(el)})});
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.cover .cu').forEach(el=>{el.classList.add('done');countUp(el)});
+  /* Nav highlight on scroll */
+  const navTargets=['summary','f1','benchmark','deepdive','matrix','flow','conclusion'];
+  const sideDots=document.querySelectorAll('.side-nav-dot');
+  const botLinks=document.querySelectorAll('.bottom-nav a');
+  const navObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+    const id=e.target.id;
+    sideDots.forEach(d=>{d.classList.toggle('active',d.getAttribute('href')==='#'+id)});
+    botLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id)});
+  }})},{threshold:.3,rootMargin:'-20% 0px -60% 0px'});
+  navTargets.forEach(id=>{const el=document.getElementById(id);if(el)navObs.observe(el)});
+});
 </script>
 </body>
 </html>
